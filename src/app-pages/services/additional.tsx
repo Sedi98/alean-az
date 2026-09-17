@@ -1,0 +1,32 @@
+export interface AdditionalService {
+  title: string
+}
+
+export interface AdditionalServicesSectionProps {
+  number: string
+  title: string
+  services: AdditionalService[]
+}
+
+export function AdditionalServicesSection({ number, title, services }: AdditionalServicesSectionProps) {
+  return (
+    <section data-node-id="239:2372" className="bg-[#0a0a0d] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
+      <div className="mx-auto flex max-w-[1280px] flex-col gap-8">
+        <div className="flex w-full max-w-[469px] flex-col gap-6">
+          <p className="font-sans text-base font-medium leading-[1.5] text-[#6666ec]">{number} / ƏLAVƏ XİDMƏTLƏR</p>
+          <h2 className="font-sans text-[28px] font-semibold leading-[1.25] text-white sm:text-[36px]">{title}</h2>
+        </div>
+        <div className="grid gap-4 md:grid-cols-3">
+          {services.map((service, index) => (
+            <div
+              key={service.title}
+              className={`flex min-h-[82px] items-center rounded-xl border bg-[#14141a] p-5 font-sans text-[15px] font-semibold leading-normal text-white ${index === 0 ? "border-[#b9b9f6]" : "border-[#d0d0f9]"}`}
+            >
+              {service.title}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

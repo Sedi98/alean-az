@@ -1,0 +1,8 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Frame">
+<rect width="48" height="48" rx="14" fill="#F2F2F7"/>
+<circle id="Ellipse" cx="24" cy="24" r="12" stroke="#F2E002" stroke-width="2"/>
+<line id="Line" x1="11" y1="23.25" x2="37" y2="23.25" stroke="#F2E002" stroke-width="1.5"/>
+<path id="Ellipse_2" d="M24 11.75C25.5248 11.75 27.0755 12.9094 28.2891 15.1631C29.4862 17.3864 30.25 20.5094 30.25 24C30.25 27.4906 29.4862 30.6136 28.2891 32.8369C27.0755 35.0906 25.5248 36.25 24 36.25C22.4752 36.25 20.9245 35.0906 19.7109 32.8369C18.5138 30.6136 17.75 27.4906 17.75 24C17.75 20.5094 18.5138 17.3864 19.7109 15.1631C20.9245 12.9094 22.4752 11.75 24 11.75Z" stroke="#F2E002" stroke-width="1.5"/>
+</g>
+</svg>

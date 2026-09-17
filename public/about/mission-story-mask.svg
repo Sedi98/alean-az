@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="580" height="978" viewBox="0 0 580 978" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Hekay&#201;&#153;miz">
+<rect width="580" height="978" rx="20" fill="#1A1F2E"/>
+<rect id="Rectangle" width="465" height="355" fill="url(#paint0_linear_0_4)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_4" x1="232.5" y1="0" x2="232.5" y2="355" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0A0A14" stop-opacity="0.1"/>
+<stop offset="0.5" stop-color="#0A0A14" stop-opacity="0.45"/>
+<stop offset="1" stop-color="#0A0A14" stop-opacity="0.85"/>
+</linearGradient>
+</defs>
+</svg>

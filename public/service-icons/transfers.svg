@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Frame">
+<rect width="48" height="48" rx="14" fill="#F2F2F7"/>
+<rect id="Rectangle" x="11" y="19" width="26" height="10" rx="2" stroke="#F2E002" stroke-width="2"/>
+<path id="Vector" d="M13 21L18 9H30L35 21" stroke="#F2E002" stroke-width="2"/>
+<circle id="Ellipse" cx="18" cy="31" r="2.5" fill="#F2E002" stroke="#F2E002"/>
+<circle id="Ellipse_2" cx="31" cy="31" r="2.5" fill="#F2E002" stroke="#F2E002"/>
+</g>
+</svg>

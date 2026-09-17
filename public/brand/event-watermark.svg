@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="160" height="130" viewBox="0 0 160 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Logo Watermark" opacity="0.06">
+<path id="Logo Blob" d="M28 3C18 0 8 6 4 16C1.19209e-07 26 4 38 14 45C22 50 34 52 44 48C54 44 62 34 62 24C62 14 56 6 46 4C40 2 34 1 28 3Z" fill="url(#paint0_linear_0_17)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_17" x1="1.90556" y1="12.3722" x2="46.889" y2="43.2273" gradientUnits="userSpaceOnUse">
+<stop stop-color="#8FBFFF"/>
+<stop offset="0.3" stop-color="#8099FA"/>
+<stop offset="0.65" stop-color="#8573F2"/>
+<stop offset="1" stop-color="#8F61E6"/>
+</linearGradient>
+</defs>
+</svg>
