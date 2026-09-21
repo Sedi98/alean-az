@@ -7,15 +7,16 @@ const pageLinks = [
   ["Partnyorlar", "/partners"],
   ["Tədbirlər", "/events"],
   ["Xəbərlər", "/news"],
-  ["İstiqamətlər", "/destinations"],
-  ["Otellər", "/hotels"],
+  // ["İstiqamətlər", "/destinations"],
+  // ["Otellər", "/hotels"],
+  ["Əlaqə", "/contact"],
 ]
 
 const serviceLinks = [
-  ["Aviabiletlər", "/services/air-tickets"],
-  ["Sığorta", "/services/insurance"],
-  ["Korporativ", "/services/corporate-travel"],
-  ["Tibbi Turizm", "/services/medical-tourism"],
+  ["Aviabiletlər", "/services#air-tickets"],
+  ["Sığorta", "/services#insurance"],
+  ["Korporativ", "/services#corporate-travel"],
+  ["Tibbi Turizm", "/services#medical-tourism"],
 ]
 
 export function Footer() {
