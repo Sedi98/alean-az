@@ -54,15 +54,14 @@ function CarouselContent({ className, ...props }: React.HTMLAttributes<HTMLDivEl
   const { carouselRef, orientation } = useCarousel()
   return (
     <div ref={carouselRef} className="overflow-hidden">
-      <div className={cn("flex", orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col", className)} {...props} />
+      <div className={cn("flex", orientation === "horizontal" ? "-ml-4 items-start" : "-mt-4 flex-col", className)} {...props} />
     </div>
   )
 }
 
 function CarouselItem({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   const { orientation } = useCarousel()
-  return <div role="group" aria-roledescription="slide" className={cn("min-w-0 shrink-0 grow-0 basis-full", orientation === "horizontal" ? "pl-4" : "pt-4", className)} {...props} />
+  return <div role="group" aria-roledescription="slide" className={cn("min-w-0 shrink-0 grow-0 basis-full self-start", orientation === "horizontal" ? "pl-4" : "pt-4", className)} {...props} />
 }
 
 export { Carousel, CarouselContent, CarouselItem, useCarousel }
-

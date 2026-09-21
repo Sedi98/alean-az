@@ -20,7 +20,7 @@ export function EventCard({ title, description, href, className }: EventCardProp
   )
 
   const cardClassName = cn(
-    "relative h-[170px] w-full overflow-hidden rounded-2xl border border-[rgba(115,140,255,0.12)] bg-[#14141a] transition-shadow hover:shadow-lg",
+    "relative block h-[170px] w-full overflow-hidden rounded-2xl border border-[rgba(115,140,255,0.12)] bg-[#14141a] transition-shadow hover:shadow-lg",
     href && "cursor-pointer",
     className,
   )

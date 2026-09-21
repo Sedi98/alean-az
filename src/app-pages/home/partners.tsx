@@ -30,7 +30,7 @@ export function PartnersSection({ label, dotImage, actionText, actionUrl, partne
         </div>
 
         {actionText && actionUrl ? (
-          <Link href={actionUrl} className="px-6 text-right font-sans text-lg font-semibold leading-[1.5] text-[#8059f2] hover:text-[#738cff] sm:px-10 lg:px-20">
+          <Link href={actionUrl} className="hidden px-6 text-right font-sans text-lg font-semibold leading-[1.5] text-[#8059f2] hover:text-[#738cff] sm:px-10 lg:block lg:px-20">
             {actionText} ↗
           </Link>
         ) : null}
@@ -44,6 +44,12 @@ export function PartnersSection({ label, dotImage, actionText, actionUrl, partne
             ))}
           </CarouselContent>
         </Carousel>
+
+        {actionText && actionUrl ? (
+          <Link href={actionUrl} className="block self-end px-6 text-right font-sans text-lg font-semibold leading-[1.5] text-[#8059f2] hover:text-[#738cff] sm:px-10 lg:hidden">
+            {actionText} ↗
+          </Link>
+        ) : null}
       </div>
     </section>
   )

@@ -26,8 +26,7 @@ export function NewsCard({ title, description, image, imageAlt = "", href, class
     </>
   )
 
-  const cardClassName = cn("group relative h-[420px] overflow-hidden rounded-2xl bg-[#263852]", href && "cursor-pointer", className)
+  const cardClassName = cn("group relative block h-[420px] overflow-hidden rounded-2xl bg-[#263852]", href && "cursor-pointer", className)
 
   return href ? <Link href={href} className={cardClassName}>{content}</Link> : <article className={cardClassName}>{content}</article>
 }
-
