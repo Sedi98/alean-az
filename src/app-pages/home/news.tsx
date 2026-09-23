@@ -1,5 +1,5 @@
 import Image from "next/image"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 
 import { NewsCard, type NewsCardProps } from "@/components/news-card"
 import { NewsMobileCarousel } from "@/components/news-mobile-carousel"

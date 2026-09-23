@@ -1,5 +1,6 @@
 import Image from "next/image"
-import Link from "next/link"
+import { useTranslations } from "next-intl"
+import { Link } from "@/i18n/navigation"
 
 const pageLinks = [
   ["Haqqımızda", "/about"],
@@ -20,6 +21,8 @@ const serviceLinks = [
 ]
 
 export function Footer() {
+  const t = useTranslations("Footer")
+
   return (
     <footer className="bg-[#180f2a] px-6 py-16 text-[#f0f0fd] sm:px-10 sm:py-20 lg:px-20 lg:py-[100px]">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-12">
@@ -51,10 +54,10 @@ export function Footer() {
           </div>
 
           <div className="grid gap-10 sm:grid-cols-3 sm:gap-6 lg:gap-[25px]">
-            <FooterColumn title="Səhifələr" links={pageLinks} />
-            <FooterColumn title="Xidmətlər" links={serviceLinks} />
+            <FooterColumn title={t("pages")} links={pageLinks} />
+            <FooterColumn title={t("services")} links={serviceLinks} />
             <div className="flex flex-col gap-6 sm:w-[188px]">
-              <h2 className="font-sans text-xl font-semibold leading-[1.5]">Əlaqə</h2>
+              <h2 className="font-sans text-xl font-semibold leading-[1.5]">{t("contact")}</h2>
               <div className="flex flex-col gap-4 font-sans text-lg leading-[1.5] text-[#f0f0fd]">
                 <p>İzmir Plaza, Bakı</p>
                 <a href="tel:+994772180770" className="hover:text-white/70">+994 77 218 0770</a>
@@ -65,9 +68,9 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col gap-8 border-t border-white/[0.08] pt-8 sm:flex-row sm:items-end sm:justify-between">
-          <p className="font-sans text-base leading-6 text-[#b0b0b0]">© 2026 ALEAN Tour Operator. Bütün hüquqlar qorunur.</p>
+          <p className="font-sans text-base leading-6 text-[#b0b0b0]">{t("copyright")}</p>
           <div className="flex flex-col items-start gap-5 sm:items-center">
-            <p className="font-inter text-[18px] font-medium text-[#80808c]">Bizi izləyin</p>
+            <p className="font-inter text-[18px] font-medium text-[#80808c]">{t("followUs")}</p>
             <div className="flex items-center gap-4">
               <SocialLink label="f" href="#" />
               <Link href="#" aria-label="Instagram" className="flex size-[53px] items-center justify-center rounded-full border border-white/20 transition-colors hover:border-white/60">

@@ -1,0 +1,22 @@
+{
+  "Navbar": {
+    "home": "Ana səhifə",
+    "about": "Haqqımızda",
+    "services": "Xidmətlər",
+    "events": "Tədbirlər",
+    "news": "Xəbərlər",
+    "partners": "Partnyorlar",
+    "contact": "Əlaqə",
+    "registration": "Qeydiyyat",
+    "language": "Dil: Azərbaycan dili",
+    "openMenu": "Menyunu aç",
+    "closeMenu": "Menyunu bağla"
+  },
+  "Footer": {
+    "pages": "Səhifələr",
+    "services": "Xidmətlər",
+    "contact": "Əlaqə",
+    "followUs": "Bizi izləyin",
+    "copyright": "© 2026 ALEAN Tour Operator. Bütün hüquqlar qorunur."
+  }
+}

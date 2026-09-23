@@ -1,22 +1,34 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link"
+import { useLocale, useTranslations } from "next-intl"
+import { Link } from "@/i18n/navigation"
+import { usePathname, useRouter } from "@/i18n/navigation"
+import type { Locale } from "@/i18n/routing"
 import { Menu, X } from "lucide-react"
 import { useEffect, useState } from "react"
 
 const navigation = [
-  { label: "Ana səhifə", href: "/" },
-  { label: "Haqqımızda", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Partnyorlar", href: "/partners" },
-  { label: "Tədbirlər", href: "/events" },
-  { label: "Xəbərlər", href: "/news" },
-  { label: "Əlaqə", href: "/elaqe" },
+  { key: "home", href: "/" },
+  { key: "about", href: "/about" },
+  { key: "services", href: "/services" },
+  { key: "partners", href: "/partners" },
+  { key: "events", href: "/events" },
+  { key: "news", href: "/news" },
+  { key: "contact", href: "/contact" },
 ]
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const locale = useLocale()
+  const t = useTranslations("Navbar")
+  const pathname = usePathname()
+  const router = useRouter()
+  const nextLocale: Locale = locale === "az" ? "en" : "az"
+
+  function switchLocale() {
+    router.replace(pathname, { locale: nextLocale })
+  }
 
   useEffect(() => {
     if (!isMenuOpen) return
@@ -65,7 +77,7 @@ export function Navbar() {
               href={item.href}
               className="rounded-sm p-1 font-sans text-[16px] leading-normal text-[#e6e6e6] transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              {item.label}
+              {t(item.key)}
             </Link>
           ))}
         </nav>
@@ -74,9 +86,10 @@ export function Navbar() {
           <button
             type="button"
             className="hidden p-1 font-semibold leading-6 text-[#e6e6e6] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:block"
-            aria-label="Dil: Azərbaycan dili"
+            aria-label={t("language")}
+            onClick={switchLocale}
           >
-            AZ
+            {nextLocale.toUpperCase()}
           </button>
           <Link
             href="/registration"
@@ -89,7 +102,7 @@ export function Navbar() {
         <button
           type="button"
           className="inline-flex size-12 items-center justify-center rounded-full border border-white/20 bg-white/[0.08] text-white transition-colors hover:bg-white/[0.14] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white xl:hidden"
-          aria-label={isMenuOpen ? "Menyunu bağla" : "Menyunu aç"}
+          aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsMenuOpen((open) => !open)}
@@ -112,7 +125,7 @@ export function Navbar() {
         <button
           type="button"
           className="absolute right-6 top-6 inline-flex size-12 items-center justify-center rounded-full border border-white/20 bg-white/[0.08] text-white transition-colors hover:bg-white/[0.14] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:right-10"
-          aria-label="Menyunu bağla"
+          aria-label={t("closeMenu")}
           onClick={() => setIsMenuOpen(false)}
         >
           <X size={22} strokeWidth={1.8} />
@@ -125,7 +138,7 @@ export function Navbar() {
               onClick={() => setIsMenuOpen(false)}
               className="border-b border-white/[0.08] py-3 font-sans text-lg leading-normal text-[#e6e6e6] transition-colors hover:text-white"
             >
-              {item.label}
+              {t(item.key)}
             </Link>
           ))}
         </nav>
@@ -134,9 +147,10 @@ export function Navbar() {
           <button
             type="button"
             className="self-start p-1 font-sans text-base font-semibold leading-6 text-[#e6e6e6] transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-            aria-label="Dil: Azərbaycan dili"
+            aria-label={t("language")}
+            onClick={switchLocale}
           >
-            AZ
+            {nextLocale.toUpperCase()}
           </button>
           <Link
             href="/registration"

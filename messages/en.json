@@ -1,0 +1,22 @@
+{
+  "Navbar": {
+    "home": "Home",
+    "about": "About us",
+    "services": "Services",
+    "events": "Events",
+    "news": "News",
+    "partners": "Partners",
+    "contact": "Contact",
+    "registration": "Registration",
+    "language": "Language: English",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "Footer": {
+    "pages": "Pages",
+    "services": "Services",
+    "contact": "Contact",
+    "followUs": "Follow us",
+    "copyright": "© 2026 ALEAN Tour Operator. All rights reserved."
+  }
+}
