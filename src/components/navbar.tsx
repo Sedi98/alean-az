@@ -24,9 +24,10 @@ export function Navbar() {
   const t = useTranslations("Navbar")
   const pathname = usePathname()
   const router = useRouter()
-  const nextLocale: Locale = locale === "az" ? "en" : "az"
+  const localeOrder: Locale[] = ["az", "en", "ru"]
+  const currentLocale = localeOrder.includes(locale as Locale) ? (locale as Locale) : "az"
 
-  function switchLocale() {
+  function switchLocale(nextLocale: Locale) {
     router.replace(pathname, { locale: nextLocale })
   }
 
@@ -83,19 +84,23 @@ export function Navbar() {
         </nav>
 
         <div className="hidden shrink-0 items-center gap-4 xl:flex">
-          <button
-            type="button"
-            className="hidden p-1 font-semibold leading-6 text-[#e6e6e6] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:block"
+          <select
+            value={currentLocale}
             aria-label={t("language")}
-            onClick={switchLocale}
+            onChange={(event) => switchLocale(event.target.value as Locale)}
+            className="hidden cursor-pointer appearance-none border-0 bg-transparent p-1 font-semibold leading-6 text-[#e6e6e6] outline-none hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:block"
           >
-            {nextLocale.toUpperCase()}
-          </button>
+            {localeOrder.map((item) => (
+              <option key={item} value={item} className="bg-[#0a0a0d] text-white">
+                {item.toUpperCase()}
+              </option>
+            ))}
+          </select>
           <Link
             href="/registration"
             className="inline-flex h-12 items-center justify-center rounded-full bg-[linear-gradient(101.6deg,#4848a8_0.9%,#7e7eff_95.6%)] px-4 py-1 font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
-            Qeydiyyat
+            {t("registration")}
           </Link>
         </div>
 
@@ -144,20 +149,27 @@ export function Navbar() {
         </nav>
 
         <div className="mt-auto flex flex-col gap-5 border-t border-white/[0.08] pt-6">
-          <button
-            type="button"
-            className="self-start p-1 font-sans text-base font-semibold leading-6 text-[#e6e6e6] transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-            aria-label={t("language")}
-            onClick={switchLocale}
-          >
-            {nextLocale.toUpperCase()}
-          </button>
+          <label className="self-start">
+            <span className="sr-only">{t("language")}</span>
+            <select
+              value={currentLocale}
+              aria-label={t("language")}
+              onChange={(event) => switchLocale(event.target.value as Locale)}
+              className="cursor-pointer appearance-none border-0 bg-transparent p-1 font-sans text-base font-semibold leading-6 text-[#e6e6e6] outline-none transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              {localeOrder.map((item) => (
+                <option key={item} value={item} className="bg-[#0a0a0d] text-white">
+                  {item.toUpperCase()}
+                </option>
+              ))}
+            </select>
+          </label>
           <Link
             href="/registration"
             onClick={() => setIsMenuOpen(false)}
             className="inline-flex h-12 items-center justify-center rounded-full bg-[linear-gradient(101.6deg,#4848a8_0.9%,#7e7eff_95.6%)] px-4 py-1 font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
-            Qeydiyyat
+            {t("registration")}
           </Link>
         </div>
       </aside>

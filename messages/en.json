@@ -17,6 +17,16 @@
     "services": "Services",
     "contact": "Contact",
     "followUs": "Follow us",
-    "copyright": "© 2026 ALEAN Tour Operator. All rights reserved."
+    "copyright": "© 2026 ALEAN Tour Operator. All rights reserved.",
+    "pageAbout": "About us",
+    "pageServices": "Services",
+    "pagePartners": "Partners",
+    "pageEvents": "Events",
+    "pageNews": "News",
+    "pageContact": "Contact",
+    "serviceFlights": "Flights",
+    "serviceInsurance": "Insurance",
+    "serviceCorporate": "Corporate",
+    "serviceMedical": "Medical tourism"
   }
 }

@@ -4,20 +4,14 @@ import Image from "next/image"
 import { Link } from "@/i18n/navigation"
 
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
-
-export interface PartnerLogo {
-  name: string
-  image: string
-  width: number
-  height: number
-}
+import type { PublicPartner } from "@/features/services/partners/types"
 
 export interface PartnersSectionProps {
   label: string
   dotImage: string
   actionText?: string
   actionUrl?: string
-  partners: PartnerLogo[]
+  partners: PublicPartner[]
 }
 
 export function PartnersSection({ label, dotImage, actionText, actionUrl, partners }: PartnersSectionProps) {
@@ -38,8 +32,8 @@ export function PartnersSection({ label, dotImage, actionText, actionUrl, partne
         <Carousel opts={{ align: "start", loop: true }} className="w-full">
           <CarouselContent className="ml-0 items-center justify-between gap-8 px-6 sm:gap-12 sm:px-10 lg:gap-0 lg:px-20">
             {partners.map((partner) => (
-              <CarouselItem key={partner.name} className="flex basis-[72%] items-center justify-center pl-0 sm:basis-[42%] lg:basis-1/4">
-                <Image src={partner.image} alt={partner.name} width={partner.width} height={partner.height} className="h-auto max-w-full object-contain" />
+              <CarouselItem key={partner.id} className="flex basis-[72%] items-center justify-center pl-0 sm:basis-[42%] lg:basis-1/4">
+                <Image src={partner.logo} alt={partner.name} width={206} height={116} className="h-auto max-w-full object-contain" />
               </CarouselItem>
             ))}
           </CarouselContent>

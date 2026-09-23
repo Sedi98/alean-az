@@ -3,21 +3,21 @@ import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
 
 const pageLinks = [
-  ["Haqqımızda", "/about"],
-  ["Xidmətlər", "/services"],
-  ["Partnyorlar", "/partners"],
-  ["Tədbirlər", "/events"],
-  ["Xəbərlər", "/news"],
+  ["pageAbout", "/about"],
+  ["pageServices", "/services"],
+  ["pagePartners", "/partners"],
+  ["pageEvents", "/events"],
+  ["pageNews", "/news"],
   // ["İstiqamətlər", "/destinations"],
   // ["Otellər", "/hotels"],
-  ["Əlaqə", "/contact"],
+  ["pageContact", "/contact"],
 ]
 
 const serviceLinks = [
-  ["Aviabiletlər", "/services#air-tickets"],
-  ["Sığorta", "/services#insurance"],
-  ["Korporativ", "/services#corporate-travel"],
-  ["Tibbi Turizm", "/services#medical-tourism"],
+  ["serviceFlights", "/services#air-tickets"],
+  ["serviceInsurance", "/services#insurance"],
+  ["serviceCorporate", "/services#corporate-travel"],
+  ["serviceMedical", "/services#medical-tourism"],
 ]
 
 export function Footer() {
@@ -54,8 +54,8 @@ export function Footer() {
           </div>
 
           <div className="grid gap-10 sm:grid-cols-3 sm:gap-6 lg:gap-[25px]">
-            <FooterColumn title={t("pages")} links={pageLinks} />
-            <FooterColumn title={t("services")} links={serviceLinks} />
+            <FooterColumn title={t("pages")} links={pageLinks.map(([key, href]) => [t(key), href])} />
+            <FooterColumn title={t("services")} links={serviceLinks.map(([key, href]) => [t(key), href])} />
             <div className="flex flex-col gap-6 sm:w-[188px]">
               <h2 className="font-sans text-xl font-semibold leading-[1.5]">{t("contact")}</h2>
               <div className="flex flex-col gap-4 font-sans text-lg leading-[1.5] text-[#f0f0fd]">

@@ -1,25 +1,37 @@
-import type { Metadata } from "next"
-import { notFound } from "next/navigation"
+import type { Metadata } from "next";
 
-import { newsItems } from "@/app-pages/news/data"
-import { NewsDetailHero } from "@/app-pages/news/detail/hero"
-import { NewsDetailImage } from "@/app-pages/news/detail/image"
-import { NewsArticle } from "@/app-pages/news/detail/article"
+import { NewsDetailHero } from "@/app-pages/news/detail/hero";
+import { NewsDetailImage } from "@/app-pages/news/detail/image";
+import { NewsArticle } from "@/app-pages/news/detail/article";
+import { getNewsDetail } from "@/features/services/news/api";
 
-export function generateStaticParams() { return newsItems.map(({ slug }) => ({ slug })) }
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const news = await getNewsDetail(slug);
 
-export const dynamicParams = false
-
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params
-  const news = newsItems.find((item) => item.slug === slug)
-  return { title: news ? `${news.title} | Alean.az` : "News | Alean.az", description: news?.description }
+  return {
+    title: `${news.title} | Alean.az`,
+    description: news.summary,
+  };
 }
 
-export default async function NewsDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  const news = newsItems.find((item) => item.slug === slug)
-  if (!news) notFound()
+export default async function NewsDetailPage({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}) {
+  const { slug } = await params;
+  const news = await getNewsDetail(slug);
 
-  return <main className="min-h-screen bg-white"><NewsDetailHero news={news} /><NewsDetailImage /><NewsArticle /></main>
+  return (
+    <main className="min-h-screen bg-white">
+      <NewsDetailHero news={news} />
+      <NewsDetailImage src={news.cover_image ?? undefined} />
+      <NewsArticle news={news} />
+    </main>
+  );
 }

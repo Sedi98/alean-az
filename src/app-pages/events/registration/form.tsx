@@ -1,34 +1,49 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
+import Image from "next/image"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import type { EventGridCardProps } from "@/components/event-grid-card"
+import { submitEventRegistration } from "@/app/[locale]/events/[slug]/registration/actions"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import type { PublicEventDetail } from "@/features/services/events/types"
 
 const registrationSchema = z.object({
   firstName: z.string().min(2, "Adınızı daxil edin"),
   lastName: z.string().min(2, "Soyadınızı daxil edin"),
   email: z.string().email("Düzgün e-mail daxil edin"),
   phone: z.string().min(7, "Telefon nömrəsini daxil edin"),
-  organization: z.string().min(2, "Şirkət / təşkilat adını daxil edin"),
+  company: z.string().min(2, "Şirkət / təşkilat adını daxil edin"),
   position: z.string().min(2, "Vəzifənizi daxil edin"),
-  attendees: z.string().min(1, "İştirakçı sayını seçin"),
+  participantsCount: z.string().min(1, "İştirakçı sayını seçin"),
   country: z.string().min(1, "Ölkə seçin"),
-  description: z.string().min(10, "Sorğunu daha ətraflı yazın"),
+  message: z.string().min(10, "Sorğunu daha ətraflı yazın"),
 })
 
 type RegistrationValues = z.infer<typeof registrationSchema>
 
-export function RegistrationForm({ event }: { event: EventGridCardProps }) {
+export function RegistrationForm({ event }: { event: PublicEventDetail }) {
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const { register, handleSubmit, formState: { errors } } = useForm<RegistrationValues>({ resolver: zodResolver(registrationSchema) })
-  const onSubmit = () => setSubmitted(true)
+  const onSubmit = async (values: RegistrationValues) => {
+    setIsSubmitting(true)
+    setSubmitError(null)
+    try {
+      await submitEventRegistration(event.slug, values)
+      setSubmitted(true)
+    } catch {
+      setSubmitError("Qeydiyyat göndərilərkən xəta baş verdi. Bir qədər sonra yenidən cəhd edin.")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
     <section data-node-id="316:495" className="bg-white px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
@@ -40,18 +55,19 @@ export function RegistrationForm({ event }: { event: EventGridCardProps }) {
             <Field error={errors.lastName?.message}><Input placeholder="Soyad" {...register("lastName")} /></Field>
             <Field error={errors.email?.message}><Input type="email" placeholder="E-mail" {...register("email")} /></Field>
             <Field error={errors.phone?.message}><Input placeholder="Telefon" {...register("phone")} /></Field>
-            <Field error={errors.organization?.message}><Input placeholder="Şirkət / Təşkilat" {...register("organization")} /></Field>
+            <Field error={errors.company?.message}><Input placeholder="Şirkət / Təşkilat" {...register("company")} /></Field>
             <Field error={errors.position?.message}><Input placeholder="Vəzifə" {...register("position")} /></Field>
-            <Field error={errors.attendees?.message}><Select defaultValue="" {...register("attendees")}><option value="" disabled>İştirakçı sayı</option><option value="1-10">1–10</option><option value="11-50">11–50</option><option value="50+">50+</option></Select></Field>
+            <Field error={errors.participantsCount?.message}><Select defaultValue="" {...register("participantsCount")}><option value="" disabled>İştirakçı sayı</option><option value="1">1–10</option><option value="10">11–50</option><option value="50">50+</option></Select></Field>
             <Field error={errors.country?.message}><Select defaultValue="" {...register("country")}><option value="" disabled>Ölkə</option><option value="Azerbaijan">Azərbaycan</option><option value="Turkey">Türkiyə</option><option value="Other">Digər</option></Select></Field>
           </div>
-          <Field error={errors.description?.message}><Textarea placeholder="Sorğunun təsviri — tarix, şəxs sayı, büdcə" {...register("description")} /></Field>
-          {submitted ? <p className="text-sm text-green-700">Qeydiyyatınız qəbul edildi.</p> : <Button type="submit" className="h-12 self-end rounded-full bg-[linear-gradient(109deg,#4848a8,#7e7eff)] px-4 font-sans text-base font-semibold text-white hover:opacity-90">Qeydiyyatı tamamla</Button>}
+          <Field error={errors.message?.message}><Textarea placeholder="Sorğunun təsviri — tarix, şəxs sayı, büdcə" {...register("message")} /></Field>
+          {submitError ? <p className="text-sm text-red-600">{submitError}</p> : null}
+          {submitted ? <p className="text-sm text-green-700">Qeydiyyatınız qəbul edildi.</p> : <Button disabled={isSubmitting} type="submit" className="h-12 self-end rounded-full bg-[linear-gradient(109deg,#4848a8,#7e7eff)] px-4 font-sans text-base font-semibold text-white hover:opacity-90">{isSubmitting ? "Göndərilir..." : "Qeydiyyatı tamamla"}</Button>}
         </form>
 
         <aside className="overflow-hidden rounded-[20px] bg-[#0a0a0d] text-white">
-          <div className="flex h-[180px] items-center justify-center bg-[#1f2433] font-sans text-xs text-[#666673]">Tədbir şəkli</div>
-          <div className="flex flex-col gap-4 p-6"><h2 className="font-sans text-lg font-bold leading-[1.3]">{event.title}</h2><SummaryRow label="Tarix" value="15 Mart 2026" /><SummaryRow label="Saat" value="09:00 – 18:00" /><SummaryRow label="Məkan" value="Heydar Əliyev Mərkəzi" /><SummaryRow label="Şəhər" value="Bakı, Azərbaycan" /><SummaryRow label="Qiymət" value="Pulsuz" /></div>
+          <div className="relative flex h-[180px] items-center justify-center bg-[#1f2433] font-sans text-xs text-[#666673]">{event.cover_image ? <Image src={event.cover_image} alt={event.title} fill sizes="380px" className="object-cover" /> : "Tədbir şəkli"}</div>
+          <div className="flex flex-col gap-4 p-6"><h2 className="font-sans text-lg font-bold leading-[1.3]">{event.title}</h2><SummaryRow label="Tarix" value={event.date} /><SummaryRow label="Saat" value={`${event.start_time}${event.end_time ? ` – ${event.end_time}` : ""}`} /><SummaryRow label="Məkan" value={event.venue} /><SummaryRow label="Şəhər" value={event.city} /><SummaryRow label="Qiymət" value={event.is_free ? "Pulsuz" : `${event.price ?? "—"} ${event.currency ?? ""}`.trim()} /></div>
         </aside>
       </div>
     </section>

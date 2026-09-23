@@ -1,0 +1,1939 @@
+openapi: 3.0.3
+info:
+  title: ALEAN Corporate API
+  version: 1.0.0
+  description: 'Public API: /api/v1/public/... (Accept-Language / ?lang= az | ru |
+    en).'
+paths:
+  /api/v1/about/:
+    get:
+      operationId: v1_about_retrieve
+      description: «Haqqımızda» ictimai səhifəsi üçün bütün məlumatı tək cavabda qaytarır.
+        'Biz kimik?', statistika, IATA, hekayə, missiya, vizyon, üstünlüklər ('Niyə
+        ALEAN') və xronologiya ('Tariximiz') bloklarını əhatə edir.
+      summary: Şirkət haqqında (Haqqımızda)
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      tags:
+      - About
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicAbout'
+          description: ''
+  /api/v1/contact/:
+    get:
+      operationId: v1_contact_retrieve
+      description: 'Əlaqə səhifəsinin bütün məlumatını qaytarır: başlıq, əlaqə kanalları
+        (telefon, e-mail, ünvan və s.), form başlıqları və ofis kartı.'
+      summary: Əlaqə səhifəsinin məlumatları
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      tags:
+      - Contact
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicContact'
+          description: ''
+    post:
+      operationId: v1_contact_create
+      description: İstifadəçi müraciətini qəbul edir. Spamdan qorunma var (gizli `website`
+        sahəsi - honeypot).
+      summary: Əlaqə formasından mesaj göndərilməsi
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      tags:
+      - Contact
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactMessageCreateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContactMessageCreateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ContactMessageCreateRequest'
+        required: true
+      security:
+      - {}
+      responses:
+        '201':
+          description: 'Müraciət uğurla qəbul edildi (`{ ''status'': ''received''
+            }`).'
+        '400':
+          description: Göndərilən sahələrdə doğrulama xətası.
+  /api/v1/event-categories/:
+    get:
+      operationId: v1_event_categories_list
+      summary: Aktiv tədbir kateqoriyalarının siyahısı
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      tags:
+      - Events
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PublicCategory'
+          description: ''
+  /api/v1/events/:
+    get:
+      operationId: v1_events_list
+      summary: Yayımlanmış tədbirlərin siyahısı
+      parameters:
+      - in: query
+        name: category
+        schema:
+          type: string
+        description: 'Kateqoriya slug (məs: konfrans)'
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: Başlıq və ya məkan üzrə axtarış
+      tags:
+      - Events
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPublicEventListList'
+          description: ''
+  /api/v1/events/{slug}/:
+    get:
+      operationId: v1_events_retrieve
+      summary: Tədbirin təfərrüat səhifəsi
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      - in: path
+        name: slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - Events
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicEventDetail'
+          description: ''
+  /api/v1/events/{slug}/register/:
+    post:
+      operationId: v1_events_register_create
+      summary: Tədbirə qeydiyyat
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      - in: path
+        name: slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - Events
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationCreateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RegistrationCreateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RegistrationCreateRequest'
+        required: true
+      security:
+      - {}
+      responses:
+        '201':
+          description: 'Müraciət qəbul edildi (`{ ''id'': 1, ''status'': ''pending''
+            }`)'
+  /api/v1/events/{slug}/related/:
+    get:
+      operationId: v1_events_related_list
+      summary: Oxşar / digər tədbirlər
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: 1-6 arası, defolt 3
+      - in: path
+        name: slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - Events
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PublicEventList'
+          description: ''
+  /api/v1/home/:
+    get:
+      operationId: home_page
+      description: |-
+        GET /api/v1/public/home/?lang=az
+        Ana səhifə - tək cavabda bütün bloklar (Hero, Haqqımızda, Xidmətlər,
+        Tədbirlər, Xəbərlər, Partnyorlar).
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      tags:
+      - Home
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicHome'
+          description: ''
+  /api/v1/news/:
+    get:
+      operationId: v1_news_list
+      description: Yayımlanmış xəbərləri kateqoriya, etiket (tag) və mətn üzrə filtrləyərək,
+        səhifələmə (pagination) dəstəyi ilə qaytarır.
+      summary: Xəbərlərin siyahısı
+      parameters:
+      - in: query
+        name: category
+        schema:
+          type: string
+        description: Kateqoriya slug-ı
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: Başlıq və ya qısa məzmun üzrə axtarış
+      - in: query
+        name: tag
+        schema:
+          type: string
+        description: Açar söz (tag) slug-ı
+      tags:
+      - News
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPublicNewsListList'
+          description: ''
+  /api/v1/news-categories/:
+    get:
+      operationId: v1_news_categories_list
+      description: Filtrləmə üçün aktiv xəbər kateqoriyalarının siyahısını qaytarır.
+      summary: Xəbər kateqoriyaları
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      tags:
+      - News
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PublicNewsCategory'
+          description: ''
+  /api/v1/news-page/:
+    get:
+      operationId: v1_news_page_retrieve
+      description: Xəbərlər bölməsinin başlığı üçün 'Title' və 'Subtitle' məlumatını
+        qaytarır.
+      summary: Xəbərlər səhifəsinin başlığı
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      tags:
+      - News
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicNewsPage'
+          description: ''
+  /api/v1/news/{slug}/:
+    get:
+      operationId: v1_news_retrieve
+      description: '`slug` üzrə xəbərin tam məzmununu qaytarır.'
+      summary: Xəbərin təfərrüatları (slug üzrə)
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      - in: path
+        name: slug
+        schema:
+          type: string
+        required: true
+      tags:
+      - News
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicNewsDetail'
+          description: ''
+  /api/v1/partners/:
+    get:
+      operationId: v1_partners_list
+      description: Bütün aktiv partnyorları (loqo, ad, təsvir, üstünlüklər) səhifələmə
+        (pagination) və dil parametri (?lang=az|ru|en) ilə qaytarır.
+      summary: Aktiv partnyorların siyahısı
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      tags:
+      - Partners
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPublicPartnerList'
+          description: ''
+  /api/v1/partners/page/:
+    get:
+      operationId: v1_partners_page_retrieve
+      description: Səhifənin yuxarı hissəsindəki 'Title' və 'Subtitle' məlumatlarını
+        qaytarır.
+      summary: Partnyorlar səhifəsinin başlığı və alt başlığı
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      tags:
+      - Partners
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicPartnersPage'
+          description: ''
+  /api/v1/services/:
+    get:
+      operationId: v1_services_retrieve
+      description: Səhifə başlığını (Hero), sürətli keçid çiplərini və bütün aktiv
+        xidmət bölmələrini müəyyən olunmuş sırada qaytarır.
+      summary: Bütün xidmətlərə ümumi baxış (Xidmətlər səhifəsi)
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      tags:
+      - Services
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServicesOverview'
+          description: ''
+  /api/v1/services/{key}/:
+    get:
+      operationId: v1_services_retrieve_2
+      description: Konkret xidmət blokunun məlumatını qaytarır (`aviation`, `hotels`,
+        `tours` və s.).
+      summary: Ayrıca xidmətin təfərrüatları (key üzrə)
+      parameters:
+      - in: path
+        name: key
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      tags:
+      - Services
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicService'
+          description: ''
+        '404':
+          description: Xidmət tapılmadı və ya aktiv deyil.
+  /api/v1/site/:
+    get:
+      operationId: site_settings
+      description: Footer mətnləri, əlaqə məlumatları və aktiv sosial şəbəkə linklərini
+        qaytarır. Autentifikasiya tələb olunmur.
+      summary: Sayt tənzimləmələri
+      parameters:
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - az
+          - en
+          - ru
+        description: 'Dil. Accept-Language əvəzinə istifadə olunur (default: az)'
+      tags:
+      - v1
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicSite'
+          description: ''
+components:
+  schemas:
+    AboutBlock:
+      type: object
+      properties:
+        eyebrow:
+          type: string
+        headline:
+          type: string
+        stats:
+          type: array
+          items:
+            $ref: '#/components/schemas/Stat'
+          readOnly: true
+        iata:
+          allOf:
+          - $ref: '#/components/schemas/HomeIata'
+          readOnly: true
+      required:
+      - eyebrow
+      - headline
+      - iata
+      - stats
+    Card:
+      type: object
+      description: API cavabındakı kart (number - 01, 02 ... sırayla əlavə olunur)
+        - yalnız Swagger sxemi üçün.
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+          format: uri
+          nullable: true
+        number:
+          type: string
+      required:
+      - description
+      - number
+      - title
+    Channel:
+      type: object
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/TypeEnum'
+          title: Növ
+        label:
+          type: string
+          title: Başlıq
+          description: 'Məs: Telefon'
+          maxLength: 80
+        value:
+          type: string
+          title: Dəyər
+          description: 'Məs: +994 77 218 0770'
+          maxLength: 255
+        note:
+          type: string
+          title: Qeyd
+          description: 'Məs: Həftənin 7 günü, 24 saat'
+          maxLength: 160
+        href:
+          type: string
+          nullable: true
+          readOnly: true
+      required:
+      - href
+      - label
+      - type
+      - value
+    Chip:
+      type: object
+      properties:
+        key:
+          type: string
+        label:
+          type: string
+      required:
+      - key
+      - label
+    ContactMessageCreateRequest:
+      type: object
+      properties:
+        first_name:
+          type: string
+          minLength: 1
+          title: Ad
+          maxLength: 100
+        last_name:
+          type: string
+          title: Soyad
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          minLength: 1
+          title: E-mail
+          maxLength: 254
+        phone:
+          type: string
+          title: Telefon
+          maxLength: 32
+        company:
+          type: string
+          title: Şirkət / Təşkilat
+          maxLength: 255
+        subject:
+          type: string
+          title: Mövzu
+          maxLength: 255
+        message:
+          type: string
+          minLength: 1
+          title: Mesaj
+          maxLength: 5000
+        website:
+          type: string
+          writeOnly: true
+      required:
+      - email
+      - first_name
+      - message
+    Cta:
+      type: object
+      properties:
+        label:
+          type: string
+        url:
+          type: string
+      required:
+      - label
+      - url
+    EventsBlock:
+      type: object
+      properties:
+        eyebrow:
+          type: string
+        title:
+          type: string
+        subtitle:
+          type: string
+        note:
+          type: string
+        link_label:
+          type: string
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/HomeEventCategory'
+          readOnly: true
+      required:
+      - categories
+      - eyebrow
+      - link_label
+      - note
+      - subtitle
+      - title
+    FormInfo:
+      type: object
+      properties:
+        title:
+          type: string
+          default: ''
+        subtitle:
+          type: string
+          default: ''
+    Hero:
+      type: object
+      properties:
+        title:
+          type: string
+          default: ''
+        subtitle:
+          type: string
+          default: ''
+        badge:
+          type: string
+          default: ''
+    HeroBlock:
+      type: object
+      properties:
+        title:
+          type: string
+        subtitle:
+          type: string
+        image:
+          type: string
+          format: uri
+          nullable: true
+        cta:
+          allOf:
+          - $ref: '#/components/schemas/HomeCta'
+          nullable: true
+          readOnly: true
+      required:
+      - cta
+      - image
+      - subtitle
+      - title
+    HomeCta:
+      type: object
+      properties:
+        label:
+          type: string
+        url:
+          type: string
+      required:
+      - label
+      - url
+    HomeEventCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        slug:
+          type: string
+          maxLength: 80
+          pattern: ^[-a-zA-Z0-9_]+$
+        name:
+          type: string
+          description: 'Hero kartında başlıq. Məs: Konfrans'
+          maxLength: 120
+        short_description:
+          type: string
+          description: 'Hero kartındakı qısa mətn. Məs: Zal, texniki təchizat, qeydiyyat,
+            tərcümə.'
+          maxLength: 255
+      required:
+      - id
+      - name
+      - slug
+    HomeIata:
+      type: object
+      properties:
+        logo:
+          type: string
+          nullable: true
+        caption:
+          type: string
+      required:
+      - caption
+      - logo
+    HomePartner:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Ad
+          description: 'Brend adı, dilə görə dəyişmir. Məs: Hilton Hotels & Resorts'
+          maxLength: 200
+        logo:
+          type: string
+          format: uri
+          title: Loqo
+      required:
+      - id
+      - logo
+      - name
+    Iata:
+      type: object
+      properties:
+        logo:
+          type: string
+          format: uri
+          nullable: true
+        caption:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/IataFeature'
+      required:
+      - caption
+      - description
+      - features
+      - logo
+      - title
+    IataFeature:
+      type: object
+      properties:
+        text:
+          type: string
+          title: Mətn
+          description: 'Məs: Tam üzvlü agentlik'
+          maxLength: 160
+      required:
+      - text
+    Image:
+      type: object
+      properties:
+        image:
+          type: string
+          format: uri
+        alt:
+          type: string
+      required:
+      - alt
+      - image
+    Mission:
+      type: object
+      properties:
+        eyebrow:
+          type: string
+        title:
+          type: string
+        text:
+          type: string
+      required:
+      - eyebrow
+      - text
+      - title
+    NetworkEnum:
+      enum:
+      - facebook
+      - instagram
+      - linkedin
+      - youtube
+      - telegram
+      - tiktok
+      - x
+      - whatsapp
+      type: string
+      description: |-
+        * `facebook` - Facebook
+        * `instagram` - Instagram
+        * `linkedin` - LinkedIn
+        * `youtube` - YouTube
+        * `telegram` - Telegram
+        * `tiktok` - TikTok
+        * `x` - X (Twitter)
+        * `whatsapp` - WhatsApp
+    NewsBlock:
+      type: object
+      properties:
+        eyebrow:
+          type: string
+        title:
+          type: string
+        subtitle:
+          type: string
+        link_label:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicNewsList'
+          readOnly: true
+      required:
+      - eyebrow
+      - items
+      - link_label
+      - subtitle
+      - title
+    Office:
+      type: object
+      description: |-
+        Yan kart: telefon / e-mail / ünvan aktiv əlaqə kanallarından (ContactChannel) götürülür.
+        Kanallarda göstərilməyibsə - avtomatik qlobal SiteSettings-dən götürülür.
+      properties:
+        image:
+          type: string
+          nullable: true
+          readOnly: true
+        name:
+          type: string
+          default: ''
+        phone:
+          type: string
+          readOnly: true
+        email:
+          type: string
+          readOnly: true
+        address:
+          type: string
+          readOnly: true
+        working_hours:
+          type: string
+          default: ''
+        support:
+          type: string
+          default: ''
+        map_url:
+          type: string
+          default: ''
+      required:
+      - address
+      - email
+      - image
+      - phone
+    PaginatedPublicEventListList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicEventList'
+    PaginatedPublicNewsListList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicNewsList'
+    PaginatedPublicPartnerList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=400&limit=100
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?offset=200&limit=100
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicPartner'
+    PartnerFeature:
+      type: object
+      properties:
+        text:
+          type: string
+          title: Mətn
+          maxLength: 160
+      required:
+      - text
+    PartnersBlock:
+      type: object
+      properties:
+        eyebrow:
+          type: string
+        link_label:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/HomePartner'
+          readOnly: true
+      required:
+      - eyebrow
+      - items
+      - link_label
+    PublicAbout:
+      type: object
+      description: Вся страница «Haqqımızda» одним ответом.
+      properties:
+        who:
+          $ref: '#/components/schemas/Who'
+        stats:
+          type: array
+          items:
+            $ref: '#/components/schemas/Stat'
+        iata:
+          $ref: '#/components/schemas/Iata'
+        story:
+          $ref: '#/components/schemas/Story'
+        mission:
+          $ref: '#/components/schemas/Mission'
+        vision:
+          $ref: '#/components/schemas/Vision'
+        why:
+          $ref: '#/components/schemas/Why'
+        timeline:
+          $ref: '#/components/schemas/TimelineSection'
+      required:
+      - iata
+      - mission
+      - stats
+      - story
+      - timeline
+      - vision
+      - who
+      - why
+    PublicCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        slug:
+          type: string
+          maxLength: 80
+          pattern: ^[-a-zA-Z0-9_]+$
+        name:
+          type: string
+          description: 'Hero kartında başlıq. Məs: Konfrans'
+          maxLength: 120
+        display_name:
+          type: string
+          readOnly: true
+        short_name:
+          type: string
+          description: 'Kartdakı bədge. Məs: KONFRANS'
+          maxLength: 40
+        short_description:
+          type: string
+          description: 'Hero kartındakı qısa mətn. Məs: Zal, texniki təchizat, qeydiyyat,
+            tərcümə.'
+          maxLength: 255
+        description:
+          type: string
+          description: Kateqoriyanın tam təsviri (məcburi deyil)
+      required:
+      - display_name
+      - id
+      - name
+      - short_name
+      - slug
+    PublicCategoryBrief:
+      type: object
+      properties:
+        slug:
+          type: string
+          maxLength: 80
+          pattern: ^[-a-zA-Z0-9_]+$
+        name:
+          type: string
+          description: 'Hero kartında başlıq. Məs: Konfrans'
+          maxLength: 120
+        display_name:
+          type: string
+          readOnly: true
+        short_name:
+          type: string
+          description: 'Kartdakı bədge. Məs: KONFRANS'
+          maxLength: 40
+      required:
+      - display_name
+      - name
+      - short_name
+      - slug
+    PublicContact:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/Hero'
+        channels:
+          type: array
+          items:
+            $ref: '#/components/schemas/Channel'
+        form:
+          $ref: '#/components/schemas/FormInfo'
+        office:
+          $ref: '#/components/schemas/Office'
+      required:
+      - channels
+      - form
+      - office
+      - page
+    PublicEventDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        slug:
+          type: string
+          maxLength: 160
+          pattern: ^[-a-zA-Z0-9_]+$
+        title:
+          type: string
+          maxLength: 255
+        cover_image:
+          type: string
+          format: uri
+          nullable: true
+        category:
+          allOf:
+          - $ref: '#/components/schemas/PublicCategoryBrief'
+          readOnly: true
+        date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+          nullable: true
+        start_time:
+          type: string
+          format: time
+        end_time:
+          type: string
+          format: time
+          nullable: true
+        venue:
+          type: string
+          maxLength: 255
+        city:
+          type: string
+          maxLength: 120
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          nullable: true
+          description: Boş və ya 0 = Pulsuz
+        currency:
+          type: string
+          maxLength: 3
+        is_free:
+          type: boolean
+          readOnly: true
+        description:
+          type: string
+        organizer:
+          type: string
+          maxLength: 255
+        expected_participants:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          nullable: true
+          description: Təxmini iştirakçı sayı. Saytda '500+ gözlənilir' kimi göstərilir
+        event_languages:
+          type: array
+          items:
+            type: string
+          readOnly: true
+        seats_left:
+          type: integer
+          readOnly: true
+          nullable: true
+        can_register:
+          type: boolean
+          readOnly: true
+        gallery:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicGallery'
+          readOnly: true
+      required:
+      - can_register
+      - category
+      - city
+      - date
+      - event_languages
+      - gallery
+      - id
+      - is_free
+      - seats_left
+      - slug
+      - start_time
+      - title
+      - venue
+    PublicEventList:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        slug:
+          type: string
+          maxLength: 160
+          pattern: ^[-a-zA-Z0-9_]+$
+        title:
+          type: string
+          maxLength: 255
+        cover_image:
+          type: string
+          format: uri
+          nullable: true
+        category:
+          allOf:
+          - $ref: '#/components/schemas/PublicCategoryBrief'
+          readOnly: true
+        date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+          nullable: true
+        start_time:
+          type: string
+          format: time
+        end_time:
+          type: string
+          format: time
+          nullable: true
+        venue:
+          type: string
+          maxLength: 255
+        city:
+          type: string
+          maxLength: 120
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+          nullable: true
+          description: Boş və ya 0 = Pulsuz
+        currency:
+          type: string
+          maxLength: 3
+        is_free:
+          type: boolean
+          readOnly: true
+      required:
+      - category
+      - city
+      - date
+      - id
+      - is_free
+      - slug
+      - start_time
+      - title
+      - venue
+    PublicGallery:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        image:
+          type: string
+          format: uri
+        alt:
+          type: string
+          maxLength: 255
+        order:
+          type: integer
+          maximum: 32767
+          minimum: 0
+      required:
+      - id
+      - image
+    PublicHome:
+      type: object
+      properties:
+        hero:
+          $ref: '#/components/schemas/HeroBlock'
+        about:
+          $ref: '#/components/schemas/AboutBlock'
+        services:
+          $ref: '#/components/schemas/ServicesBlock'
+        events:
+          $ref: '#/components/schemas/EventsBlock'
+        news:
+          $ref: '#/components/schemas/NewsBlock'
+        partners:
+          $ref: '#/components/schemas/PartnersBlock'
+      required:
+      - about
+      - events
+      - hero
+      - news
+      - partners
+      - services
+    PublicNewsCategory:
+      type: object
+      properties:
+        slug:
+          type: string
+          maxLength: 80
+          pattern: ^[-a-zA-Z0-9_]+$
+        name:
+          type: string
+          title: Ad
+          description: 'Məs: Rəsmi xəbərlər'
+          maxLength: 120
+      required:
+      - name
+      - slug
+    PublicNewsDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        slug:
+          type: string
+          maxLength: 180
+          pattern: ^[-a-zA-Z0-9_]+$
+        title:
+          type: string
+          title: Başlıq
+          maxLength: 255
+        summary:
+          type: string
+          title: Qısa məzmun
+          description: Siyahıdakı kartda və məqalənin giriş abzasında göstərilir
+        cover_image:
+          type: string
+          format: uri
+          nullable: true
+          title: Şəkil
+        category:
+          allOf:
+          - $ref: '#/components/schemas/PublicNewsCategory'
+          readOnly: true
+        date:
+          type: string
+          format: date
+          title: Tarix
+        content:
+          type: string
+          title: Məzmun
+        author:
+          type: string
+          title: Müəllif
+          maxLength: 120
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicNewsTag'
+          readOnly: true
+      required:
+      - category
+      - id
+      - slug
+      - tags
+      - title
+    PublicNewsList:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        slug:
+          type: string
+          maxLength: 180
+          pattern: ^[-a-zA-Z0-9_]+$
+        title:
+          type: string
+          title: Başlıq
+          maxLength: 255
+        summary:
+          type: string
+          title: Qısa məzmun
+          description: Siyahıdakı kartda və məqalənin giriş abzasında göstərilir
+        cover_image:
+          type: string
+          format: uri
+          nullable: true
+          title: Şəkil
+        category:
+          allOf:
+          - $ref: '#/components/schemas/PublicNewsCategory'
+          readOnly: true
+        date:
+          type: string
+          format: date
+          title: Tarix
+      required:
+      - category
+      - id
+      - slug
+      - title
+    PublicNewsPage:
+      type: object
+      properties:
+        title:
+          type: string
+          title: Başlıq
+          description: 'Məs: Xəbərlər'
+          maxLength: 120
+        subtitle:
+          type: string
+          title: Alt başlıq
+          description: 'Məs: Turizm sektorundakı son yeniliklər, ALEAN-ın tədbirləri
+            ...'
+    PublicNewsTag:
+      type: object
+      properties:
+        slug:
+          type: string
+          maxLength: 80
+          pattern: ^[-a-zA-Z0-9_]+$
+        name:
+          type: string
+          title: Ad
+          maxLength: 80
+      required:
+      - name
+      - slug
+    PublicPartner:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          title: Ad
+          description: 'Brend adı, dilə görə dəyişmir. Məs: Hilton Hotels & Resorts'
+          maxLength: 200
+        logo:
+          type: string
+          format: uri
+          title: Loqo
+        description:
+          type: string
+          title: Təsvir
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartnerFeature'
+          readOnly: true
+          description: Spesifikasiya və üstünlüklər siyahısı
+      required:
+      - features
+      - id
+      - logo
+      - name
+    PublicPartnersPage:
+      type: object
+      properties:
+        title:
+          type: string
+          title: Başlıq
+          description: 'Məs: Partnyorlar'
+          maxLength: 120
+        subtitle:
+          type: string
+          title: Alt başlıq
+          description: 'Məs: Dünya üzrə aparıcı otel şəbəkələri, aviasiya təşkilatları
+            və ...'
+    PublicService:
+      type: object
+      description: |-
+        Bir xidmət bloku. Bütün xidmətlər üçün eyni forma:
+        cards / images / tags (istifadə olunmursa - boş massiv).
+      properties:
+        key:
+          type: string
+          readOnly: true
+        eyebrow:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        chip_label:
+          type: string
+        icon:
+          type: string
+          format: uri
+          nullable: true
+        cta:
+          allOf:
+          - $ref: '#/components/schemas/Cta'
+          nullable: true
+          readOnly: true
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/Card'
+          readOnly: true
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/Image'
+          readOnly: true
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+          readOnly: true
+      required:
+      - cards
+      - chip_label
+      - cta
+      - description
+      - eyebrow
+      - icon
+      - images
+      - key
+      - tags
+      - title
+    PublicSite:
+      type: object
+      properties:
+        site_name:
+          type: string
+          title: Sayt adı
+          maxLength: 120
+        logo:
+          type: string
+          readOnly: true
+          title: Loqo (header)
+          description: Header loqosunun tam URL-i
+        footer_logo:
+          type: string
+          readOnly: true
+          title: Loqo (footer)
+          description: Footer loqosunun tam URL-i (boşdursa header loqosu qaytarılır)
+        tagline:
+          type: string
+          title: Footer təsviri
+          maxLength: 255
+        footer_contact_title:
+          type: string
+          title: Əlaqə sütunu başlığı
+          maxLength: 60
+        address:
+          type: string
+          title: Ünvan
+          maxLength: 255
+        phone:
+          type: string
+          title: Telefon
+          maxLength: 50
+        email:
+          title: E-poçt
+          oneOf:
+          - type: string
+            format: email
+            maxLength: 120
+          - type: string
+            maxLength: 0
+        footer_social_title:
+          type: string
+          title: Sosial şəbəkə başlığı
+          maxLength: 60
+        social:
+          type: array
+          items:
+            $ref: '#/components/schemas/Social'
+          readOnly: true
+          title: Sosial şəbəkələr
+          description: Aktiv sosial şəbəkə linklərinin siyahısı
+        copyright:
+          type: string
+          readOnly: true
+          description: Cari il {year} ilə əvəz olunmuş copyright mətni
+      required:
+      - copyright
+      - footer_logo
+      - logo
+      - social
+    RegistrationCreateRequest:
+      type: object
+      properties:
+        first_name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        last_name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          minLength: 1
+          maxLength: 254
+        phone:
+          type: string
+          minLength: 1
+          maxLength: 32
+        company:
+          type: string
+          maxLength: 255
+        position:
+          type: string
+          maxLength: 255
+        participants_count:
+          type: integer
+          maximum: 100
+          minimum: 1
+        country:
+          type: string
+          maxLength: 100
+        message:
+          type: string
+      required:
+      - email
+      - first_name
+      - last_name
+      - phone
+    ServicesBlock:
+      type: object
+      properties:
+        eyebrow:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicService'
+          readOnly: true
+      required:
+      - eyebrow
+      - items
+    ServicesHero:
+      type: object
+      properties:
+        eyebrow:
+          type: string
+        title:
+          type: string
+        subtitle:
+          type: string
+      required:
+      - eyebrow
+      - subtitle
+      - title
+    ServicesOverview:
+      type: object
+      description: Yalnız Swagger sxemi üçün.
+      properties:
+        page:
+          allOf:
+          - $ref: '#/components/schemas/ServicesHero'
+          nullable: true
+        chips:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chip'
+        sections:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicService'
+      required:
+      - chips
+      - page
+      - sections
+    Social:
+      type: object
+      properties:
+        network:
+          allOf:
+          - $ref: '#/components/schemas/NetworkEnum'
+          title: Şəbəkə
+        url:
+          type: string
+          format: uri
+          title: Link
+          maxLength: 500
+      required:
+      - network
+      - url
+    Stat:
+      type: object
+      properties:
+        value:
+          type: string
+          title: Rəqəm
+          description: 'Məs: 2000+'
+          maxLength: 30
+        label:
+          type: string
+          title: Yazı
+          description: 'Məs: Yerli və xarici tərəfdaş agentlik'
+          maxLength: 120
+      required:
+      - label
+      - value
+    Story:
+      type: object
+      properties:
+        image:
+          type: string
+          format: uri
+          nullable: true
+        title:
+          type: string
+        text:
+          type: string
+      required:
+      - image
+      - text
+      - title
+    Tag:
+      type: object
+      properties:
+        text:
+          type: string
+      required:
+      - text
+    Timeline:
+      type: object
+      properties:
+        year:
+          type: integer
+          maximum: 2100
+          minimum: 1900
+          title: İl
+        title:
+          type: string
+          title: Başlıq
+          maxLength: 160
+        description:
+          type: string
+          title: Təsvir
+      required:
+      - title
+      - year
+    TimelineSection:
+      type: object
+      properties:
+        title:
+          type: string
+        subtitle:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Timeline'
+      required:
+      - items
+      - subtitle
+      - title
+    TypeEnum:
+      enum:
+      - phone
+      - email
+      - address
+      - whatsapp
+      - other
+      type: string
+      description: |-
+        * `phone` - Telefon
+        * `email` - E-mail
+        * `address` - Ünvan
+        * `whatsapp` - WhatsApp
+        * `other` - Digər
+    ValueOut:
+      type: object
+      description: 'Схема для блока «Niyə ALEAN»: дополняется порядковым номером "01",
+        "02" и т.д.'
+      properties:
+        number:
+          type: string
+          description: 'Avtomatik nömrələmə (məs: ''01'', ''02'')'
+        icon:
+          type: string
+          format: uri
+          nullable: true
+        title:
+          type: string
+        description:
+          type: string
+      required:
+      - description
+      - icon
+      - number
+      - title
+    Vision:
+      type: object
+      properties:
+        title:
+          type: string
+        text:
+          type: string
+      required:
+      - text
+      - title
+    Who:
+      type: object
+      properties:
+        eyebrow:
+          type: string
+          description: 'Bölmə etiketi (məs: BİZ KİMİK?)'
+        headline:
+          type: string
+          description: Əsas başlıq
+        intro_left:
+          type: string
+          description: Sol sütun mətni
+        intro_right:
+          type: string
+          description: Sağ sütun mətni
+      required:
+      - eyebrow
+      - headline
+      - intro_left
+      - intro_right
+    Why:
+      type: object
+      properties:
+        eyebrow:
+          type: string
+        title:
+          type: string
+        subtitle:
+          type: string
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValueOut'
+          readOnly: true
+      required:
+      - eyebrow
+      - subtitle
+      - title
+      - values

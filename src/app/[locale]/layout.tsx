@@ -36,6 +36,7 @@ export function generateStaticParams(): Array<{ locale: Locale }> {
 
 export const dynamic = "force-static"
 export const dynamicParams = false
+export const revalidate = 120
 
 type LocaleLayoutProps = Readonly<{
   children: React.ReactNode

@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   description: "Alean.az qeydiyyat səhifəsi.",
 }
 
-export default function Page() {
-  return <RegistrationPage />
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  return <RegistrationPage locale={locale} />
 }

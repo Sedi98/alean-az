@@ -5,11 +5,11 @@ export interface MissionVisionSectionProps {
   dotImage: string
   storyImage: string
   storyTitle: string
-  storyParagraphs: string[]
+  storyText: string
   missionTitle: string
-  missionParagraphs: string[]
+  missionText: string
   visionTitle: string
-  visionParagraphs: string[]
+  visionText: string
 }
 
 export function MissionVisionSection({
@@ -17,11 +17,11 @@ export function MissionVisionSection({
   dotImage,
   storyImage,
   storyTitle,
-  storyParagraphs,
+  storyText,
   missionTitle,
-  missionParagraphs,
+  missionText,
   visionTitle,
-  visionParagraphs,
+  visionText,
 }: MissionVisionSectionProps) {
   return (
     <section className="bg-white px-6 py-16 sm:px-10 sm:py-20 lg:px-20 lg:py-[100px]">
@@ -38,14 +38,14 @@ export function MissionVisionSection({
             <div className="absolute inset-x-8 bottom-8 flex flex-col gap-6">
               <h2 className="font-sans text-xl font-semibold leading-[1.5]">{storyTitle}</h2>
               <div className="space-y-0 font-sans text-sm leading-[1.25] text-[#d1d1de]">
-                {storyParagraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                <div dangerouslySetInnerHTML={{ __html: storyText }} />
               </div>
             </div>
           </article>
 
           <div className="flex min-h-[558px] flex-col gap-6">
-            <InfoCard title={missionTitle} paragraphs={missionParagraphs} className="bg-[#f0f0fd] text-[#4848a8]" titleClassName="text-[#2b2b63]" />
-            <InfoCard title={visionTitle} paragraphs={visionParagraphs} className="bg-[#6666ec] text-[#d0d0f9]" titleClassName="text-white" />
+            <InfoCard title={missionTitle} html={missionText} className="bg-[#f0f0fd] text-[#4848a8]" titleClassName="text-[#2b2b63]" />
+            <InfoCard title={visionTitle} html={visionText} className="bg-[#6666ec] text-[#d0d0f9]" titleClassName="text-white" />
           </div>
         </div>
       </div>
@@ -53,14 +53,13 @@ export function MissionVisionSection({
   )
 }
 
-function InfoCard({ title, paragraphs, className, titleClassName }: { title: string; paragraphs: string[]; className: string; titleClassName: string }) {
+function InfoCard({ title, html, className, titleClassName }: { title: string; html: string; className: string; titleClassName: string }) {
   return (
     <article className={`flex flex-1 flex-col gap-3 overflow-hidden rounded-[20px] p-8 ${className}`}>
       <h2 className={`font-sans text-xl font-semibold leading-[1.5] ${titleClassName}`}>{title}</h2>
       <div className="space-y-0 font-sans text-sm leading-[1.25]">
-        {paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        <div dangerouslySetInnerHTML={{ __html: html }} />
       </div>
     </article>
   )
 }
-

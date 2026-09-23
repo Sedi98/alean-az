@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   description: "Alean.az services and tourism solutions.",
 }
 
-export default function Page() {
-  return <ServicesPage />
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  return <ServicesPage locale={locale} />
 }

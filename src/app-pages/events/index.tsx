@@ -1,33 +1,49 @@
-import { EventsHero } from "./hero"
 import { EventsGrid } from "./grid"
-import { events } from "./data"
+import { EventsHero } from "./hero"
 import { PartnersSection } from "@/app-pages/home/partners"
+import { Pagination } from "@/components/ui/pagination"
+import type { PublicCategory, PublicEventList } from "@/features/services/events/types"
+import type { PublicPartner } from "@/features/services/partners/types"
 
-export default function EventsPage() {
+export interface EventsPageProps {
+  categories: PublicCategory[]
+  events: PublicEventList[]
+  activeCategory?: string
+  currentPage: number
+  totalPages: number
+  searchParams: Record<string, string | undefined>
+  partners: PublicPartner[]
+}
+
+export default function EventsPage({ categories, events, currentPage, totalPages, searchParams, partners }: EventsPageProps) {
   return (
     <main className="min-h-screen bg-white">
       <EventsHero
         breadcrumb="Ana səhifə  /  Tədbirlər"
         title="Tədbirlər"
-        cards={[
-          { title: "Konfrans", description: "Zal, texniki təchizat, qeydiyyat, tərcümə." },
-          { title: "Sərgi", description: "Stend logistikası, delegasiya, B2B görüşlər." },
-          { title: "Korporativ tədbir", description: "Yığıncaq, təqdimat, təlim proqramları." },
-          { title: "Təşviq səyahəti", description: "Komanda proqramları və tematik marşrutlar." },
-        ]}
+        cards={categories.map((category) => ({
+          title: category.short_name,
+          description: category.short_description ?? "",
+          href: "/events?category=" + encodeURIComponent(category.slug),
+        }))}
       />
-      <EventsGrid events={events} />
+      <EventsGrid
+        events={events.map((event) => ({
+          slug: event.slug,
+          image: event.cover_image ?? "/events/tourism-forum.jpg",
+          category: event.category.short_name,
+          date: event.date,
+          title: event.title,
+          location: `${event.venue}, ${event.city}`,
+        }))}
+      />
+      <Pagination pathname="/events" page={currentPage} totalPages={totalPages} searchParams={searchParams} />
       <PartnersSection
         label="ÇALIŞDIĞIMIZ OTEL ŞƏBƏKƏLƏRİ"
         dotImage="/brand/partners-dot.svg"
         actionText="Hamısına bax"
         actionUrl="/partners"
-        partners={[
-          { name: "Hilton Hotels & Resorts", image: "/partners/hilton.png", width: 116, height: 88 },
-          { name: "Marriott", image: "/partners/marriott.png", width: 126, height: 99 },
-          { name: "Four Seasons Hotels and Resorts", image: "/partners/four-seasons.png", width: 206, height: 116 },
-          { name: "Hyatt", image: "/partners/hyatt.png", width: 196, height: 110 },
-        ]}
+        partners={partners}
       />
     </main>
   )

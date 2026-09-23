@@ -1,0 +1,32 @@
+{
+  "Navbar": {
+    "home": "Главная",
+    "about": "О нас",
+    "services": "Услуги",
+    "partners": "Партнёры",
+    "events": "Мероприятия",
+    "news": "Новости",
+    "contact": "Контакты",
+    "registration": "Регистрация",
+    "language": "Dil",
+    "openMenu": "Menyunu aç",
+    "closeMenu": "Menyunu bağla"
+  },
+  "Footer": {
+    "pages": "Səhifələr",
+    "services": "Xidmətlər",
+    "contact": "Əlaqə",
+    "followUs": "Bizi izləyin",
+    "copyright": "© 2026 ALEAN Tour Operator. Bütün hüquqlar qorunur.",
+    "pageAbout": "О нас",
+    "pageServices": "Услуги",
+    "pagePartners": "Партнёры",
+    "pageEvents": "Мероприятия",
+    "pageNews": "Новости",
+    "pageContact": "Контакты",
+    "serviceFlights": "Авиабилеты",
+    "serviceInsurance": "Страхование",
+    "serviceCorporate": "Корпоративные услуги",
+    "serviceMedical": "Медицинский туризм"
+  }
+}

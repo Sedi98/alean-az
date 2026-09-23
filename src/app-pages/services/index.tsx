@@ -8,7 +8,8 @@ import { CorporateSection } from "./corporate"
 import { MedicalTourismSection } from "./medical-tourism"
 import { AdditionalServicesSection } from "./additional"
 
-export default function ServicesPage() {
+export default function ServicesPage({ locale = "az" }: { locale?: string }) {
+  void locale
   return (
     <main className="min-h-screen bg-white">
       <ServicesHero

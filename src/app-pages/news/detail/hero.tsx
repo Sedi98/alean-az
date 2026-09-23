@@ -1,16 +1,16 @@
 import Image from "next/image"
 import { Link } from "@/i18n/navigation"
 
-import type { NewsItem } from "@/app-pages/news/data"
+import type { PublicNewsDetail } from "@/features/services/news/types"
 
 export interface NewsDetailHeroProps {
-  news: NewsItem
+  news: PublicNewsDetail
 }
 
 export function NewsDetailHero({ news }: NewsDetailHeroProps) {
-  const title = news.detailTitle ?? news.title
-  const category = news.category ?? "Turizm"
-  const breadcrumbTitle = news.detailBreadcrumb ?? title
+  const title = news.title
+  const category = news.category.name
+  const breadcrumbTitle = title
 
   return (
     <section data-node-id="276:1093" className="border border-[rgba(255,255,255,0.05)] bg-[linear-gradient(180deg,#14141f_0%,#1f1a38_50%,#332661_100%)] px-6 pb-16 pt-36 sm:px-10 lg:px-20 lg:pb-[100px] lg:pt-36">

@@ -1,10 +1,12 @@
-export function ContactDetailsCard() {
+import type { Office } from "@/features/services/contact/types"
+
+export function ContactDetailsCard({ office }: { office: Office }) {
   const details = [
-    ["Telefon", "+994 77 218 0770"],
-    ["E-mail", "info@alean-az.com"],
-    ["Ünvan", "İzmir Plaza, Bakı"],
-    ["İş saatları", "B.e — Cümə: 09:00–18:00"],
-    ["Dəstək", "7/24 əməliyyat"],
+    ["Telefon", office.phone],
+    ["E-mail", office.email],
+    ["Ünvan", office.address],
+    ["İş saatları", office.working_hours ?? ""],
+    ["Dəstək", office.support ?? ""],
   ]
 
   return (

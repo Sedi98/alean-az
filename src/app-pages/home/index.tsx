@@ -4,78 +4,78 @@ import { MiceSection } from "./mice"
 import { NewsSection } from "./news"
 import { PartnersSection } from "./partners"
 import { ServicesSection } from "./services"
-import { newsItems } from "@/app-pages/news/data"
+import type { PublicHome } from "@/features/services/home/types"
+import type { PublicPartner } from "@/features/services/partners/types"
 
-export default function HomePage() {
+export default function HomePage({ home, partners }: { home: PublicHome; partners: PublicPartner[] }) {
+  const serviceFallbackIcon = "/brand/icon-circle.svg"
+
   return (
     <main className="min-h-screen bg-white">
       <HeroSection
-        image="/images/hero.webp"
-        title={"Azərbaycana\nsəyahətin operatoru"}
-        description={"2006-cı ildən incoming turizm, MICE, korporativ səfərlər,\nnəqliyyat, sığorta və tibbi turizm üzrə tam xidmət — 2000-dən çox tərəfdaş agentlik üçün."}
-        buttonText="Xidmətlərimiz"
-        url="/services"
+        image={home.hero.image ?? "/images/hero.webp"}
+        title={home.hero.title}
+        description={home.hero.subtitle}
+        buttonText={home.hero.cta?.label ?? ""}
+        url={home.hero.cta?.url ?? "/services"}
       />
       <AboutSection
-        label="HAQQIMIZDA"
+        label={home.about.eyebrow}
         dotImage="/brand/section-dot.svg"
-        title="Tərəfdaş agentliklər, korporativ müştərilər və qonaqlarla işləyirik — marşrutu, oteli, nəqliyyatı və sənədləşməni tam idarə edərək səyahəti sadə və qayğısız edirik."
+        title={home.about.headline}
         stats={[
-          { value: "2000+", label: "Yerli və xarici tərəfdaş\nagentlik" },
-          { value: "20+", label: "İl Azərbaycan turizm\nbazarında" },
-          { value: "50+", label: "Səyahət istiqaməti" },
-          { image: "/brand/iata-logo.png", imageAlt: "IATA", label: "Səyahət istiqaməti" },
+          ...home.about.stats,
+          ...(home.about.iata.logo
+            ? [{ image: home.about.iata.logo, imageAlt: "IATA", label: home.about.iata.caption }]
+            : []),
         ]}
       />
       <ServicesSection
-        label="XİDMƏTLƏRİMİZ"
+        label={home.services.eyebrow}
         dotImage="/brand/section-dot.svg"
-        services={[
-          { title: "Aviabiletlər", description: "IATA agentliyi olaraq bütün istiqamətlər üzrə bilet satışı, qrup tarifləri və dəyişiklik dəstəyi.", icon: "/service-icons/air-tickets.svg", iconAlt: "Aviabiletlər", href: "/services/air-tickets" },
-          { title: "Turlar", description: "Şəhər, mədəniyyət, təbiət və qış turları — hazır proqramlar və fərdi marşrutlar.", icon: "/service-icons/tours.svg", iconAlt: "Turlar", href: "/services/tours" },
-          { title: "Otellər", description: "Azərbaycan və dünya üzrə müqaviləli otellər, kateqoriya seçimi və korporativ tariflər.", icon: "/service-icons/corporate-travel.svg", iconAlt: "Otellər", href: "/services/hotels" },
-          { title: "Səyahət Sığortası", description: "Fərdi və qrup sığorta paketləri, əhatə dairəsi və viza tələblərinə uyğun sənədləşmə.", icon: "/service-icons/insurance.svg", iconAlt: "Səyahət sığortası", href: "/services/insurance" },
-          { title: "Transferlər & Ekskursiyalar", description: "VIP və biznes sinif transferlər, qrup avtobusları, bələdçili ekskursiya proqramları.", icon: "/service-icons/transfers.svg", iconAlt: "Transferlər və ekskursiyalar", href: "/services/transfers" },
-          { title: "Korporativ Səyahət", description: "Biznes səfərlər, korporativ səyahət həlləri, MICE — konfrans, sərgi və təşviq proqramları.", icon: "/service-icons/excursions.svg", iconAlt: "Korporativ səyahət", href: "/services/corporate-travel" },
-        ]}
+        services={home.services.items.map((service) => ({
+          title: service.title,
+          description: service.description,
+          icon: service.icon ?? serviceFallbackIcon,
+          iconAlt: service.title,
+          href: service.cta?.url,
+        }))}
       />
       <MiceSection
-        label="MICE/TƏDBİRLƏR"
+        label={home.events.eyebrow}
         dotImage="/brand/mice-dot.svg"
-        title="Tədbirlərin təşkili"
-        description="Konfrans, sərgi, korporativ tədbir və təşviq səyahətləri — məkan seçimindən iştirakçı logistikasına qədər tam idarəetmə."
-        actionText="Hamısına bax"
+        title={home.events.title}
+        description={home.events.subtitle}
+        actionText={home.events.link_label}
         actionUrl="/events"
-        note="Tədbir briefinizi göndərin — məkan variantları və əməliyyat planı ilə 24 saat ərzində cavab veririk."
-        cards={[
-          { title: "Konfrans", description: "Zal, texniki təchizat, qeydiyyat, tərcümə.", href: "/events/conference" },
-          { title: "Sərgi", description: "Stend logistikası, delegasiya, B2B görüşlər.", href: "/events/exhibition" },
-          { title: "Korporativ tədbir", description: "Yığıncaq, təqdimat, təlim proqramları.", href: "/events/corporate" },
-          { title: "Təşviq səyahəti", description: "Komanda proqramları və tematik marşrutlar.", href: "/events/incentive-travel" },
-        ]}
+        note={home.events.note}
+        cards={home.events.categories.map((category) => ({
+          title: category.name,
+          description: category.short_description ?? "",
+          href: "/events?category=" + encodeURIComponent(category.slug),
+        }))}
       />
       <NewsSection
-        label="XƏBƏRLƏR"
+        label={home.news.eyebrow}
         dotImage="/brand/section-dot.svg"
-        title="Lorem İmpsum"
-        description="Konfrans, sərgi, korporativ tədbir və təşviq səyahətləri — məkan seçimindən iştirakçı logistikasına qədər tam idarəetmə."
-        actionText="Hamısına bax"
+        title={home.news.title}
+        description={home.news.subtitle}
+        actionText={home.news.link_label}
         actionUrl="/news"
-        cards={[
-          ...newsItems.map(({ slug, ...card }) => ({ ...card, href: `/news/${slug}` })),
-        ]}
+        cards={home.news.items.map((item) => ({
+          title: item.title,
+          description: item.summary ?? "",
+          image: item.cover_image ?? "/news/news-1.jpeg",
+          imageAlt: item.title,
+          href: "/news/" + item.slug,
+        }))}
       />
       <PartnersSection
-        label="ÇALIŞDIĞIMIZ OTEL ŞƏBƏKƏLƏRİ"
+        label={home.partners.eyebrow}
         dotImage="/brand/partners-dot.svg"
-        actionText="Hamısına bax"
+        actionText={home.partners.link_label}
         actionUrl="/partners"
-        partners={[
-          { name: "Hilton Hotels & Resorts", image: "/partners/hilton.png", width: 116, height: 88 },
-          { name: "Marriott", image: "/partners/marriott.png", width: 126, height: 99 },
-          { name: "Four Seasons Hotels and Resorts", image: "/partners/four-seasons.png", width: 206, height: 116 },
-          { name: "Hyatt", image: "/partners/hyatt.png", width: 196, height: 110 },
-        ]}
+        partners={partners}
       />
     </main>
   )
