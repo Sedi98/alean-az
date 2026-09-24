@@ -11,7 +11,7 @@ export function RegistrationHero({ event }: { event: PublicEventDetail }) {
           <div className="w-full max-w-[581px]">
             <p className="font-sans text-xs leading-normal text-[#737380]">Ana səhifə / Tədbirlər / {event.title} / Qeydiyyat</p>
             <span className="mt-[21px] inline-flex rounded-full bg-[#7366e5] px-3.5 py-1.5 font-sans text-[11px] font-semibold tracking-[1.1px] text-white">{event.category.short_name}</span>
-            <h1 className="mt-[21px] whitespace-pre-line font-sans text-[40px] font-semibold leading-none text-white sm:text-[48px]">{event.title}</h1>
+            <h1 className="mt-[21px] whitespace-pre-line font-[family-name:var(--font-hero-title)] text-[40px] font-semibold leading-none text-white sm:text-[48px]">{event.title}</h1>
             <p className="mt-6 font-sans text-sm font-medium text-[#bfbfcc]">📅 {event.date}   ·   📍 {event.venue}, {event.city}   ·   ⏱ {event.start_time}{event.end_time ? ` – ${event.end_time}` : ""}</p>
           </div>
           <div className="flex w-full flex-col items-start gap-12 lg:w-[524px] lg:items-end lg:gap-[58px]">

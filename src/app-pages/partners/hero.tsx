@@ -24,8 +24,8 @@ export function PartnersHero({ breadcrumb, eyebrow, title, description, metadata
               <p>{breadcrumb}</p>
               <p>{eyebrow}</p>
             </div>
-            <h1 className="mt-[22px] font-sans text-[40px] font-semibold leading-none text-[#f0f0fd] sm:text-[48px]">{title}</h1>
-            <p className="mt-[22px] whitespace-pre-line font-sans text-base leading-[1.5] text-[#d0d0f9] sm:text-lg">{description}</p>
+            <h1 className="mt-[22px] font-[family-name:var(--font-hero-title)] text-[40px] font-semibold leading-none text-[#f0f0fd] sm:text-[48px]">{title}</h1>
+            <p className="mt-[22px] whitespace-pre-line font-[family-name:var(--font-hero-description)] text-base leading-[1.5] text-[#d0d0f9] sm:text-lg">{description}</p>
           </div>
 
           <div className="flex w-full flex-col items-start gap-12 lg:w-[482px] lg:items-end lg:gap-[114px]">

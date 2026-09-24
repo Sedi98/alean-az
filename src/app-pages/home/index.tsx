@@ -7,6 +7,12 @@ import { ServicesSection } from "./services"
 import type { PublicHome } from "@/features/services/home/types"
 import type { PublicPartner } from "@/features/services/partners/types"
 
+function truncateText(value: string, maxLength: number) {
+  if (value.length <= maxLength) return value
+
+  return `${value.slice(0, maxLength - 3).trimEnd()}...`
+}
+
 export default function HomePage({ home, partners }: { home: PublicHome; partners: PublicPartner[] }) {
   const serviceFallbackIcon = "/brand/icon-circle.svg"
 
@@ -35,10 +41,10 @@ export default function HomePage({ home, partners }: { home: PublicHome; partner
         dotImage="/brand/section-dot.svg"
         services={home.services.items.map((service) => ({
           title: service.title,
-          description: service.description,
+          description: truncateText(service.description, 100),
           icon: service.icon ?? serviceFallbackIcon,
           iconAlt: service.title,
-          href: service.cta?.url,
+          href: `/services#${encodeURIComponent(service.key)}`,
         }))}
       />
       <MiceSection

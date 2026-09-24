@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 
 import ServicesPage from "@/app-pages/services"
+import { getServicesOverview } from "@/features/services/services/api"
 
 export const metadata: Metadata = {
   title: "Services | Alean.az",
@@ -8,6 +9,8 @@ export const metadata: Metadata = {
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params
-  return <ServicesPage locale={locale} />
+  await params
+  const services = await getServicesOverview()
+
+  return <ServicesPage services={services} />
 }

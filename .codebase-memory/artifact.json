@@ -1,11 +1,11 @@
 {
     "schema_version": 2,
-    "commit": "1dc4efafa9d8e6db2727c7d84eaff7e858db1bb0",
-    "indexed_at": "2026-09-23T17:07:24Z",
+    "commit": "62a00bc43f79e04fba273d2f398998f19fd175b7",
+    "indexed_at": "2026-09-24T09:50:32Z",
     "project": "home-sadi-programming-secop-alean-az",
-    "nodes": 748,
-    "edges": 1422,
-    "original_size": 3342336,
-    "compressed_size": 373499,
+    "nodes": 765,
+    "edges": 1526,
+    "original_size": 3604480,
+    "compressed_size": 398907,
     "compression_level": 3
 }

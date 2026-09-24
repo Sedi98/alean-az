@@ -19,7 +19,7 @@ export function NewsDetailHero({ news }: NewsDetailHeroProps) {
           <div className="w-full max-w-[568px]">
             <p className="font-sans text-[13px] leading-normal text-[#9999a6]">Ana səhifə / Xəbərlər / {breadcrumbTitle}</p>
             <span className="mt-[21px] inline-flex rounded-full bg-[#7366e5] px-3.5 py-1.5 font-sans text-[11px] font-semibold leading-normal tracking-[1.1px] text-white">{category}</span>
-            <h1 className="mt-[21px] font-sans text-[38px] font-bold leading-[1.15] text-white sm:text-[46px]">{title}</h1>
+            <h1 className="mt-[21px] font-[family-name:var(--font-hero-title)] text-[38px] font-bold leading-[1.15] text-white sm:text-[46px]">{title}</h1>
           </div>
           <div className="flex w-full flex-col items-start gap-12 lg:w-[482px] lg:items-end lg:gap-[114px]">
             <p className="w-full max-w-[420px] text-left font-sans text-xs leading-[1.6] text-[#666673] lg:text-right">IATA qeydiyyatlı agentlik · 2000+ tərəfdaş · 7/24 əməliyyat dəstəyi</p>

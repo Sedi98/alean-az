@@ -38,11 +38,11 @@ export function HeroSection({
         <div className="w-full text-center text-white">
           <h1
             id="hero-title"
-            className="whitespace-pre-line font-[family-name:var(--font-hero)] text-[42px] font-bold leading-none sm:text-[60px]"
+            className="whitespace-pre-line font-[family-name:var(--font-hero-title)] text-[42px] font-bold leading-none sm:text-[60px]"
           >
             {title}
           </h1>
-          <p className="mx-auto mt-[14px] max-w-[752px] whitespace-pre-line font-[family-name:var(--font-hero)] text-base leading-6 text-white sm:text-lg sm:leading-[27px]">
+          <p className="mx-auto mt-[14px] max-w-[752px] whitespace-pre-line font-[family-name:var(--font-hero-description)] text-base leading-6 text-white sm:text-lg sm:leading-[27px]">
             {description}
           </p>
           <Link

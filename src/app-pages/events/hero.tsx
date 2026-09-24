@@ -16,7 +16,7 @@ export function EventsHero({ breadcrumb, title, cards }: EventsHeroProps) {
       <div className="mx-auto flex max-w-[1280px] flex-col gap-8">
         <div className="flex w-full max-w-[249px] flex-col gap-4">
           <p className="font-sans text-base font-medium leading-[1.5] text-[#9999a6]">{breadcrumb}</p>
-          <h1 className="font-sans text-[40px] font-semibold leading-none text-white sm:text-[48px]">{title}</h1>
+          <h1 className="font-[family-name:var(--font-hero-title)] text-[40px] font-semibold leading-none text-white sm:text-[48px]">{title}</h1>
         </div>
         <div className="lg:hidden">
           <EventsMobileCarousel cards={cards} />

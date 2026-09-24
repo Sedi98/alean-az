@@ -21,8 +21,8 @@ export interface Social {
 
 export interface PublicSite {
   site_name?: string
-  logo: string
-  footer_logo: string
+  logo?: string | null
+  footer_logo?: string | null
   tagline?: string
   footer_contact_title?: string
   address?: string

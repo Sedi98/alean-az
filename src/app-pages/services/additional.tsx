@@ -3,17 +3,17 @@ export interface AdditionalService {
 }
 
 export interface AdditionalServicesSectionProps {
-  number: string
+  category: string
   title: string
   services: AdditionalService[]
 }
 
-export function AdditionalServicesSection({ number, title, services }: AdditionalServicesSectionProps) {
+export function AdditionalServicesSection({ category, title, services }: AdditionalServicesSectionProps) {
   return (
-    <section data-node-id="239:2372" className="bg-[#0a0a0d] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
+    <section id="extras" data-node-id="239:2372" className="scroll-mt-6 bg-[#0a0a0d] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-8">
         <div className="flex w-full max-w-[469px] flex-col gap-6">
-          <p className="font-sans text-base font-medium leading-[1.5] text-[#6666ec]">{number} / ƏLAVƏ XİDMƏTLƏR</p>
+          <p className="font-sans text-base font-medium leading-[1.5] text-[#6666ec]">{category}</p>
           <h2 className="font-sans text-[28px] font-semibold leading-[1.25] text-white sm:text-[36px]">{title}</h2>
         </div>
         <div className="grid gap-4 md:grid-cols-3">

@@ -5,22 +5,23 @@ export interface InsuranceFeature {
 }
 
 export interface InsuranceSectionProps {
-  number: string
+  category: string
+  icon?: string | null
   title: string
   description: string[]
   features: InsuranceFeature[]
 }
 
-export function InsuranceSection({ number, title, description, features }: InsuranceSectionProps) {
+export function InsuranceSection({ category, icon, title, description, features }: InsuranceSectionProps) {
   return (
-    <section data-node-id="222:2087" className="bg-[#0a0a0d] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
+    <section id="insurance" data-node-id="222:2087" className="scroll-mt-6 bg-[#0a0a0d] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
       <div className="mx-auto max-w-[1280px]">
         <div className="flex w-full flex-col gap-8">
           <div className="flex w-full max-w-[956px] flex-col gap-6">
-            <p className="font-sans text-base font-medium leading-[1.5] text-[#6666ec]">{number} / SIĞORTA</p>
+            <p className="font-sans text-base font-medium leading-[1.5] text-[#6666ec]">{category}</p>
             <div className="flex flex-col gap-5">
               <div className="flex items-center gap-[21px]">
-                <Image src="/services/insurance-icon.svg" alt="" width={48} height={48} />
+                <Image src={icon ?? "/services/insurance-icon.svg"} alt="" width={48} height={48} />
                 <h2 className="font-sans text-[28px] font-semibold leading-[1.25] text-white sm:text-[36px]">{title}</h2>
               </div>
               <div className="flex flex-col gap-4 font-sans text-base leading-[1.5] text-white">

@@ -2,20 +2,29 @@ import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
 
+import { ServiceImageGallery, type ServiceImage } from "./image-gallery"
+
 export interface ToursSectionProps {
-  number: string
+  category: string
+  icon?: string | null
   title: string
   description: string
-  image: string
+  images: ServiceImage[]
   categories: string[]
 }
 
-export function ToursSection({ number, title, description, image, categories }: ToursSectionProps) {
+export function ToursSection({ category, icon, title, description, images, categories }: ToursSectionProps) {
   return (
-    <section data-node-id="222:1594" className="bg-white px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
+    <section id="tours" data-node-id="222:1594" className="scroll-mt-6 bg-white px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
       <div className="mx-auto flex max-w-[1280px] flex-col items-center gap-12 lg:flex-row lg:gap-[97px]">
-        <div className="relative h-[300px] w-full shrink-0 overflow-hidden rounded-2xl bg-[#ebebf0] sm:h-[404px] lg:w-[522px]">
-          <Image src={image} alt="Tur xidmətləri" fill sizes="(max-width: 1024px) 100vw, 522px" className="object-cover" />
+        <div className="w-full shrink-0 lg:w-[522px]">
+          <ServiceImageGallery
+            images={images}
+            firstImageClassName="h-[300px] sm:h-[404px]"
+            singleImageClassName="h-[300px] sm:h-[404px]"
+            restImageClassName="h-[168px]"
+            sizes="(max-width: 1024px) 100vw, 522px"
+          />
         </div>
 
         <div className="flex w-full flex-col items-start lg:h-[365px] lg:w-[661px]">
@@ -23,11 +32,11 @@ export function ToursSection({ number, title, description, image, categories }: 
             <div className="flex w-full flex-col items-start">
               <div className="flex w-full max-w-[469px] flex-col gap-6">
                 <p className="font-sans text-base font-medium leading-[1.5] text-[#6666ec]">
-                  {number} / TURLAR
+                  {category}
                 </p>
                 <div className="flex flex-col gap-5">
                   <div className="flex items-center gap-[21px]">
-                    <Image src="/services/tours-icon.svg" alt="" width={48} height={48} />
+                    <Image src={icon ?? "/services/tours-icon.svg"} alt="" width={48} height={48} />
                     <h2 className="font-sans text-[28px] font-semibold leading-[1.25] text-[#14141a] sm:text-[36px]">
                       {title}
                     </h2>

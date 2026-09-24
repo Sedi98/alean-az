@@ -15,7 +15,7 @@ export function RegistrationHero({ breadcrumb, title, phone, email, note }: Regi
       <div className="mx-auto flex max-w-[1252px] flex-col gap-12 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
         <div className="w-full max-w-[609px]">
           <p className="font-sans text-[13px] leading-normal text-[#9999a6]">{breadcrumb}</p>
-          <h1 className="mt-[21px] font-sans text-[42px] font-semibold leading-none text-white sm:text-[48px]">{title}</h1>
+          <h1 className="mt-[21px] font-[family-name:var(--font-hero-title)] text-[42px] font-semibold leading-none text-white sm:text-[48px]">{title}</h1>
         </div>
 
         <div className="w-full max-w-[482px] text-left lg:pt-1 lg:text-right">

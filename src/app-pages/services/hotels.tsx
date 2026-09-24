@@ -1,20 +1,24 @@
 import Image from "next/image"
 
+import { ServiceImageGallery, type ServiceImage } from "./image-gallery"
+
 export interface HotelFeature {
   title: string
   description: string
 }
 
 export interface HotelsSectionProps {
-  number: string
+  category: string
+  icon?: string | null
   title: string
   description: string
   features: HotelFeature[]
-  mainImage: string
-  secondaryImages: [string, string]
+  images: ServiceImage[]
 }
 
-function HotelIcon() {
+function HotelIcon({ icon }: { icon?: string | null }) {
+  if (icon) return <Image src={icon} alt="" width={48} height={48} />
+
   return (
     <span className="relative size-12 shrink-0 overflow-hidden rounded-[14px] bg-[#f2f2f7]" aria-hidden="true">
       <span className="absolute left-3 top-[11px] h-[26px] w-6 rounded-[2px] border-2 border-[#f2e002]" />
@@ -25,17 +29,17 @@ function HotelIcon() {
   )
 }
 
-export function HotelsSection({ number, title, description, features, mainImage, secondaryImages }: HotelsSectionProps) {
+export function HotelsSection({ category, icon, title, description, features, images }: HotelsSectionProps) {
   return (
-    <section data-node-id="222:1596" className="bg-[#f7f7fa] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
+    <section id="hotels" data-node-id="222:1596" className="scroll-mt-6 bg-[#f7f7fa] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
       <div className="mx-auto grid max-w-[1280px] gap-14 lg:grid-cols-[minmax(0,800px)_409px] lg:gap-[71px]">
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-6">
             <div className="flex w-full max-w-[469px] flex-col gap-6">
-              <p className="font-sans text-base font-medium leading-[1.5] text-[#6666ec]">{number} / OTELLƏR</p>
+              <p className="font-sans text-base font-medium leading-[1.5] text-[#6666ec]">{category}</p>
               <div className="flex flex-col gap-5">
                 <div className="flex items-center gap-[21px]">
-                  <HotelIcon />
+                  <HotelIcon icon={icon} />
                   <h2 className="font-sans text-[28px] font-semibold leading-[1.25] text-[#14141a] sm:text-[36px]">{title}</h2>
                 </div>
                 <p className="font-sans text-base leading-[1.5] text-[#666673]">{description}</p>
@@ -54,18 +58,7 @@ export function HotelsSection({ number, title, description, features, mainImage,
           </div>
         </div>
 
-        <div className="flex flex-col items-center gap-[15px]">
-          <div className="relative h-[280px] w-full overflow-hidden rounded-2xl bg-[#ebebf0]">
-            <Image src={mainImage} alt="Otel xidmətləri" fill sizes="409px" className="object-cover" />
-          </div>
-          <div className="flex w-full gap-5">
-            {secondaryImages.map((image, index) => (
-              <div key={image} className="relative h-[168px] min-w-0 flex-1 overflow-hidden rounded-xl bg-[#ebebf0]">
-                <Image src={image} alt={`Otel xidməti ${index + 1}`} fill sizes="195px" className="object-cover" />
-              </div>
-            ))}
-          </div>
-        </div>
+        <ServiceImageGallery images={images} />
       </div>
     </section>
   )

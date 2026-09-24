@@ -16,7 +16,7 @@ export function AboutHero({ breadcrumb, title, image }: AboutHeroProps) {
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,20,0.3),rgba(10,10,20,0.6)_50%,rgba(10,10,20,0.2))] mix-blend-multiply" />
       <div className="relative mx-auto flex min-h-[400px] max-w-[1440px] flex-col items-start px-6 pt-[136px] sm:px-10 lg:px-20">
         <p className="font-sans text-base font-medium leading-6 text-[#9999a6]">{breadcrumb}</p>
-        <h1 className="mt-4 font-sans text-3xl font-semibold leading-[1.25] text-white sm:text-4xl">{title}</h1>
+        <h1 className="mt-4 font-[family-name:var(--font-hero-title)] text-3xl font-semibold leading-[1.25] text-white sm:text-4xl">{title}</h1>
       </div>
     </section>
   )

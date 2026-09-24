@@ -1,5 +1,7 @@
 import Image from "next/image"
 
+import { ServiceImageGallery, type ServiceImage } from "./image-gallery"
+
 export interface MedicalFeature {
   number: string
   title: string
@@ -7,23 +9,24 @@ export interface MedicalFeature {
 }
 
 export interface MedicalTourismSectionProps {
-  number: string
+  category: string
+  icon?: string | null
   title: string
   description: string
   features: MedicalFeature[]
-  image: string
+  images: ServiceImage[]
 }
 
-export function MedicalTourismSection({ number, title, description, features, image }: MedicalTourismSectionProps) {
+export function MedicalTourismSection({ category, icon, title, description, features, images }: MedicalTourismSectionProps) {
   return (
-    <section data-node-id="236:2291" className="bg-[#f7f7fa] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
+    <section id="medical" data-node-id="236:2291" className="scroll-mt-6 bg-[#f7f7fa] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
       <div className="mx-auto grid max-w-[1280px] items-center gap-14 lg:grid-cols-[minmax(0,800px)_409px] lg:gap-[71px]">
         <div className="flex flex-col gap-8">
           <div className="flex w-full max-w-[469px] flex-col gap-6">
-            <p className="font-sans text-base font-medium leading-[1.5] text-[#6666ec]">{number} / TİBBİ TURİZM</p>
+            <p className="font-sans text-base font-medium leading-[1.5] text-[#6666ec]">{category}</p>
             <div className="flex flex-col gap-5">
               <div className="flex items-center gap-[21px]">
-                <Image src="/services/medical-icon.svg" alt="" width={52} height={52} />
+                <Image src={icon ?? "/services/medical-icon.svg"} alt="" width={52} height={52} />
                 <h2 className="font-sans text-[28px] font-semibold leading-[1.25] text-[#14141a] sm:text-[36px]">{title}</h2>
               </div>
               <p className="font-sans text-base leading-[1.5] text-[#666673]">{description}</p>
@@ -46,9 +49,7 @@ export function MedicalTourismSection({ number, title, description, features, im
           </div>
         </div>
 
-        <div className="relative h-[360px] w-full overflow-hidden rounded-[18px] bg-[#ebebf0] sm:h-[435px]">
-          <Image src={image} alt="Tibbi turizm" fill sizes="409px" className="object-cover" />
-        </div>
+        <ServiceImageGallery images={images} />
       </div>
     </section>
   )

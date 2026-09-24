@@ -21,11 +21,11 @@ export function ServicesHero({ breadcrumb, eyebrow, title, description, metadata
             </div>
             <h1
               id="services-hero-title"
-              className="mt-[22px] whitespace-pre-line font-sans text-[36px] font-semibold leading-none text-[#f0f0fd] sm:text-[48px]"
+              className="mt-[22px] whitespace-pre-line font-[family-name:var(--font-hero-title)] text-[36px] font-semibold leading-none text-[#f0f0fd] sm:text-[48px]"
             >
               {title}
             </h1>
-            <p className="mt-[22px] whitespace-pre-line font-sans text-base leading-[1.5] text-[#d0d0f9] sm:text-lg">
+            <p className="mt-[22px] whitespace-pre-line font-[family-name:var(--font-hero-description)] text-base leading-[1.5] text-[#d0d0f9] sm:text-lg">
               {description}
             </p>
           </div>

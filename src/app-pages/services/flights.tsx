@@ -1,41 +1,41 @@
 import Image from "next/image"
 
+import { ServiceImageGallery, type ServiceImage } from "./image-gallery"
+
 export interface FlightFeature {
   title: string
   description: string
 }
 
 export interface FlightsSectionProps {
-  number: string
   category: string
+  icon?: string | null
   title: string
   description: string[]
   features: FlightFeature[]
-  mainImage: string
-  secondaryImages: [string, string]
+  images: ServiceImage[]
 }
 
 export function FlightsSection({
-  number,
   category,
+  icon,
   title,
   description,
   features,
-  mainImage,
-  secondaryImages,
+  images,
 }: FlightsSectionProps) {
   return (
-    <section data-node-id="226:240" className="bg-[#f7f7fa] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
+    <section id="aviation" data-node-id="226:240" className="scroll-mt-6 bg-[#f7f7fa] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
       <div className="mx-auto grid max-w-[1280px] gap-14 lg:grid-cols-[minmax(0,800px)_409px] lg:gap-[clamp(64px,6vw,71px)]">
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-6">
             <p className="font-sans text-base font-medium leading-[1.5] text-[#6666ec]">
-              {number} / {category}
+              {category}
             </p>
             <div className="flex flex-col gap-5">
               <div className="flex items-center gap-[21px]">
                 <span className="relative size-[52px] shrink-0">
-                  <Image src="/services/service-icon.svg" alt="" fill sizes="52px" />
+                  <Image src={icon ?? "/services/service-icon.svg"} alt="" fill sizes="52px" />
                 </span>
                 <h2 className="font-sans text-[28px] font-semibold leading-[1.25] text-[#14141a] sm:text-[36px]">
                   {title}
@@ -61,18 +61,7 @@ export function FlightsSection({
           </div>
         </div>
 
-        <div className="flex flex-col items-center gap-[15px] lg:pt-0">
-          <div className="relative h-[280px] w-full overflow-hidden rounded-2xl bg-[#ebebf0]">
-            <Image src={mainImage} alt="Aviaşirkət və bilet xidmətləri" fill sizes="409px" className="object-cover" />
-          </div>
-          <div className="flex w-full gap-5">
-            {secondaryImages.map((image, index) => (
-              <div key={image} className="relative h-[168px] min-w-0 flex-1 overflow-hidden rounded-xl bg-[#ebebf0]">
-                <Image src={image} alt={`Aviaşirkət xidməti ${index + 1}`} fill sizes="195px" className="object-cover" />
-              </div>
-            ))}
-          </div>
-        </div>
+        <ServiceImageGallery images={images} />
       </div>
     </section>
   )

@@ -2,17 +2,19 @@ import type { Metadata } from "next"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
-import { Geist, Geist_Mono, Inter, Manrope, Montserrat } from "next/font/google"
+import { Geist, Geist_Mono, Inter, Montserrat, Poppins, Space_Grotesk } from "next/font/google"
 
 import { Footer } from "@/components/footer"
 import { Navbar } from "@/components/navbar"
+import { getSiteSettings } from "@/features/services/site-settings/api"
 import { cn } from "@/lib/utils"
 import { routing, type Locale } from "@/i18n/routing"
 
 import "../globals.css"
 
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans" })
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-hero" })
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], weight: ["600", "700"], variable: "--font-hero-title" })
+const poppins = Poppins({ subsets: ["latin"], weight: ["400"], variable: "--font-hero-description" })
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
 const geistSans = Geist({
@@ -52,14 +54,15 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   // Avoid reading the locale from request headers so pages remain statically renderable.
   setRequestLocale(locale)
+  const site = await getSiteSettings()
 
   return (
-    <html lang={locale} className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, montserrat.variable, manrope.variable, inter.variable, "font-sans")}>
+    <html lang={locale} className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, montserrat.variable, spaceGrotesk.variable, poppins.variable, inter.variable, "font-sans")}>
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider>
-          <Navbar />
+          <Navbar site={site} />
           {children}
-          <Footer />
+          <Footer site={site} />
         </NextIntlClientProvider>
       </body>
     </html>
