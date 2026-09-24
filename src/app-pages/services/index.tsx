@@ -1,4 +1,5 @@
 import { AdditionalServicesSection } from "./additional"
+import { useTranslations } from "next-intl"
 import { CorporateSection } from "./corporate"
 import { FlightsSection } from "./flights"
 import { HotelsSection } from "./hotels"
@@ -43,6 +44,7 @@ function getImages(section: PublicService, fallbacks: readonly string[]): Servic
 }
 
 export default function ServicesPage({ services }: { services: ServicesOverview }) {
+  const t = useTranslations("Common")
   const aviation = getSection(services.sections, "aviation")
   const tours = getSection(services.sections, "tours")
   const hotels = getSection(services.sections, "hotels")
@@ -55,11 +57,11 @@ export default function ServicesPage({ services }: { services: ServicesOverview 
   return (
     <main className="min-h-screen bg-white">
       <ServicesHero
-        breadcrumb="Ana səhifə / Xidmətlər"
+        breadcrumb={`${t("home")} / ${t("services")}`}
         eyebrow={services.page?.eyebrow ?? "TAM XİDMƏT TUR OPERATORU"}
         title={services.page?.title ?? "Bir nöqtədən bütün\nsəyahət xidmətləri"}
         description={services.page?.subtitle ?? ""}
-        metadata="IATA qeydiyyatlı agentlik · 2000+ tərəfdaş · 7/24 əməliyyat dəstəyi"
+        metadata={t("trustLine")}
       />
       <ServicesFilters filters={services.chips} />
 

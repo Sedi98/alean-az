@@ -1,12 +1,26 @@
 import type { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
 
 import EventsPage from "@/app-pages/events"
 import { getEventCategories, getEvents } from "@/features/services/events/api"
 import { getPartners } from "@/features/services/partners/api"
+import { createPageMetadata } from "@/lib/seo"
+import type { Locale } from "@/i18n/routing"
 
-export const metadata: Metadata = {
-  title: "Events | Alean.az",
-  description: "Alean.az tədbir və MICE xidmətləri.",
+export async function generateMetadata({ params, searchParams }: {
+  params: Promise<{ locale: string }>
+  searchParams: Promise<{ category?: string; search?: string; page?: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const query = await searchParams
+  const t = await getTranslations({ locale, namespace: "Seo" })
+  return createPageMetadata({
+    locale: locale as Locale,
+    path: "events",
+    title: t("eventsTitle"),
+    description: t("eventsDescription"),
+    noIndex: Boolean(query.search || query.category || query.page),
+  })
 }
 
 export default async function Page({ searchParams }: {

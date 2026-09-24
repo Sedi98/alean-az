@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
-import { setRequestLocale } from "next-intl/server"
+import { getTranslations, setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { Geist, Geist_Mono, Inter, Montserrat, Poppins, Space_Grotesk } from "next/font/google"
 
@@ -8,6 +8,7 @@ import { Footer } from "@/components/footer"
 import { Navbar } from "@/components/navbar"
 import { getSiteSettings } from "@/features/services/site-settings/api"
 import { cn } from "@/lib/utils"
+import { createPageMetadata } from "@/lib/seo"
 import { routing, type Locale } from "@/i18n/routing"
 
 import "../globals.css"
@@ -27,9 +28,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 })
 
-export const metadata: Metadata = {
-  title: "Alean.az | Səyahət və turizm",
-  description: "Alean.az ilə unudulmaz səyahətləri kəşf edin.",
+export async function generateMetadata({ params }: LocaleLayoutProps): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: "Seo" })
+
+  return createPageMetadata({
+    locale: locale as Locale,
+    title: t("siteTitle"),
+    description: t("siteDescription"),
+  })
 }
 
 export function generateStaticParams(): Array<{ locale: Locale }> {

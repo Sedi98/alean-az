@@ -1,30 +1,61 @@
-import Image from "next/image"
-import { Link } from "@/i18n/navigation"
+import Image from "next/image";
+import { Link } from "@/i18n/navigation";
 
 export interface NewsHeroProps {
-  breadcrumb: string
-  title: string
-  description: string
-  metadata: string
-  actionText?: string
-  actionUrl?: string
+  breadcrumb: string;
+  title: string;
+  description: string;
+  metadata: string;
+  actionText?: string;
+  actionUrl?: string;
 }
 
-export function NewsHero({ breadcrumb, title, description, metadata, actionText, actionUrl }: NewsHeroProps) {
+export function NewsHero({
+  breadcrumb,
+  title,
+  description,
+  metadata,
+  actionText,
+  actionUrl,
+}: NewsHeroProps) {
   return (
-    <section data-node-id="266:979" className="relative overflow-hidden border border-[rgba(255,255,255,0.05)] bg-[linear-gradient(180deg,#14141f_0%,#1f1a38_50%,#332661_100%)] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
+    <section
+      data-node-id="266:979"
+      className="relative overflow-hidden border border-[rgba(255,255,255,0.05)] bg-[linear-gradient(180deg,#14141f_0%,#1f1a38_50%,#332661_100%)] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]"
+    >
       <div className="relative mx-auto flex  max-w-[1252px] items-end">
         <div className="flex w-full flex-col items-start gap-12 lg:flex-row lg:items-end lg:gap-[clamp(64px,16.4vw,236px)]">
           <div className="w-full max-w-[568px]">
-            <p className="font-sans text-[13px] leading-normal text-[#737380]">{breadcrumb}</p>
-            <h1 className="mt-[21px] font-[family-name:var(--font-hero-title)] text-[42px] font-bold leading-normal text-white sm:text-[52px]">{title}</h1>
-            <p className="mt-[21px] whitespace-pre-line font-[family-name:var(--font-hero-description)] text-base leading-[1.5] text-[#d0d0f9] sm:text-lg">{description}</p>
+            <p className="font-sans text-[13px] leading-normal text-[#737380]">
+              {breadcrumb}
+            </p>
+            <h1 className="mt-[21px] font-[family-name:var(--font-hero-title)] text-[42px] font-bold leading-normal text-white sm:text-[52px]">
+              {title}
+            </h1>
+            <p className="mt-[21px] whitespace-pre-line font-[family-name:var(--font-hero-description)] text-base leading-[1.5] text-[#d0d0f9] sm:text-lg">
+              {description}
+            </p>
           </div>
           <div className="flex w-full flex-col items-start gap-12 lg:w-[482px] lg:items-end lg:gap-[114px]">
-            <p className="w-full max-w-[420px] text-left font-sans text-xs leading-[1.6] text-[#666673] lg:text-right">{metadata}</p>
+            <p className="w-full max-w-[420px] text-left font-sans text-xs leading-[1.6] text-[#666673] lg:text-right">
+              {metadata}
+            </p>
             {actionText && actionUrl ? (
-              <Link href={actionUrl} className="inline-flex items-center justify-center gap-4 rounded-full border border-white/20 bg-white/[0.08] py-[6px] pl-[6px] pr-8 font-sans text-lg font-medium leading-[1.5] text-white transition-colors hover:bg-white/[0.14]">
-                <span className="relative size-11 shrink-0 overflow-hidden rounded-full"><Image src="/news/hero-icon-circle.svg" alt="" fill sizes="44px" /><span className="absolute inset-0 flex items-center justify-center font-inter text-[22px] font-bold leading-none text-white">»</span></span>
+              <Link
+                href={actionUrl}
+                className="inline-flex items-center justify-center gap-4 rounded-full border border-white/20 bg-white/[0.08] py-[6px] pl-[6px] pr-8 font-sans text-lg font-medium leading-[1.5] text-white transition-colors hover:bg-white/[0.14]"
+              >
+                <span className="relative size-11 shrink-0 overflow-hidden rounded-full">
+                  <Image
+                    src="/news/hero-icon-circle.svg"
+                    alt=""
+                    fill
+                    sizes="44px"
+                  />
+                  <span className="absolute inset-0 flex items-center justify-center font-inter text-[22px] font-bold leading-none text-white">
+                    »
+                  </span>
+                </span>
                 {actionText}
               </Link>
             ) : null}
@@ -32,5 +63,5 @@ export function NewsHero({ breadcrumb, title, description, metadata, actionText,
         </div>
       </div>
     </section>
-  )
+  );
 }

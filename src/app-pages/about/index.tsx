@@ -1,4 +1,5 @@
 import { AboutHero } from "./hero"
+import { useTranslations } from "next-intl"
 import { AboutContent } from "./content"
 import { IataSection } from "./iata"
 import { MissionVisionSection } from "./mission"
@@ -9,9 +10,10 @@ import type { PublicAbout } from "@/features/services/about/types"
 import type { PublicPartner } from "@/features/services/partners/types"
 
 export default function AboutPage({ about, partners }: { about: PublicAbout; partners: PublicPartner[] }) {
+  const t = useTranslations("Common")
   return (
     <main className="min-h-screen bg-white">
-      <AboutHero image="/about-hero.png" breadcrumb="Ana səhifə  /  Haqqımızda" title="Haqqımızda" />
+      <AboutHero image="/about-hero.png" breadcrumb={`${t("home")} / ${t("about")}`} title={t("about")} />
       <AboutContent
         label={about.who.eyebrow}
         dotImage="/about/about-dot.svg"
@@ -57,7 +59,7 @@ export default function AboutPage({ about, partners }: { about: PublicAbout; par
         }))}
       />
       <PartnersSection
-        label="PARTNYORLAR"
+        label={t("partnersLabel")}
         dotImage="/brand/partners-dot.svg"
         partners={partners}
       />

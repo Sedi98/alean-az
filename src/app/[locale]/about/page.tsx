@@ -1,12 +1,16 @@
 import type { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
 
 import AboutPage from "@/app-pages/about"
 import { getAbout } from "@/features/services/about/api"
 import { getPartners } from "@/features/services/partners/api"
+import { createPageMetadata } from "@/lib/seo"
+import type { Locale } from "@/i18n/routing"
 
-export const metadata: Metadata = {
-  title: "Haqqımızda | Alean.az",
-  description: "Alean.az haqqında məlumat əldə edin.",
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: "Seo" })
+  return createPageMetadata({ locale: locale as Locale, path: "about", title: t("aboutTitle"), description: t("aboutDescription") })
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {

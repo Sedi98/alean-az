@@ -1,5 +1,6 @@
 import { NewsHero } from "./hero"
 import { MediaSection } from "./media"
+import { useTranslations } from "next-intl"
 import type {
   PublicNewsCategory,
   PublicNewsList,
@@ -18,6 +19,7 @@ export interface NewsPageProps {
 }
 
 export default function NewsPage({ page, categories, news, activeCategory, currentPage, totalPages, searchParams }: NewsPageProps) {
+  const t = useTranslations("Common")
   const cards = news.map((item) => ({
     title: item.title,
     description: item.summary ?? "",
@@ -30,11 +32,11 @@ export default function NewsPage({ page, categories, news, activeCategory, curre
     <main className="min-h-screen bg-white">
 
       <NewsHero
-        breadcrumb="Ana səhifə / Xəbərlər"
-        title={page.title ?? "Xəbərlər"}
+        breadcrumb={`${t("home")} / ${t("news")}`}
+        title={page.title ?? t("news")}
         description={page.subtitle ?? "Turizm sektorundakı son yeniliklər, ALEAN-ın tədbirləri,\nsəyahət məsləhətləri və sektora dair analitik yazılar."}
-        metadata="IATA qeydiyyatlı agentlik · 2000+ tərəfdaş · 7/24 əməliyyat dəstəyi"
-        actionText="Xidmətlərimiz"
+        metadata={t("trustLine")}
+        actionText={t("servicesWithPossessive")}
         actionUrl="/services"
       />
 

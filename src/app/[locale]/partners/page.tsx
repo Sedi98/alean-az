@@ -1,11 +1,25 @@
 import type { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
 
 import PartnersPage from "@/app-pages/partners"
 import { getPartners, getPartnersPage } from "@/features/services/partners/api"
+import { createPageMetadata } from "@/lib/seo"
+import type { Locale } from "@/i18n/routing"
 
-export const metadata: Metadata = {
-  title: "Partners | Alean.az",
-  description: "Alean.az partner network.",
+export async function generateMetadata({ params, searchParams }: {
+  params: Promise<{ locale: string }>
+  searchParams: Promise<{ page?: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const query = await searchParams
+  const t = await getTranslations({ locale, namespace: "Seo" })
+  return createPageMetadata({
+    locale: locale as Locale,
+    path: "partners",
+    title: t("partnersTitle"),
+    description: t("partnersDescription"),
+    noIndex: Boolean(query.page),
+  })
 }
 
 export default async function Page({ searchParams }: {

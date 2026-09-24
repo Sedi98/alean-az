@@ -28,5 +28,29 @@
     "serviceInsurance": "Insurance",
     "serviceCorporate": "Corporate",
     "serviceMedical": "Medical tourism"
+  },
+  "Seo": {
+    "siteTitle": "Alean.az | Travel and tourism",
+    "siteDescription": "Discover unforgettable journeys with Alean.az.",
+    "aboutTitle": "About us | Alean.az",
+    "aboutDescription": "Learn more about Alean.az.",
+    "contactTitle": "Contact | Alean.az",
+    "contactDescription": "Get in touch with ALEAN.",
+    "eventsTitle": "Events | Alean.az",
+    "eventsDescription": "Events and MICE services by Alean.az.",
+    "newsTitle": "News | Alean.az",
+    "newsDescription": "Tourism news and updates from Alean.az.",
+    "partnersTitle": "Partners | Alean.az",
+    "partnersDescription": "Alean.az partner network.",
+    "servicesTitle": "Services | Alean.az",
+    "servicesDescription": "Travel and tourism services by Alean.az.",
+    "registrationTitle": "Registration | Alean.az",
+    "registrationDescription": "Alean.az registration page.",
+    "loginTitle": "Login | Alean.az",
+    "loginDescription": "Sign in to the Alean.az agent portal.",
+    "eventRegistrationTitle": "Event registration | Alean.az"
+  },
+  "Common": {
+    "home": "Home", "about": "About us", "services": "Services", "events": "Events", "news": "News", "partners": "Partners", "contact": "Contact", "registration": "Registration", "servicesWithPossessive": "Our services", "allNews": "All news", "allEvents": "All events", "viewAll": "View all", "partnerNetworks": "HOTEL NETWORKS WE WORK WITH", "partnersLabel": "PARTNERS", "eventsLabel": "EVENTS", "newsLabel": "NEWS", "servicesLabel": "SERVICES", "writeToUs": "Write to us", "contactDescription": "Fill in the form below and we will contact you as soon as possible.", "requestDescription": "Request details — dates, number of people, budget", "send": "Send", "sending": "Sending...", "requestAccepted": "Your request has been received.", "requestFailed": "Something went wrong while sending your request. Please try again later.", "firstName": "First name", "lastName": "Last name", "email": "Email", "phone": "Phone", "company": "Company / organization", "subject": "Subject", "individualTravel": "Individual travel", "corporateTravel": "Corporate travel", "cooperation": "Cooperation", "other": "Other", "share": "Share", "keywords": "Keywords", "eventAbout": "About the event", "otherEvents": "OTHER EVENTS", "date": "Date", "time": "Time", "location": "Location", "city": "City", "category": "Category", "participants": "Participants", "organizer": "Organizer", "language": "Language", "price": "Price", "remainingSeats": "Seats left", "free": "Free", "mapOfficeImage": "Map / office image", "address": "Address", "workingHours": "Working hours", "support": "Support", "errorTitle": "Something went wrong", "errorDescription": "We could not process your request. Please try again later.", "tryAgain": "Try again", "notFoundTitle": "Page not found", "notFoundDescription": "The page you are looking for does not exist.", "backHome": "Back to home", "registrationInfo": "Registration details", "registrationDescription": "Fill in the form below and you will receive a confirmation email.", "completeRegistration": "Complete registration", "registrationAccepted": "Your registration has been received.", "login": "Login", "loginInfo": "Sign in to the agent portal", "forgotPassword": "Forgot your password?", "loginSent": "Your login details have been sent.", "loginButton": "Sign in", "or": "or", "noAccount": "Don’t have an account? Register →", "agencyNetwork": "Join the ALEAN agent network", "hasAccount": "Already have an account? Sign in →", "agencyName": "Agency name", "licenseNumber": "IATA / license number", "contactPerson": "Contact person", "password": "Password", "position": "Position", "participantsCount": "Number of participants", "country": "Country", "eventPhoto": "Event image", "seatsLeft": "seats left", "trustLine": "IATA agency · 2,000+ partners · 24/7 operational support"
   }
 }

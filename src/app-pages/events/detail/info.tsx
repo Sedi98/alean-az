@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { useTranslations } from "next-intl"
 import type { PublicEventDetail } from "@/features/services/events/types"
 
 export interface EventInfoSectionProps {
@@ -7,17 +8,18 @@ export interface EventInfoSectionProps {
 }
 
 export function EventInfoSection({ title, event }: EventInfoSectionProps) {
+  const t = useTranslations("Common")
   const rows = [
-    ["Tarix", event.date],
-    ["Saat", `${event.start_time}${event.end_time ? ` – ${event.end_time}` : ""}`],
-    ["Məkan", event.venue],
-    ["Şəhər", event.city],
-    ["Kateqoriya", event.category.display_name],
-    ["İştirakçı", event.expected_participants ? `${event.expected_participants}+ gözlənilir` : "—"],
-    ["Təşkilatçı", event.organizer ?? "—"],
-    ["Dil", event.event_languages.join(", ") || "—"],
-    ["Qiymət", event.is_free ? "Pulsuz" : `${event.price ?? "—"} ${event.currency ?? ""}`.trim()],
-    ["Qalan yerlər", event.seats_left === null ? "—" : String(event.seats_left)],
+    [t("date"), event.date],
+    [t("time"), `${event.start_time}${event.end_time ? ` – ${event.end_time}` : ""}`],
+    [t("location"), event.venue],
+    [t("city"), event.city],
+    [t("category"), event.category.display_name],
+    [t("participants"), event.expected_participants ? `${event.expected_participants}+` : "—"],
+    [t("organizer"), event.organizer ?? "—"],
+    [t("language"), event.event_languages.join(", ") || "—"],
+    [t("price"), event.is_free ? t("free") : `${event.price ?? "—"} ${event.currency ?? ""}`.trim()],
+    [t("remainingSeats"), event.seats_left === null ? "—" : String(event.seats_left)],
   ]
 
   return (

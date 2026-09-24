@@ -1,5 +1,6 @@
 import { EventsGrid } from "./grid"
 import { EventsHero } from "./hero"
+import { useTranslations } from "next-intl"
 import { PartnersSection } from "@/app-pages/home/partners"
 import { Pagination } from "@/components/ui/pagination"
 import type { PublicCategory, PublicEventList } from "@/features/services/events/types"
@@ -16,11 +17,12 @@ export interface EventsPageProps {
 }
 
 export default function EventsPage({ categories, events, currentPage, totalPages, searchParams, partners }: EventsPageProps) {
+  const t = useTranslations("Common")
   return (
     <main className="min-h-screen bg-white">
       <EventsHero
-        breadcrumb="Ana səhifə  /  Tədbirlər"
-        title="Tədbirlər"
+        breadcrumb={`${t("home")} / ${t("events")}`}
+        title={t("events")}
         cards={categories.map((category) => ({
           title: category.short_name,
           description: category.short_description ?? "",
@@ -39,9 +41,9 @@ export default function EventsPage({ categories, events, currentPage, totalPages
       />
       <Pagination pathname="/events" page={currentPage} totalPages={totalPages} searchParams={searchParams} />
       <PartnersSection
-        label="ÇALIŞDIĞIMIZ OTEL ŞƏBƏKƏLƏRİ"
+        label={t("partnerNetworks")}
         dotImage="/brand/partners-dot.svg"
-        actionText="Hamısına bax"
+        actionText={t("viewAll")}
         actionUrl="/partners"
         partners={partners}
       />

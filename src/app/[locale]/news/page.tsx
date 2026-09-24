@@ -1,11 +1,22 @@
 import type { Metadata } from "next"
+import { getTranslations } from "next-intl/server"
 
 import NewsPage from "@/app-pages/news"
 import { getNews, getNewsCategories, getNewsPage } from "@/features/services/news/api"
+import { createPageMetadata } from "@/lib/seo"
+import type { Locale } from "@/i18n/routing"
 
-export const metadata: Metadata = {
-  title: "News | Alean.az",
-  description: "Alean.az turizm xəbərləri və yenilikləri.",
+export async function generateMetadata({ params, searchParams }: NewsPageRouteProps): Promise<Metadata> {
+  const { locale } = await params
+  const query = await searchParams
+  const t = await getTranslations({ locale, namespace: "Seo" })
+  return createPageMetadata({
+    locale: locale as Locale,
+    path: "news",
+    title: t("newsTitle"),
+    description: t("newsDescription"),
+    noIndex: Boolean(query.search || query.category || query.page),
+  })
 }
 
 interface NewsPageRouteProps {

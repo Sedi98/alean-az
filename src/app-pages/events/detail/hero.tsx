@@ -1,8 +1,8 @@
 import Image from "next/image"
+import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
 
 import type { PublicEventDetail } from "@/features/services/events/types"
-import { localize } from "@/i18n/content"
 
 export interface EventDetailHeroProps {
   event: PublicEventDetail
@@ -22,21 +22,22 @@ function CtaLink({ href, children, light = false }: { href: string; children: st
 }
 
 export function EventDetailHero({ event, locale = "az" }: EventDetailHeroProps) {
+  const t = useTranslations("Common")
   return (
     <section data-node-id="258:307" className="relative min-h-[420px] overflow-hidden bg-[linear-gradient(180deg,#14141f_0%,#1f1a38_50%,#332661_100%)] px-6 py-8 sm:px-10 lg:px-20 lg:pt-[100px]">
       <div className="mx-auto flex  max-w-[1266px] items-center">
         <div className="flex w-full flex-col items-start gap-12 lg:flex-row lg:items-end lg:gap-[clamp(64px,11vw,162px)]">
           <div className="w-full max-w-[583px]">
-            <p className="font-sans text-[13px] leading-normal text-[#9999a6]">{localize(locale, "Ana səhifə / Tədbirlər")} / {event.title}</p>
+            <p className="font-sans text-[13px] leading-normal text-[#9999a6]">{t("home")} / {t("events")} / {event.title}</p>
             <span className="mt-[21px] inline-flex rounded-full bg-[#7366e5] px-3.5 py-1.5 font-sans text-[11px] font-semibold leading-normal tracking-[1.1px] text-white">{event.category.short_name}</span>
             <h1 className="mt-[21px] whitespace-pre-line font-[family-name:var(--font-hero-title)] text-[40px] font-semibold leading-none text-white sm:text-[48px]">{event.title}</h1>
             <p className="mt-6 font-sans text-sm font-medium leading-normal text-[#bfbfcc]">📅 {event.date}   ·   📍 {event.venue}, {event.city}   ·   ⏱ {event.start_time}{event.end_time ? ` – ${event.end_time}` : ""}</p>
           </div>
           <div className="flex w-full flex-col items-start gap-12 lg:w-[482px] lg:items-end lg:gap-[114px]">
-            <p className="w-full max-w-[420px] text-left font-sans text-xs leading-[1.6] text-[#666673] lg:text-right">{localize(locale, "IATA qeydiyyatlı agentlik · 2000+ tərəfdaş · 7/24 əməliyyat dəstəyi")}</p>
+            <p className="w-full max-w-[420px] text-left font-sans text-xs leading-[1.6] text-[#666673] lg:text-right">{t("trustLine")}</p>
             <div className="flex w-full flex-wrap gap-5 lg:justify-end">
-              <CtaLink href="/services">{localize(locale, "Xidmətlərimiz")}</CtaLink>
-              {event.can_register ? <CtaLink href={`/events/${event.slug}/registration`} light>Qeydiyyatdan keç</CtaLink> : null}
+              <CtaLink href="/services">{t("servicesWithPossessive")}</CtaLink>
+              {event.can_register ? <CtaLink href={`/events/${event.slug}/registration`} light>{t("registration")}</CtaLink> : null}
             </div>
           </div>
         </div>
