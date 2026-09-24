@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
 
 import type { PublicNewsDetail } from "@/features/services/news/types"
@@ -8,8 +8,8 @@ export interface NewsDetailHeroProps {
   news: PublicNewsDetail
 }
 
-export function NewsDetailHero({ news }: NewsDetailHeroProps) {
-  const t = useTranslations("Common")
+export async function NewsDetailHero({ news }: NewsDetailHeroProps) {
+  const t = await getTranslations("Common")
   const title = news.title
   const category = news.category.name
   const breadcrumbTitle = title
@@ -24,7 +24,7 @@ export function NewsDetailHero({ news }: NewsDetailHeroProps) {
             <h1 className="mt-[21px] font-[family-name:var(--font-hero-title)] text-[38px] font-bold leading-[1.15] text-white sm:text-[46px]">{title}</h1>
           </div>
           <div className="flex w-full flex-col items-start gap-12 lg:w-[482px] lg:items-end lg:gap-[114px]">
-            <p className="w-full max-w-[420px] text-left font-sans text-xs leading-[1.6] text-[#666673] lg:text-right">IATA qeydiyyatlı agentlik · 2000+ tərəfdaş · 7/24 əməliyyat dəstəyi</p>
+            <p className="w-full max-w-[420px] text-left font-sans text-xs leading-[1.6] text-[#666673] lg:text-right">{t("trustLine")}</p>
             <Link href="/news" className="inline-flex items-center justify-center gap-4 rounded-full border border-white/20 bg-white/[0.08] py-[6px] pl-[6px] pr-8 font-sans text-lg font-medium leading-[1.5] text-white transition-colors hover:bg-white/[0.14]">
               <span className="relative size-11 shrink-0 overflow-hidden rounded-full"><Image src="/news/detail/hero-icon-circle.svg" alt="" fill sizes="44px" /><span className="absolute inset-0 flex items-center justify-center font-inter text-[22px] font-bold leading-none text-white">»</span></span>
               {t("allNews")}

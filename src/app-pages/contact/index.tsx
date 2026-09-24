@@ -1,25 +1,28 @@
 import { NewsHero } from "../news/hero"
+import { getTranslations } from "next-intl/server"
+import { ContactDetailsCard } from "@/components/contact-details-card"
 import { ContactFormSection } from "./form"
 import { ContactInfoSection } from "./info"
 import type { PublicContact } from "@/features/services/contact/types"
 
-export default function ContactPage({
+export default async function ContactPage({
   contact,
 }: {
   contact: PublicContact
 }) {
+  const t = await getTranslations("Common")
   return (
     <main className="min-h-screen bg-white">
       <NewsHero
       // badge
-        breadcrumb="Ana səhifə / Əlaqə"
+        breadcrumb={`${t("home")} / ${t("contact")}`}
 
         // title
-        title={contact.page.title ?? "Əlaqə"}
+        title={contact.page.title ?? t("contact")}
 
         // subtitle
-        description={contact.page.subtitle ?? "Səyahət planlarınız, əməkdaşlıq təklifləriniz və suallarınız üçün\nALEAN komandası ilə əlaqə saxlayın."}
-        metadata={contact.page.badge ?? "IATA qeydiyyatlı agentlik · 2000+ tərəfdaş · 7/24 əməliyyat dəstəyi"}
+        description={contact.page.subtitle ?? t("contactPageDescription")}
+        metadata={contact.page.badge ?? t("trustLine")}
       />
 
       {/* channels api array map  */}
@@ -28,7 +31,7 @@ export default function ContactPage({
 
       {/* form title and subtitle goes here  */}
       {/* office araay data is going to ContactDetailsCard component  */}
-      <ContactFormSection form={contact.form} office={contact.office} />
+      <ContactFormSection form={contact.form} details={<ContactDetailsCard office={contact.office} />} />
     </main>
   )
 }

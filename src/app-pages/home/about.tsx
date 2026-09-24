@@ -16,14 +16,14 @@ export interface AboutSectionProps {
 
 export function AboutSection({ label, title, stats, dotImage }: AboutSectionProps) {
   return (
-    <section className="bg-[#0a0a0d] px-6 py-12 text-white sm:px-10 sm:py-16 lg:px-20">
+    <section aria-labelledby="home-about-title" className="bg-[#0a0a0d] px-6 py-12 text-white sm:px-10 sm:py-16 lg:px-20">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-12">
         <div className="flex items-center gap-2.5 overflow-hidden">
           <Image src={dotImage} alt="" width={8} height={8} />
           <p className="font-sans text-lg font-semibold leading-6 text-[#9999a6]">{label}</p>
         </div>
 
-        <h2 className="max-w-[1100px] font-sans text-3xl font-medium leading-tight text-[#f0f0fd] sm:text-4xl lg:text-5xl">
+        <h2 id="home-about-title" className="max-w-[1100px] font-sans text-3xl font-medium leading-tight text-[#f0f0fd] sm:text-4xl lg:text-5xl">
           {title}
         </h2>
 
@@ -58,4 +58,3 @@ export function AboutSection({ label, title, stats, dotImage }: AboutSectionProp
     </section>
   )
 }
-

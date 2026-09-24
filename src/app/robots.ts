@@ -10,5 +10,6 @@ export default function robots(): MetadataRoute.Robots {
       disallow: ["/*?search=", "/*?page=", "/*?category=", "/az/login", "/en/login", "/ru/login"],
     },
     sitemap: `${baseUrl.replace(/\/$/, "")}/sitemap.xml`,
+    host: baseUrl,
   }
 }

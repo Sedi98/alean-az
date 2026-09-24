@@ -24,11 +24,11 @@ export function MissionVisionSection({
   visionText,
 }: MissionVisionSectionProps) {
   return (
-    <section className="bg-white px-6 py-16 sm:px-10 sm:py-20 lg:px-20 lg:py-[100px]">
+    <section aria-labelledby="about-mission-title" className="bg-white px-6 py-16 sm:px-10 sm:py-20 lg:px-20 lg:py-[100px]">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-12">
         <div className="flex items-center gap-2.5">
           <Image src={dotImage} alt="" width={8} height={8} />
-          <p className="font-sans text-lg font-medium leading-[1.5] text-[#666673]">{label}</p>
+          <h2 id="about-mission-title" className="font-sans text-lg font-medium leading-[1.5] text-[#666673]">{label}</h2>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[minmax(0,580px)_minmax(0,1fr)]">

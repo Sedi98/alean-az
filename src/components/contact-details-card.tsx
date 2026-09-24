@@ -1,18 +1,20 @@
 import type { Office } from "@/features/services/contact/types"
+import { getTranslations } from "next-intl/server"
 
-export function ContactDetailsCard({ office }: { office: Office }) {
+export async function ContactDetailsCard({ office }: { office: Office }) {
+  const t = await getTranslations("Common")
   const details = [
-    ["Telefon", office.phone],
-    ["E-mail", office.email],
-    ["Ünvan", office.address],
-    ["İş saatları", office.working_hours ?? ""],
-    ["Dəstək", office.support ?? ""],
+    [t("phone"), office.phone],
+    [t("email"), office.email],
+    [t("address"), office.address],
+    [t("workingHours"), office.working_hours ?? ""],
+    [t("support"), office.support ?? ""],
   ]
 
   return (
     <aside data-node-id="501:851" className="w-full overflow-hidden rounded-[20px] bg-[#0a0a0d] lg:w-[400px] lg:shrink-0">
       <div data-node-id="501:853" className="flex h-[200px] items-center justify-center bg-[#1a1f2e]">
-        <p className="font-sans text-center text-[13px] text-[#666673]">📍 Xəritə / Ofis şəkli</p>
+        <p className="font-sans text-center text-[13px] text-[#666673]">📍 {t("mapOfficeImage")}</p>
       </div>
       <div data-node-id="501:855" className="flex flex-col px-7 py-6">
         <h2 className="font-sans text-xl font-bold leading-normal text-white">ALEAN Tour Operator</h2>

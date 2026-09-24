@@ -1,5 +1,5 @@
 import { AdditionalServicesSection } from "./additional"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import { CorporateSection } from "./corporate"
 import { FlightsSection } from "./flights"
 import { HotelsSection } from "./hotels"
@@ -43,8 +43,8 @@ function getImages(section: PublicService, fallbacks: readonly string[]): Servic
   return fallbacks.map((image) => ({ image, alt: "" }))
 }
 
-export default function ServicesPage({ services }: { services: ServicesOverview }) {
-  const t = useTranslations("Common")
+export default async function ServicesPage({ services }: { services: ServicesOverview }) {
+  const t = await getTranslations("Common")
   const aviation = getSection(services.sections, "aviation")
   const tours = getSection(services.sections, "tours")
   const hotels = getSection(services.sections, "hotels")
@@ -58,8 +58,8 @@ export default function ServicesPage({ services }: { services: ServicesOverview 
     <main className="min-h-screen bg-white">
       <ServicesHero
         breadcrumb={`${t("home")} / ${t("services")}`}
-        eyebrow={services.page?.eyebrow ?? "TAM XİDMƏT TUR OPERATORU"}
-        title={services.page?.title ?? "Bir nöqtədən bütün\nsəyahət xidmətləri"}
+        eyebrow={services.page?.eyebrow ?? t("servicesPageEyebrow")}
+        title={services.page?.title ?? t("servicesPageTitle")}
         description={services.page?.subtitle ?? ""}
         metadata={t("trustLine")}
       />

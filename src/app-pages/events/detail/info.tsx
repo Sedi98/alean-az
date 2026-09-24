@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import type { PublicEventDetail } from "@/features/services/events/types"
 
 export interface EventInfoSectionProps {
@@ -7,8 +7,8 @@ export interface EventInfoSectionProps {
   event: PublicEventDetail
 }
 
-export function EventInfoSection({ title, event }: EventInfoSectionProps) {
-  const t = useTranslations("Common")
+export async function EventInfoSection({ title, event }: EventInfoSectionProps) {
+  const t = await getTranslations("Common")
   const rows = [
     [t("date"), event.date],
     [t("time"), `${event.start_time}${event.end_time ? ` – ${event.end_time}` : ""}`],

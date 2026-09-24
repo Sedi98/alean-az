@@ -1,6 +1,6 @@
 import { PartnersHero } from "./hero"
 import { PartnersList } from "./list"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import { Pagination } from "@/components/ui/pagination"
 import type { PublicPartner, PublicPartnersPage } from "@/features/services/partners/types"
 
@@ -11,15 +11,15 @@ interface PartnersPageProps {
   totalPages: number
 }
 
-export default function PartnersPage({ page, partners, currentPage, totalPages }: PartnersPageProps) {
-  const t = useTranslations("Common")
+export default async function PartnersPage({ page, partners, currentPage, totalPages }: PartnersPageProps) {
+  const t = await getTranslations("Common")
   return (
     <main className="min-h-screen bg-white">
       <PartnersHero
         breadcrumb={`${t("home")} / ${t("partners")}`}
-        eyebrow="ƏMƏKDAŞLIQ ŞƏBƏKƏMİZ"
+        eyebrow={t("partnersLabel")}
         title={page.title ?? t("partners")}
-        description={page.subtitle ?? "Dünya üzrə aparıcı otel şəbəkələri, aviasiya təşkilatları və turizm tərəfdaşları ilə birbaşa əməkdaşlıq edirik."}
+        description={page.subtitle ?? t("partnersPageDescription")}
         metadata={t("trustLine")}
         actionText={t("servicesWithPossessive")}
         actionUrl="/services"

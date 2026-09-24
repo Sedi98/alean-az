@@ -10,7 +10,10 @@
     "registration": "Qeydiyyat",
     "language": "Dil: Azərbaycan dili",
     "openMenu": "Menyunu aç",
-    "closeMenu": "Menyunu bağla"
+    "closeMenu": "Menyunu bağla",
+    "mainNavigation": "Əsas naviqasiya",
+    "mobileNavigation": "Mobil naviqasiya",
+    "homeAria": "Alean.az ana səhifə"
   },
   "Footer": {
     "pages": "Səhifələr",
@@ -27,7 +30,9 @@
     "serviceFlights": "Aviabiletlər",
     "serviceInsurance": "Sığorta",
     "serviceCorporate": "Korporativ",
-    "serviceMedical": "Tibbi Turizm"
+    "serviceMedical": "Tibbi Turizm",
+    "fallbackTagline": "2006-cı ildən Azərbaycandan dünyaya açılan etibarlı səyahət tərəfdaşınız.",
+    "homeAria": "Alean.az ana səhifə"
   },
   "Seo": {
     "siteTitle": "Alean.az | Səyahət və turizm",
@@ -132,6 +137,14 @@
     "country": "Ölkə",
     "eventPhoto": "Tədbir şəkli",
     "seatsLeft": "yer qalıb",
-    "trustLine": "IATA qeydiyyatlı agentlik · 2000+ tərəfdaş · 7/24 əməliyyat dəstəyi"
+    "trustLine": "IATA qeydiyyatlı agentlik · 2000+ tərəfdaş · 7/24 əməliyyat dəstəyi",
+    "pagination": "Səhifələmə",
+    "previousPage": "Əvvəlki səhifə",
+    "nextPage": "Növbəti səhifə",
+    "contactPageDescription": "Səyahət planlarınız, əməkdaşlıq təklifləriniz və suallarınız üçün ALEAN komandası ilə əlaqə saxlayın.",
+    "newsPageDescription": "Turizm sektorundakı son yeniliklər, ALEAN-ın tədbirləri, səyahət məsləhətləri və sektora dair analitik yazılar.",
+    "partnersPageDescription": "Dünya üzrə aparıcı otel şəbəkələri, aviasiya təşkilatları və turizm tərəfdaşları ilə birbaşa əməkdaşlıq edirik.",
+    "servicesPageTitle": "Bir nöqtədən bütün səyahət xidmətləri",
+    "servicesPageEyebrow": "TAM XİDMƏT TUR OPERATORU"
   }
 }

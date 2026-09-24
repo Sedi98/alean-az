@@ -1,4 +1,5 @@
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
+import { getTranslations } from "next-intl/server"
 
 import { Link } from "@/i18n/navigation"
 import { cn } from "cn"
@@ -59,17 +60,18 @@ function PaginationLink({
   )
 }
 
-export function Pagination({ pathname, page, totalPages, searchParams = {} }: PaginationProps) {
+export async function Pagination({ pathname, page, totalPages, searchParams = {} }: PaginationProps) {
+  const t = await getTranslations("Common")
   if (totalPages <= 1) return null
 
   const previousHref = getHref(pathname, page - 1, searchParams)
   const nextHref = getHref(pathname, page + 1, searchParams)
 
   return (
-    <nav aria-label="Pagination" className="flex items-center justify-center gap-1 py-10">
+    <nav aria-label={t("pagination")} className="flex items-center justify-center gap-1 py-10">
       <PaginationLink
         href={previousHref}
-        aria-label="Əvvəlki səhifə"
+        aria-label={t("previousPage")}
         aria-disabled={page === 1}
         tabIndex={page === 1 ? -1 : undefined}
         className={page === 1 ? "pointer-events-none opacity-40" : undefined}
@@ -89,7 +91,7 @@ export function Pagination({ pathname, page, totalPages, searchParams = {} }: Pa
       )}
       <PaginationLink
         href={nextHref}
-        aria-label="Növbəti səhifə"
+        aria-label={t("nextPage")}
         aria-disabled={page === totalPages}
         tabIndex={page === totalPages ? -1 : undefined}
         className={page === totalPages ? "pointer-events-none opacity-40" : undefined}

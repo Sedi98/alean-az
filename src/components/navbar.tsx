@@ -52,7 +52,7 @@ export function Navbar({ site }: { site: PublicSite }) {
   return (
     <header className="fixed inset-x-0 top-0 z-50 w-full bg-[linear-gradient(180.7deg,#000_7.3%,rgba(0,0,0,0)_93.4%)] px-6 py-6 text-[#e6e6e6] sm:px-10 lg:px-20">
       <div className="relative z-[70] mx-auto flex min-h-12 max-w-[1282px] items-center justify-between gap-8">
-        <Link href="/" aria-label={`${siteName} ana səhifə`} className="flex shrink-0 items-end gap-[1.4px]">
+        <Link href="/" aria-label={t("homeAria")} className="flex shrink-0 items-end gap-[1.4px]">
           {site.logo ? (
             <Image src={site.logo} alt={siteName} width={148} height={49} className="h-[48.5px] w-auto max-w-[148px] object-contain" priority />
           ) : (
@@ -79,7 +79,7 @@ export function Navbar({ site }: { site: PublicSite }) {
           )}
         </Link>
 
-        <nav aria-label="Əsas naviqasiya" className="hidden flex-1 items-center justify-center gap-2 xl:flex">
+        <nav aria-label={t("mainNavigation")} className="hidden flex-1 items-center justify-center gap-2 xl:flex">
           {navigation.map((item) => (
             <Link
               key={item.href}
@@ -104,12 +104,6 @@ export function Navbar({ site }: { site: PublicSite }) {
               </option>
             ))}
           </select>
-          <Link
-            href="/registration"
-            className="inline-flex h-12 items-center justify-center rounded-full bg-[linear-gradient(101.6deg,#4848a8_0.9%,#7e7eff_95.6%)] px-4 py-1 font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          >
-            {t("registration")}
-          </Link>
         </div>
 
         <button
@@ -132,7 +126,7 @@ export function Navbar({ site }: { site: PublicSite }) {
 
       <aside
         id="mobile-navigation"
-        aria-label="Mobil naviqasiya"
+        aria-label={t("mobileNavigation")}
         className={`fixed right-0 top-0 z-[60] flex h-dvh w-[min(86vw,360px)] flex-col bg-[#0a0a0d] px-6 pb-8 pt-28 shadow-[-12px_0_40px_rgba(0,0,0,0.25)] transition-transform duration-300 ease-out sm:px-10 xl:hidden ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <button
@@ -143,7 +137,7 @@ export function Navbar({ site }: { site: PublicSite }) {
         >
           <X size={22} strokeWidth={1.8} />
         </button>
-        <nav className="flex flex-col gap-2" aria-label="Mobil əsas naviqasiya">
+        <nav className="flex flex-col gap-2" aria-label={t("mainNavigation")}>
           {navigation.map((item) => (
             <Link
               key={item.href}
@@ -172,13 +166,6 @@ export function Navbar({ site }: { site: PublicSite }) {
               ))}
             </select>
           </label>
-          <Link
-            href="/registration"
-            onClick={() => setIsMenuOpen(false)}
-            className="inline-flex h-12 items-center justify-center rounded-full bg-[linear-gradient(101.6deg,#4848a8_0.9%,#7e7eff_95.6%)] px-4 py-1 font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          >
-            {t("registration")}
-          </Link>
         </div>
       </aside>
     </header>

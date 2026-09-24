@@ -30,9 +30,9 @@ export function PartnersSection({
       <div className="flex flex-col gap-12">
         <div className="flex items-center gap-2.5 px-6 sm:px-10 lg:px-20">
           <Image src={dotImage} alt="" width={8} height={8} />
-          <p className="font-sans text-lg font-medium leading-[1.5] text-[#666673]">
+          <h2 className="font-sans text-lg font-medium leading-[1.5] text-[#666673]">
             {label}
-          </p>
+          </h2>
         </div>
 
         {actionText && actionUrl ? (

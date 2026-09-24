@@ -2,26 +2,26 @@ import { RegistrationHero } from "@/app-pages/registration/hero"
 import { RegistrationInfoCards } from "@/app-pages/registration/info-cards"
 
 import { LoginForm } from "./form"
-import { localize } from "@/i18n/content"
+import { getTranslations } from "next-intl/server"
 
-export default function LoginPage({ locale = "az" }: { locale?: string }) {
-  const t = <T,>(value: T) => localize(locale, value)
+export default async function LoginPage({ locale = "az" }: { locale?: string }) {
+  const t = await getTranslations("Common")
   return (
     <main className="min-h-screen bg-white">
       <RegistrationHero
-        breadcrumb={t("Ana səhifə / Giriş")}
-        title={t("Giriş")}
+        breadcrumb={`${t("home")} / ${t("login")}`}
+        title={t("login")}
         phone="+994 77 218 0770"
         email="info@alean-az.com"
-        note={t("İzmir Plaza, Bakı · 7/24 əməliyyat dəstəyi")}
+        note={t("trustLine")}
       />
       <LoginForm />
       <RegistrationInfoCards
         cards={[
-          { label: t("Telefon"), value: "+994 77 218 0770" },
-          { label: t("E-mail"), value: "info@alean-az.com" },
-          { label: t("Ünvan"), value: t("İzmir Plaza, Bakı") },
-          { label: t("Dəstək"), value: t("7/24 əməliyyat") },
+          { label: t("phone"), value: "+994 77 218 0770" },
+          { label: t("email"), value: "info@alean-az.com" },
+          { label: t("address"), value: "İzmir Plaza, Bakı" },
+          { label: t("support"), value: "7/24" },
         ]}
       />
     </main>

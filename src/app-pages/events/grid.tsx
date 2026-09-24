@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 
 import { EventGridCard } from "@/components/event-grid-card"
 import type { EventGridCardProps } from "@/components/event-grid-card"
@@ -8,8 +8,8 @@ export interface EventsGridProps {
   events: EventGridCardProps[]
 }
 
-export function EventsGrid({ events, locale = "az" }: EventsGridProps & { locale?: string }) {
-  const t = useTranslations("Common")
+export async function EventsGrid({ events, locale = "az" }: EventsGridProps & { locale?: string }) {
+  const t = await getTranslations("Common")
   return (
     <section data-node-id="251:228" className="bg-white px-6 py-16 sm:px-10 lg:px-20 lg:py-16">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-10">

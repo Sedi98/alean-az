@@ -1,5 +1,5 @@
 import { AboutHero } from "./hero"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import { AboutContent } from "./content"
 import { IataSection } from "./iata"
 import { MissionVisionSection } from "./mission"
@@ -9,8 +9,8 @@ import { PartnersSection } from "@/app-pages/home/partners"
 import type { PublicAbout } from "@/features/services/about/types"
 import type { PublicPartner } from "@/features/services/partners/types"
 
-export default function AboutPage({ about, partners }: { about: PublicAbout; partners: PublicPartner[] }) {
-  const t = useTranslations("Common")
+export default async function AboutPage({ about, partners }: { about: PublicAbout; partners: PublicPartner[] }) {
+  const t = await getTranslations("Common")
   return (
     <main className="min-h-screen bg-white">
       <AboutHero image="/about-hero.png" breadcrumb={`${t("home")} / ${t("about")}`} title={t("about")} />

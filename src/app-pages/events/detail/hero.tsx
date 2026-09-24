@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
 
 import type { PublicEventDetail } from "@/features/services/events/types"
@@ -21,8 +21,8 @@ function CtaLink({ href, children, light = false }: { href: string; children: st
   )
 }
 
-export function EventDetailHero({ event, locale = "az" }: EventDetailHeroProps) {
-  const t = useTranslations("Common")
+export async function EventDetailHero({ event, locale = "az" }: EventDetailHeroProps) {
+  const t = await getTranslations("Common")
   return (
     <section data-node-id="258:307" className="relative min-h-[420px] overflow-hidden bg-[linear-gradient(180deg,#14141f_0%,#1f1a38_50%,#332661_100%)] px-6 py-8 sm:px-10 lg:px-20 lg:pt-[100px]">
       <div className="mx-auto flex  max-w-[1266px] items-center">

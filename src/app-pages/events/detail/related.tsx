@@ -1,11 +1,11 @@
 import Image from "next/image"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 
 import { EventGridCard } from "@/components/event-grid-card"
 import type { PublicEventList } from "@/features/services/events/types"
 
-export function RelatedEvents({ events, locale = "az" }: { events: PublicEventList[]; locale?: string }) {
-  const t = useTranslations("Common")
+export async function RelatedEvents({ events, locale = "az" }: { events: PublicEventList[]; locale?: string }) {
+  const t = await getTranslations("Common")
   return (
     <section data-node-id="273:1041" className="bg-[#f7f7fa] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-10">

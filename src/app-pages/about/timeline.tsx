@@ -16,19 +16,19 @@ export interface TimelineSectionProps {
 
 export function TimelineSection({ title, subtitle, dotImage, entries }: TimelineSectionProps) {
   return (
-    <section className="bg-[rgba(240,240,253,0.47)] px-6 pb-16 pt-14 sm:px-10 sm:pb-20 sm:pt-20 lg:px-20 lg:pb-[100px] lg:pt-20">
+    <section aria-labelledby="about-timeline-title" className="bg-[rgba(240,240,253,0.47)] px-6 pb-16 pt-14 sm:px-10 sm:pb-20 sm:pt-20 lg:px-20 lg:pb-[100px] lg:pt-20">
       <div className="mx-auto flex max-w-[900px] flex-col items-center gap-12">
         <div className="flex w-full flex-col items-center gap-4 text-center">
-          <h2 className="font-sans text-3xl font-bold leading-[1.25] text-[#2b2b63] sm:text-4xl">{title}</h2>
+          <h2 id="about-timeline-title" className="font-sans text-3xl font-bold leading-[1.25] text-[#2b2b63] sm:text-4xl">{title}</h2>
           <p className="font-sans text-base leading-6 text-[#545454]">{subtitle}</p>
         </div>
 
-        <div className="relative flex w-full flex-col gap-6 pl-8 lg:block lg:h-[1477px] lg:pl-0">
+        <ol className="relative flex w-full flex-col gap-6 pl-8 lg:block lg:h-[1477px] lg:pl-0">
           <div className="absolute bottom-0 left-3 top-0 w-0.5 bg-[#e5e5f2] lg:left-1/2 lg:-translate-x-1/2" />
           {entries.map((entry, index) => (
-            <TimelineCard key={`${entry.year}-${entry.title}`} entry={entry} dotImage={dotImage} index={index} />
+            <li key={`${entry.year}-${entry.title}`}><TimelineCard entry={entry} dotImage={dotImage} index={index} /></li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   )

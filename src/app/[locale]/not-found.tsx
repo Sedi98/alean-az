@@ -1,8 +1,8 @@
 import { Link } from "@/i18n/navigation"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 
-export default function NotFound() {
-  const t = useTranslations("Common")
+export default async function NotFound() {
+  const t = await getTranslations("Common")
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white px-6 text-center text-[#2b2b63]">
       <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#666673]">404</p>

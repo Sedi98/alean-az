@@ -1,6 +1,6 @@
 import { EventsGrid } from "./grid"
 import { EventsHero } from "./hero"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import { PartnersSection } from "@/app-pages/home/partners"
 import { Pagination } from "@/components/ui/pagination"
 import type { PublicCategory, PublicEventList } from "@/features/services/events/types"
@@ -16,8 +16,8 @@ export interface EventsPageProps {
   partners: PublicPartner[]
 }
 
-export default function EventsPage({ categories, events, currentPage, totalPages, searchParams, partners }: EventsPageProps) {
-  const t = useTranslations("Common")
+export default async function EventsPage({ categories, events, currentPage, totalPages, searchParams, partners }: EventsPageProps) {
+  const t = await getTranslations("Common")
   return (
     <main className="min-h-screen bg-white">
       <EventsHero

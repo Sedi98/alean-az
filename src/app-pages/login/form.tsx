@@ -1,6 +1,7 @@
 "use client"
 
 import { Link } from "@/i18n/navigation"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -9,14 +10,14 @@ import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
-const loginSchema = z.object({
-  email: z.string().email("Düzgün e-mail daxil edin"),
-  password: z.string().min(1, "Şifrəni daxil edin"),
-})
-
-type LoginValues = z.infer<typeof loginSchema>
+type LoginValues = { email: string; password: string }
 
 export function LoginForm() {
+  const t = useTranslations("Common")
+  const loginSchema = z.object({
+    email: z.string().email(t("email")),
+    password: z.string().min(1, t("password")),
+  })
   const [submitted, setSubmitted] = useState(false)
   const { register, handleSubmit, formState: { errors } } = useForm<LoginValues>({
     resolver: zodResolver(loginSchema),
@@ -27,7 +28,7 @@ export function LoginForm() {
       <div className="mx-auto flex w-full max-w-[500px] flex-col items-center gap-10">
         <div className="flex w-full flex-col items-center gap-10">
           <p className="text-center font-sans text-sm leading-normal text-[#737380]">
-            Agent kabinetinə daxil olun
+            {t("loginInfo")}
           </p>
 
           <form id="login-form" onSubmit={handleSubmit(() => setSubmitted(true))} className="flex w-full flex-col gap-6" noValidate>
@@ -35,8 +36,8 @@ export function LoginForm() {
               <Input
                 {...register("email")}
                 type="email"
-                placeholder="E-mail"
-                aria-label="E-mail"
+                placeholder={t("email")}
+                aria-label={t("email")}
                 aria-invalid={Boolean(errors.email)}
               />
             </Field>
@@ -44,42 +45,42 @@ export function LoginForm() {
               <Input
                 {...register("password")}
                 type="password"
-                placeholder="Şifrə"
-                aria-label="Şifrə"
+                placeholder={t("password")}
+                aria-label={t("password")}
                 aria-invalid={Boolean(errors.password)}
               />
             </Field>
           </form>
 
           <button type="button" className="bg-gradient-to-r from-[#738cff] to-[#8059f2] bg-clip-text font-sans text-[13px] font-medium leading-normal text-transparent hover:opacity-80">
-            Şifrəni unutmusunuz?
+            {t("forgotPassword")}
           </button>
         </div>
 
         <div className="flex flex-col items-center gap-6">
           {submitted ? (
-            <p className="h-12 px-4 py-3 font-sans text-sm text-green-700">Giriş məlumatları göndərildi.</p>
+            <p role="status" className="h-12 px-4 py-3 font-sans text-sm text-green-700">{t("loginSent")}</p>
           ) : (
             <Button
               type="submit"
               form="login-form"
               className="h-12 rounded-full bg-[linear-gradient(99deg,#4848a8,#7e7eff)] px-4 font-sans text-base font-semibold text-white hover:opacity-90"
             >
-              Giriş et
+              {t("loginButton")}
             </Button>
           )}
 
           <div className="flex w-full flex-col items-center gap-[18px]">
             <div className="flex w-full items-center gap-4 overflow-hidden">
               <span className="h-px flex-1 bg-black/[0.08]" />
-              <span className="font-sans text-xs leading-normal text-[#80808c]">və ya</span>
+              <span className="font-sans text-xs leading-normal text-[#80808c]">{t("or")}</span>
               <span className="h-px flex-1 bg-black/[0.08]" />
             </div>
             <Link
               href="/registration"
               className="bg-gradient-to-r from-[#738cff] to-[#8059f2] bg-clip-text font-sans text-[13px] font-medium leading-normal text-transparent hover:opacity-80"
             >
-              Hesabınız yoxdur? Qeydiyyatdan keçin →
+              {t("noAccount")}
             </Link>
           </div>
         </div>

@@ -6,6 +6,7 @@ import { Geist, Geist_Mono, Inter, Montserrat, Poppins, Space_Grotesk } from "ne
 
 import { Footer } from "@/components/footer"
 import { Navbar } from "@/components/navbar"
+import { JsonLd } from "@/components/seo/json-ld"
 import { getSiteSettings } from "@/features/services/site-settings/api"
 import { cn } from "@/lib/utils"
 import { createPageMetadata } from "@/lib/seo"
@@ -67,6 +68,17 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     <html lang={locale} className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, montserrat.variable, spaceGrotesk.variable, poppins.variable, inter.variable, "font-sans")}>
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider>
+          <JsonLd data={{
+            "@context": "https://schema.org",
+            "@type": "TravelAgency",
+            name: site.site_name ?? "Alean.az",
+            url: `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}/${locale}`,
+            logo: site.logo ?? undefined,
+            telephone: site.phone ?? undefined,
+            email: site.email ?? undefined,
+            address: site.address ? { "@type": "PostalAddress", streetAddress: site.address } : undefined,
+            sameAs: site.social.map((social) => social.url),
+          }} />
           <Navbar site={site} />
           {children}
           <Footer site={site} />

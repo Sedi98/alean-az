@@ -1,6 +1,6 @@
 import { NewsHero } from "./hero"
 import { MediaSection } from "./media"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import type {
   PublicNewsCategory,
   PublicNewsList,
@@ -18,8 +18,8 @@ export interface NewsPageProps {
   searchParams: Record<string, string | undefined>
 }
 
-export default function NewsPage({ page, categories, news, activeCategory, currentPage, totalPages, searchParams }: NewsPageProps) {
-  const t = useTranslations("Common")
+export default async function NewsPage({ page, categories, news, activeCategory, currentPage, totalPages, searchParams }: NewsPageProps) {
+  const t = await getTranslations("Common")
   const cards = news.map((item) => ({
     title: item.title,
     description: item.summary ?? "",
@@ -34,7 +34,7 @@ export default function NewsPage({ page, categories, news, activeCategory, curre
       <NewsHero
         breadcrumb={`${t("home")} / ${t("news")}`}
         title={page.title ?? t("news")}
-        description={page.subtitle ?? "Turizm sektorundakı son yeniliklər, ALEAN-ın tədbirləri,\nsəyahət məsləhətləri və sektora dair analitik yazılar."}
+        description={page.subtitle ?? t("newsPageDescription")}
         metadata={t("trustLine")}
         actionText={t("servicesWithPossessive")}
         actionUrl="/services"

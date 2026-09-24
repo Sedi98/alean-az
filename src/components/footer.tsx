@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
 import type { Network, PublicSite } from "@/features/services/site-settings/types"
 
@@ -21,16 +21,16 @@ const serviceLinks = [
   ["serviceMedical", "/services#medical"],
 ]
 
-export function Footer({ site }: { site: PublicSite }) {
-  const t = useTranslations("Footer")
+export async function Footer({ site }: { site: PublicSite }) {
+  const t = await getTranslations("Footer")
   const siteName = site.site_name ?? "Alean Turoperator"
 
   return (
-    <footer className="bg-[#180f2a] px-6 py-16 text-[#f0f0fd] sm:px-10 sm:py-20 lg:px-20 lg:py-[100px]">
+    <footer aria-label={t("contact")} className="bg-[#180f2a] px-6 py-16 text-[#f0f0fd] sm:px-10 sm:py-20 lg:px-20 lg:py-[100px]">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-12">
         <div className="flex flex-col gap-12 lg:flex-row lg:items-center lg:justify-between lg:gap-20">
           <div className="flex max-w-[381px] flex-col gap-11">
-            <Link href="/" aria-label={`${siteName} ana səhifə`} className="flex items-end gap-0.5 self-start">
+            <Link href="/" aria-label={t("homeAria")} className="flex items-end gap-0.5 self-start">
               {site.footer_logo ? (
                 <Image src={site.footer_logo} alt={siteName} width={214} height={70} className="h-[70px] w-auto max-w-[214px] object-contain" priority />
               ) : (
@@ -57,7 +57,7 @@ export function Footer({ site }: { site: PublicSite }) {
               )}
             </Link>
             <p className="font-sans text-xl leading-[1.5] text-[#b0b0b0]">
-              {site.tagline ?? "2006-cı ildən Azərbaycandan dünyaya açılan etibarlı səyahət tərəfdaşınız."}
+              {site.tagline ?? t("fallbackTagline")}
             </p>
           </div>
 

@@ -19,14 +19,14 @@ export interface AboutContentProps {
 
 export function AboutContent({ label, dotImage, title, columns, stats, decorativeImageTop, decorativeImageBottom }: AboutContentProps) {
   return (
-    <section className="relative isolate overflow-hidden bg-[#0a0a0d] px-6 py-16 text-white sm:px-10 sm:py-20 lg:px-20 lg:py-[100px]">
+    <section aria-labelledby="about-content-title" className="relative isolate overflow-hidden bg-[#0a0a0d] px-6 py-16 text-white sm:px-10 sm:py-20 lg:px-20 lg:py-[100px]">
       <div className="relative z-10 mx-auto flex max-w-[1280px] flex-col gap-12">
         <div className="flex items-center gap-2.5">
           <Image src={dotImage} alt="" width={8} height={8} />
           <p className="font-sans text-lg font-semibold leading-[1.5] text-[#9999a6]">{label}</p>
         </div>
 
-        <h2 className="max-w-[1100px] font-sans text-3xl font-medium leading-tight text-[#f0f0fd] sm:text-4xl lg:text-5xl">{title}</h2>
+        <h2 id="about-content-title" className="max-w-[1100px] font-sans text-3xl font-medium leading-tight text-[#f0f0fd] sm:text-4xl lg:text-5xl">{title}</h2>
 
         <div className="grid gap-8 font-sans text-base leading-6 text-[#f0f0fd] lg:grid-cols-2 lg:gap-16">
           {columns.map((column) => <p key={column}>{column}</p>)}

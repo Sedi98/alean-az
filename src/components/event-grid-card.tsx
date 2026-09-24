@@ -21,9 +21,9 @@ export function EventGridCard({ slug, image, category, date, title, location, ca
         <span className={`rounded-full bg-[#f2e002] px-3 py-[5px] font-sans text-[10px] font-semibold leading-normal tracking-[1px] ${categoryClassName}`}>
           {category}
         </span>
-        <time className="font-sans text-xs leading-normal text-[#80808c]">{date}</time>
+        <time dateTime={date} className="font-sans text-xs leading-normal text-[#80808c]">{date}</time>
       </div>
-      <h2 className="font-sans text-lg font-semibold leading-[1.3] text-[#14141a] group-hover:text-[#4848a8]">{title}</h2>
+      <h3 className="font-sans text-lg font-semibold leading-[1.3] text-[#14141a] group-hover:text-[#4848a8]">{title}</h3>
       <div className="flex items-center gap-[6px]">
         <Image src="/events/location-dot.svg" alt="" width={5} height={5} />
         <p className="font-sans text-xs leading-normal text-[#80808c]">{location}</p>
