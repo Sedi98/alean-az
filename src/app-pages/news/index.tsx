@@ -23,7 +23,7 @@ export default async function NewsPage({ page, categories, news, activeCategory,
   const cards = news.map((item) => ({
     title: item.title,
     description: item.summary ?? "",
-    image: item.cover_image ?? "/news/news-1.jpeg",
+    image: item.cover_image ?? null,
     imageAlt: item.title,
     href: "/news/" + item.slug,
   }))

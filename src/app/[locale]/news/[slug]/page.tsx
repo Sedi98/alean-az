@@ -26,6 +26,8 @@ export default async function NewsDetailPage({
 }) {
   const { locale, slug } = await params;
   const news = await getNewsDetail(slug);
+  const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+  const shareUrl = `${siteUrl}/${locale}/news/${news.slug}`;
 
   return (
     <>
@@ -41,8 +43,8 @@ export default async function NewsDetailPage({
       }} />
       <main className="min-h-screen bg-white">
         <NewsDetailHero news={news} />
-        <NewsDetailImage src={news.cover_image ?? undefined} />
-        <NewsArticle news={news} />
+        {news.cover_image ? <NewsDetailImage src={news.cover_image} /> : null}
+        <NewsArticle news={news} shareUrl={shareUrl} />
       </main>
     </>
   );

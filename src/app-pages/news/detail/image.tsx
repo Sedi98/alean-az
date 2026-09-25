@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { getTranslations } from "next-intl/server"
 
-export async function NewsDetailImage({ src = "/news/news-1.jpeg" }: { src?: string }) {
+export async function NewsDetailImage({ src }: { src: string }) {
   const t = await getTranslations("Common")
   return (
     <section data-node-id="274:273" className="bg-white px-6 pt-10 sm:px-10 lg:px-20 lg:pt-12">
