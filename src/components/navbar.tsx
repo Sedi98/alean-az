@@ -26,12 +26,14 @@ function LocalePopover({
   label,
   onChange,
   align = "end",
+  compact = false,
 }: {
   currentLocale: Locale
   localeOrder: Locale[]
   label: string
   onChange: (locale: Locale) => void
   align?: "start" | "center" | "end"
+  compact?: boolean
 }) {
   const [open, setOpen] = useState(false)
 
@@ -40,10 +42,12 @@ function LocalePopover({
       <PopoverTrigger
         aria-label={label}
         aria-haspopup="listbox"
-        className="inline-flex h-10 items-center gap-2 rounded-full border border-white/15 bg-white/[0.08] px-4 font-sans text-sm font-semibold tracking-[0.08em] text-[#e6e6e6] outline-none backdrop-blur-md transition-colors hover:border-white/30 hover:bg-white/[0.14] focus-visible:border-white/50 focus-visible:ring-2 focus-visible:ring-white/30"
+        className={compact
+          ? "inline-flex h-8 items-center rounded-sm p-1 font-[family-name:var(--font-hero-description)] text-base font-normal leading-6 text-[#e6e6e6] outline-none transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          : "inline-flex h-10 items-center gap-2 rounded-full border border-white/15 bg-white/[0.08] px-4 font-[family-name:var(--font-hero-description)] text-sm font-semibold tracking-[0.08em] text-[#e6e6e6] outline-none backdrop-blur-md transition-colors hover:border-white/30 hover:bg-white/[0.14] focus-visible:border-white/50 focus-visible:ring-2 focus-visible:ring-white/30"}
       >
         {currentLocale.toUpperCase()}
-        <ChevronDown className={`size-4 text-white/70 transition-transform ${open ? "rotate-180" : ""}`} strokeWidth={2} aria-hidden="true" />
+        {compact ? null : <ChevronDown className={`size-4 text-white/70 transition-transform ${open ? "rotate-180" : ""}`} strokeWidth={2} aria-hidden="true" />}
       </PopoverTrigger>
       <PopoverContent align={align} className="min-w-32">
         <div role="listbox" aria-label={label} className="flex flex-col gap-0.5">
@@ -109,7 +113,7 @@ export function Navbar({ site }: { site: PublicSite }) {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 w-full bg-[linear-gradient(180.7deg,#000_7.3%,rgba(0,0,0,0)_93.4%)] px-6 py-6 text-[#e6e6e6] sm:px-10 lg:px-20">
-      <div className="relative z-[70] mx-auto flex min-h-12 max-w-[1282px] items-center justify-between gap-8">
+      <div className="relative z-[70] mx-auto flex min-h-12 w-full max-w-[1282px] items-center gap-8">
         <Link href="/" aria-label={t("homeAria")} className="flex shrink-0 items-end gap-[1.4px]">
           {site.logo ? (
             <Image src={site.logo} alt={siteName} width={148} height={49} className="h-[48.5px] w-auto max-w-[148px] object-contain" priority />
@@ -130,32 +134,34 @@ export function Navbar({ site }: { site: PublicSite }) {
                 alt={siteName}
                 width={100}
                 height={46}
-                className="h-[45.7px] w-[100.5px] object-contain"
+                className="h-auto w-[100.5px] object-contain"
                 priority
               />
             </>
           )}
         </Link>
 
-        <nav aria-label={t("mainNavigation")} className="hidden flex-1 items-center justify-center gap-2 xl:flex">
+        <div className="hidden flex-1 items-center xl:flex">
+          <nav aria-label={t("mainNavigation")} className="ml-[74px] flex flex-1 items-center justify-center gap-5">
           {navigation.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-sm p-1 font-sans text-[16px] leading-normal text-[#e6e6e6] transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="rounded-sm p-1 font-[family-name:var(--font-hero-description)] text-base font-normal leading-6 text-[#e6e6e6] transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               {t(item.key)}
             </Link>
           ))}
-        </nav>
-
-        <div className="hidden shrink-0 items-center gap-4 xl:flex">
-          <div className="relative hidden sm:block">
-            <LocalePopover currentLocale={currentLocale} localeOrder={localeOrder} label={t("language")} onChange={switchLocale} />
+          </nav>
+          <div className="ml-3 shrink-0">
+            <LocalePopover currentLocale={currentLocale} localeOrder={localeOrder} label={t("language")} onChange={switchLocale} compact />
           </div>
+        </div>
+
+        <div className="hidden shrink-0 items-center xl:flex">
           <a
             href="https://b2b.alean.az/signin"
-            className="rounded-full bg-gradient-to-r from-[#738cff] to-[#8059f2] px-5 py-2.5 font-sans text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="inline-flex h-12 items-center justify-center rounded-full border border-white px-4 py-1 font-[family-name:var(--font-hero-description)] text-base font-semibold leading-6 text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             {t("registration")}
           </a>
