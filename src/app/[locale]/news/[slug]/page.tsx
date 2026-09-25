@@ -9,6 +9,8 @@ import { createPageMetadata } from "@/lib/seo"
 import { normalizeSlug } from "@/lib/routes"
 import type { Locale } from "@/i18n/routing"
 
+export const dynamicParams = true
+
 export async function generateMetadata({
   params,
 }: {
