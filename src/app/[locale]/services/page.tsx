@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
-  await params
-  const services = await getServicesOverview()
+  const { locale } = await params
+  const services = await getServicesOverview({ lang: locale as Locale })
 
   return <ServicesPage services={services} />
 }

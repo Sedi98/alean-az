@@ -4,11 +4,14 @@ import { ContactDetailsCard } from "@/components/contact-details-card"
 import { ContactFormSection } from "./form"
 import { ContactInfoSection } from "./info"
 import type { PublicContact } from "@/features/services/contact/types"
+import type { ApiLanguage } from "@/features/services/http"
 
 export default async function ContactPage({
   contact,
+  locale,
 }: {
   contact: PublicContact
+  locale: ApiLanguage
 }) {
   const t = await getTranslations("Common")
   return (
@@ -31,7 +34,7 @@ export default async function ContactPage({
 
       {/* form title and subtitle goes here  */}
       {/* office araay data is going to ContactDetailsCard component  */}
-      <ContactFormSection form={contact.form} details={<ContactDetailsCard office={contact.office} />} />
+      <ContactFormSection locale={locale} form={contact.form} details={<ContactDetailsCard office={contact.office} />} />
     </main>
   )
 }

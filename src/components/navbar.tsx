@@ -3,8 +3,8 @@
 import Image from "next/image"
 import { useLocale, useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
-import { usePathname, useRouter } from "@/i18n/navigation"
 import type { Locale } from "@/i18n/routing"
+import { stripLocalePrefix } from "@/lib/routes"
 import type { PublicSite } from "@/features/services/site-settings/types"
 import { Menu, X } from "lucide-react"
 import { useEffect, useState } from "react"
@@ -23,14 +23,18 @@ export function Navbar({ site }: { site: PublicSite }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const locale = useLocale()
   const t = useTranslations("Navbar")
-  const pathname = usePathname()
-  const router = useRouter()
   const localeOrder: Locale[] = ["az", "en", "ru"]
   const currentLocale = localeOrder.includes(locale as Locale) ? (locale as Locale) : "az"
   const siteName = site.site_name ?? "Alean Turoperator"
 
   function switchLocale(nextLocale: Locale) {
-    router.replace(pathname, { locale: nextLocale })
+    if (nextLocale === locale) return
+    const path = stripLocalePrefix(window.location.pathname)
+    const search = window.location.search
+    const hash = window.location.hash
+    const localizedPath = path === "/" ? `/${nextLocale}` : `/${nextLocale}${path}`
+
+    window.location.assign(`${localizedPath}${search}${hash}`)
   }
 
   useEffect(() => {

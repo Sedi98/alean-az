@@ -60,9 +60,9 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     notFound()
   }
 
-  // Avoid reading the locale from request headers so pages remain statically renderable.
+  // Configure next-intl for translations and static locale-aware rendering.
   setRequestLocale(locale)
-  const site = await getSiteSettings()
+  const site = await getSiteSettings({ lang: locale as Locale })
 
   return (
     <html lang={locale} className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, montserrat.variable, spaceGrotesk.variable, poppins.variable, inter.variable, "font-sans")}>

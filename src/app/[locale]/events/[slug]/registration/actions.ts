@@ -1,6 +1,7 @@
 "use server"
 
 import { registerForEvent } from "@/features/services/events/api"
+import type { ApiLanguage } from "@/features/services/http"
 import type { RegistrationCreateResponse } from "@/features/services/events/types"
 
 export interface EventRegistrationFormInput {
@@ -18,6 +19,7 @@ export interface EventRegistrationFormInput {
 export async function submitEventRegistration(
   slug: string,
   input: EventRegistrationFormInput,
+  lang: ApiLanguage,
 ): Promise<RegistrationCreateResponse> {
   return registerForEvent(slug, {
     first_name: input.firstName,
@@ -29,5 +31,5 @@ export async function submitEventRegistration(
     participants_count: Number(input.participantsCount),
     country: input.country,
     message: input.message,
-  })
+  }, { lang })
 }

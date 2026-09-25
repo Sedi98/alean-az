@@ -13,10 +13,11 @@ import { Input } from "@/components/ui/input"
 import { Select } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import type { PublicEventDetail } from "@/features/services/events/types"
+import type { ApiLanguage } from "@/features/services/http"
 
 type RegistrationValues = { firstName: string; lastName: string; email: string; phone: string; company: string; position: string; participantsCount: string; country: string; message: string }
 
-export function RegistrationForm({ event }: { event: PublicEventDetail }) {
+export function RegistrationForm({ event, locale }: { event: PublicEventDetail; locale: ApiLanguage }) {
   const t = useTranslations("Common")
   const registrationSchema = z.object({
     firstName: z.string().min(2, t("firstName")),
@@ -37,7 +38,7 @@ export function RegistrationForm({ event }: { event: PublicEventDetail }) {
     setIsSubmitting(true)
     setSubmitError(null)
     try {
-      await submitEventRegistration(event.slug, values)
+      await submitEventRegistration(event.slug, values, locale)
       setSubmitted(true)
     } catch {
       setSubmitError(t("requestFailed"))

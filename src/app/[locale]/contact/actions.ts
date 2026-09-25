@@ -1,6 +1,7 @@
 "use server"
 
 import { createContactMessage } from "@/features/services/contact/api"
+import type { ApiLanguage } from "@/features/services/http"
 import type { ContactMessageCreateResponse } from "@/features/services/contact/types"
 
 export interface ContactFormInput {
@@ -15,6 +16,7 @@ export interface ContactFormInput {
 
 export async function submitContactForm(
   input: ContactFormInput,
+  lang: ApiLanguage,
 ): Promise<ContactMessageCreateResponse> {
   return createContactMessage(
     {
@@ -26,5 +28,6 @@ export async function submitContactForm(
       subject: input.subject,
       message: input.message,
     },
+    { lang },
   )
 }

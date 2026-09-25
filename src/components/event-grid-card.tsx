@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { Link } from "@/i18n/navigation"
+import { normalizeSlug } from "@/lib/routes"
 
 export interface EventGridCardProps {
   slug: string
@@ -13,7 +14,7 @@ export interface EventGridCardProps {
 
 export function EventGridCard({ slug, image, category, date, title, location, categoryClassName = "text-[#2b2b63]" }: EventGridCardProps) {
   return (
-    <Link href={`/events/${slug}`} className="group flex min-w-0 flex-col items-start gap-3 overflow-hidden">
+    <Link href={`/events/${normalizeSlug(slug)}`} className="group flex min-w-0 flex-col items-start gap-3 overflow-hidden">
       <div className="relative h-[240px] w-full overflow-hidden rounded-2xl bg-[#ebebf0]">
         <Image src={image} alt={title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-300 group-hover:scale-105" />
       </div>

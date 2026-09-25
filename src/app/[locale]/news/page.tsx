@@ -28,15 +28,17 @@ interface NewsPageRouteProps {
   }>
 }
 
-export default async function Page({ searchParams }: NewsPageRouteProps) {
+export default async function Page({ params, searchParams }: NewsPageRouteProps) {
+  const { locale } = await params
   const query = await searchParams
   const pageNumber = query.page ? Number(query.page) : 1
   const currentPage = Number.isFinite(pageNumber) && pageNumber > 0 ? Math.floor(pageNumber) : 1
   const limit = 9
   const [newsPage, categories, news] = await Promise.all([
-    getNewsPage(),
-    getNewsCategories(),
+    getNewsPage({ lang: locale as Locale }),
+    getNewsCategories({ lang: locale as Locale }),
     getNews({
+      lang: locale as Locale,
       category: query.category,
       search: query.search,
       limit,

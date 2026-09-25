@@ -12,15 +12,18 @@ import { Input } from "@/components/ui/input"
 import { Select } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import type { FormInfo } from "@/features/services/contact/types"
+import type { ApiLanguage } from "@/features/services/http"
 
 type ContactValues = { firstName: string; lastName: string; email: string; phone: string; company: string; subject: string; message: string }
 
 export function ContactFormSection({
   form,
   details,
+  locale,
 }: {
   form: FormInfo
   details: React.ReactNode
+  locale: ApiLanguage
 }) {
   const t = useTranslations("Common")
   const contactSchema = z.object({
@@ -50,7 +53,7 @@ export function ContactFormSection({
     setSubmitError(null)
 
     try {
-      await submitContactForm(values)
+      await submitContactForm(values, locale)
       setSubmitted(true)
     } catch {
       setSubmitError(t("requestFailed"))
