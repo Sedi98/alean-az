@@ -64,7 +64,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const site = await getSiteSettings({ lang: locale as Locale })
 
   return (
-    <html lang={locale} className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, montserrat.variable, spaceGrotesk.variable, poppins.variable, inter.variable, "font-sans")}>
+    <html lang={locale} data-scroll-behavior="smooth" className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, montserrat.variable, spaceGrotesk.variable, poppins.variable, inter.variable, "font-sans")}>
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider>
           <JsonLd data={{
