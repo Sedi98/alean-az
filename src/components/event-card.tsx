@@ -10,17 +10,17 @@ export interface EventCardProps {
 
 export function EventCard({ title, description, href, className }: EventCardProps) {
   const content = (
-    <>
-      <div className="pointer-events-none absolute left-[210.95px] top-px h-[170px] w-[93.053px] rounded-r-2xl bg-[linear-gradient(270deg,rgba(143,108,237,0.3),rgba(106,107,240,0.2)_21.211%,rgba(20,20,25,0))]" />
-      <div className="absolute left-8 top-8 flex w-[239.278px] flex-col gap-1">
+    <div className="relative flex h-full w-full flex-col items-center justify-between gap-4 p-8">
+      <div className="pointer-events-none absolute left-[210.95px] top-px h-full w-[93.053px] rounded-r-2xl bg-[linear-gradient(270deg,rgba(143,108,237,0.3),rgba(106,107,240,0.2)_21.211%,rgba(20,20,25,0))]" />
+      <div className=" flex w-[239.278px] flex-col gap-1">
         <h3 className="font-sans text-xl font-medium leading-[1.5] text-white">{title}</h3>
         <p className="font-sans text-lg font-normal leading-[1.5] text-[#80808c]">{description}</p>
       </div>
-    </>
+    </div>
   )
 
   const cardClassName = cn(
-    "relative block h-[170px] w-full overflow-hidden rounded-2xl border border-[rgba(115,140,255,0.12)] bg-[#14141a] transition-shadow hover:shadow-lg",
+    "relative block w-full overflow-hidden rounded-2xl border border-[rgba(115,140,255,0.12)] bg-[#14141a] transition-shadow hover:shadow-lg",
     href && "cursor-pointer",
     className,
   )
