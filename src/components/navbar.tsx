@@ -6,7 +6,8 @@ import { Link } from "@/i18n/navigation"
 import type { Locale } from "@/i18n/routing"
 import { stripLocalePrefix } from "@/lib/routes"
 import type { PublicSite } from "@/features/services/site-settings/types"
-import { Menu, X } from "lucide-react"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Check, ChevronDown, Menu, X } from "lucide-react"
 import { useEffect, useState } from "react"
 
 const navigation = [
@@ -18,6 +19,59 @@ const navigation = [
   { key: "news", href: "/news" },
   { key: "contact", href: "/contact" },
 ]
+
+function LocalePopover({
+  currentLocale,
+  localeOrder,
+  label,
+  onChange,
+  align = "end",
+}: {
+  currentLocale: Locale
+  localeOrder: Locale[]
+  label: string
+  onChange: (locale: Locale) => void
+  align?: "start" | "center" | "end"
+}) {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger
+        aria-label={label}
+        aria-haspopup="listbox"
+        className="inline-flex h-10 items-center gap-2 rounded-full border border-white/15 bg-white/[0.08] px-4 font-sans text-sm font-semibold tracking-[0.08em] text-[#e6e6e6] outline-none backdrop-blur-md transition-colors hover:border-white/30 hover:bg-white/[0.14] focus-visible:border-white/50 focus-visible:ring-2 focus-visible:ring-white/30"
+      >
+        {currentLocale.toUpperCase()}
+        <ChevronDown className={`size-4 text-white/70 transition-transform ${open ? "rotate-180" : ""}`} strokeWidth={2} aria-hidden="true" />
+      </PopoverTrigger>
+      <PopoverContent align={align} className="min-w-32">
+        <div role="listbox" aria-label={label} className="flex flex-col gap-0.5">
+          {localeOrder.map((item) => {
+            const isActive = item === currentLocale
+
+            return (
+              <button
+                key={item}
+                type="button"
+                role="option"
+                aria-selected={isActive}
+                onClick={() => {
+                  setOpen(false)
+                  onChange(item)
+                }}
+                className="flex h-10 items-center justify-between gap-5 rounded-xl px-3 text-left font-sans text-sm font-semibold tracking-[0.08em] text-white/75 transition-colors hover:bg-white/10 hover:text-white focus-visible:bg-white/10 focus-visible:outline-none"
+              >
+                {item.toUpperCase()}
+                {isActive ? <Check className="size-4 text-[#9ca8ff]" strokeWidth={2.5} aria-hidden="true" /> : null}
+              </button>
+            )
+          })}
+        </div>
+      </PopoverContent>
+    </Popover>
+  )
+}
 
 export function Navbar({ site }: { site: PublicSite }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -96,18 +150,15 @@ export function Navbar({ site }: { site: PublicSite }) {
         </nav>
 
         <div className="hidden shrink-0 items-center gap-4 xl:flex">
-          <select
-            value={currentLocale}
-            aria-label={t("language")}
-            onChange={(event) => switchLocale(event.target.value as Locale)}
-            className="hidden cursor-pointer appearance-none border-0 bg-transparent p-1 font-semibold leading-6 text-[#e6e6e6] outline-none hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:block"
+          <div className="relative hidden sm:block">
+            <LocalePopover currentLocale={currentLocale} localeOrder={localeOrder} label={t("language")} onChange={switchLocale} />
+          </div>
+          <a
+            href="https://b2b.alean.az/signin"
+            className="rounded-full bg-gradient-to-r from-[#738cff] to-[#8059f2] px-5 py-2.5 font-sans text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
-            {localeOrder.map((item) => (
-              <option key={item} value={item} className="bg-[#0a0a0d] text-white">
-                {item.toUpperCase()}
-              </option>
-            ))}
-          </select>
+            {t("registration")}
+          </a>
         </div>
 
         <button
@@ -155,21 +206,16 @@ export function Navbar({ site }: { site: PublicSite }) {
         </nav>
 
         <div className="mt-auto flex flex-col gap-5 border-t border-white/[0.08] pt-6">
-          <label className="self-start">
-            <span className="sr-only">{t("language")}</span>
-            <select
-              value={currentLocale}
-              aria-label={t("language")}
-              onChange={(event) => switchLocale(event.target.value as Locale)}
-              className="cursor-pointer appearance-none border-0 bg-transparent p-1 font-sans text-base font-semibold leading-6 text-[#e6e6e6] outline-none transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-            >
-              {localeOrder.map((item) => (
-                <option key={item} value={item} className="bg-[#0a0a0d] text-white">
-                  {item.toUpperCase()}
-                </option>
-              ))}
-            </select>
-          </label>
+          <div className="self-start">
+            <LocalePopover currentLocale={currentLocale} localeOrder={localeOrder} label={t("language")} onChange={switchLocale} align="start" />
+          </div>
+          <a
+            href="https://b2b.alean.az/signin"
+            onClick={() => setIsMenuOpen(false)}
+            className="inline-flex w-fit rounded-full bg-gradient-to-r from-[#738cff] to-[#8059f2] px-5 py-2.5 font-sans text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            {t("registration")}
+          </a>
         </div>
       </aside>
     </header>
