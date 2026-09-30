@@ -7,7 +7,7 @@ import type { Locale } from "@/i18n/routing"
 import { stripLocalePrefix } from "@/lib/routes"
 import type { PublicSite } from "@/features/services/site-settings/types"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Check, ChevronDown, Menu, X } from "lucide-react"
+import { Check, ChevronDown, X } from "lucide-react"
 import { useEffect, useState } from "react"
 
 const navigation = [
@@ -112,14 +112,14 @@ export function Navbar({ site }: { site: PublicSite }) {
   }, [isMenuOpen])
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 w-full bg-[linear-gradient(180.7deg,#000_7.3%,rgba(0,0,0,0)_93.4%)] px-6 py-6 text-[#e6e6e6] sm:px-10 lg:px-20">
-      <div className="relative z-[70] mx-auto flex min-h-12 w-full max-w-[1282px] items-center gap-8">
-        <Link href="/" aria-label={t("homeAria")} className="flex shrink-0 items-end gap-[1.4px]">
+    <header className="navbar-desktop-gradient fixed inset-x-0 top-0 z-50 w-full bg-[#0a0a0d] px-5 py-1.5 text-[#e6e6e6] sm:px-5 xl:px-20 xl:py-6">
+      <div className="relative z-[70] mx-auto flex min-h-11 w-full max-w-[1282px] items-center gap-8 xl:min-h-12">
+        <Link href="/" aria-label={t("homeAria")} className="flex shrink-0 items-end gap-[1.1px] xl:gap-[1.4px]">
           {site.logo ? (
-            <Image src={site.logo} alt={siteName} width={148} height={49} className="h-[48.5px] w-auto max-w-[148px] object-contain" priority />
+            <Image src={site.logo} alt={siteName} width={148} height={49} className="h-[38.42px] w-auto max-w-[118px] object-contain xl:h-[48.5px] xl:max-w-[148px]" priority />
           ) : (
             <>
-              <span className="relative block h-[48.5px] w-[47.1px] overflow-hidden">
+              <span className="relative block h-[38.42px] w-[37.32px] overflow-hidden xl:h-[48.5px] xl:w-[47.1px]">
                 <Image
                   src="/brand/alean-mark.png"
                   alt=""
@@ -134,7 +134,7 @@ export function Navbar({ site }: { site: PublicSite }) {
                 alt={siteName}
                 width={100}
                 height={46}
-                className="h-auto w-[100.5px] object-contain"
+                className="h-[36.22px] w-[79.58px] object-contain xl:h-auto xl:w-[100.5px]"
                 priority
               />
             </>
@@ -169,13 +169,21 @@ export function Navbar({ site }: { site: PublicSite }) {
 
         <button
           type="button"
-          className="inline-flex size-12 items-center justify-center rounded-full border border-white/20 bg-white/[0.08] text-white transition-colors hover:bg-white/[0.14] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white xl:hidden"
+          className="ml-auto inline-flex h-11 w-11 items-center justify-end rounded text-white transition-colors hover:bg-white/[0.08] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white xl:hidden"
           aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsMenuOpen((open) => !open)}
         >
-          {isMenuOpen ? <X size={22} strokeWidth={1.8} /> : <Menu size={22} strokeWidth={1.8} />}
+          {isMenuOpen ? (
+            <X size={22} strokeWidth={1.8} />
+          ) : (
+            <span aria-hidden="true" className="flex h-4 w-[22px] flex-col justify-between">
+              <span className="h-[2px] w-full rounded-full bg-white" />
+              <span className="h-[2px] w-full rounded-full bg-white" />
+              <span className="h-[2px] w-full rounded-full bg-white" />
+            </span>
+          )}
         </button>
       </div>
 
@@ -188,16 +196,8 @@ export function Navbar({ site }: { site: PublicSite }) {
       <aside
         id="mobile-navigation"
         aria-label={t("mobileNavigation")}
-        className={`fixed right-0 top-0 z-[60] flex h-dvh w-[min(86vw,360px)] flex-col bg-[#0a0a0d] px-6 pb-8 pt-28 shadow-[-12px_0_40px_rgba(0,0,0,0.25)] transition-transform duration-300 ease-out sm:px-10 xl:hidden ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed right-0 top-0 z-[60] flex h-dvh w-[min(86vw,360px)] flex-col bg-[#0a0a0d] px-6 pb-8 pt-20 shadow-[-12px_0_40px_rgba(0,0,0,0.25)] transition-transform duration-300 ease-out sm:px-10 xl:hidden ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
-        <button
-          type="button"
-          className="absolute right-6 top-6 inline-flex size-12 items-center justify-center rounded-full border border-white/20 bg-white/[0.08] text-white transition-colors hover:bg-white/[0.14] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:right-10"
-          aria-label={t("closeMenu")}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          <X size={22} strokeWidth={1.8} />
-        </button>
         <nav className="flex flex-col gap-2" aria-label={t("mainNavigation")}>
           {navigation.map((item) => (
             <Link

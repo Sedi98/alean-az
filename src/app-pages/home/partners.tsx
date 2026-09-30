@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
+import { SectionLabel } from "@/components/section-label";
 
 import {
   Carousel,
@@ -20,7 +21,6 @@ export interface PartnersSectionProps {
 
 export function PartnersSection({
   label,
-  dotImage,
   actionText,
   actionUrl,
   partners,
@@ -28,12 +28,7 @@ export function PartnersSection({
   return (
     <section className="bg-white py-16 sm:py-20 lg:py-[100px]">
       <div className="flex flex-col gap-12">
-        <div className="flex items-center gap-2.5 px-6 sm:px-10 lg:px-20">
-          <Image src={dotImage} alt="" width={8} height={8} />
-          <h2 className="font-sans text-lg font-medium leading-[1.5] text-[#666673]">
-            {label}
-          </h2>
-        </div>
+        <div className="px-6 sm:px-10 lg:px-20"><SectionLabel>{label}</SectionLabel></div>
 
         {actionText && actionUrl ? (
           <Link

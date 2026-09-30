@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { SectionLabel } from "@/components/section-label"
 
 export interface CorporateFeature {
   title: string
@@ -18,12 +19,12 @@ export function CorporateSection({ category, icon, title, description, features 
     <section
       id="corporate"
       data-node-id="236:2196"
-      className="scroll-mt-6 border border-[rgba(255,255,255,0.05)] bg-[linear-gradient(180deg,#14141f_0%,#1f1a38_50%,#332661_100%)] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]"
+      className="scroll-mt-6 bg-transparent px-0 py-0"
     >
       <div className="mx-auto max-w-[1280px]">
         <div className="flex w-full flex-col gap-8">
           <div className="flex w-full max-w-[622px] flex-col gap-6">
-            <p className="font-sans text-base font-medium leading-[1.5] text-[#6666ec]">{category}</p>
+            <SectionLabel>{category}</SectionLabel>
             <div className="flex flex-col gap-5">
               <div className="flex items-center gap-[21px]">
                 <Image src={icon ?? "/services/corporate-icon.svg"} alt="" width={48} height={48} />

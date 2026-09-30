@@ -1,6 +1,5 @@
 import Image from "next/image"
-
-import { ServiceImageGallery, type ServiceImage } from "./image-gallery"
+import { SectionLabel } from "@/components/section-label"
 
 export interface FlightFeature {
   title: string
@@ -13,7 +12,6 @@ export interface FlightsSectionProps {
   title: string
   description: string[]
   features: FlightFeature[]
-  images: ServiceImage[]
 }
 
 export function FlightsSection({
@@ -22,16 +20,13 @@ export function FlightsSection({
   title,
   description,
   features,
-  images,
 }: FlightsSectionProps) {
   return (
-    <section id="aviation" data-node-id="226:240" className="scroll-mt-6 bg-[#f7f7fa] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
-      <div className="mx-auto grid max-w-[1280px] gap-14 lg:grid-cols-[minmax(0,800px)_409px] lg:gap-[clamp(64px,6vw,71px)]">
+    <section id="aviation" data-node-id="226:240" className="scroll-mt-6 bg-gradient-to-b from-white to-[rgba(223,223,255,0.52)] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
+      <div className="mx-auto max-w-[1280px]">
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-6">
-            <p className="font-sans text-base font-medium leading-[1.5] text-[#6666ec]">
-              {category}
-            </p>
+            <SectionLabel>{category}</SectionLabel>
             <div className="flex flex-col gap-5">
               <div className="flex items-center gap-[21px]">
                 <span className="relative size-[52px] shrink-0">
@@ -61,7 +56,6 @@ export function FlightsSection({
           </div>
         </div>
 
-        <ServiceImageGallery images={images} />
       </div>
     </section>
   )

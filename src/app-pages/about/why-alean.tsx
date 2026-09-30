@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { SectionLabel } from "@/components/section-label"
 
 import { WhyAleanCard, type WhyAleanCardProps } from "@/components/why-alean-card"
 import { WhyAleanMobileCarousel } from "@/components/why-alean-mobile-carousel"
@@ -11,24 +12,27 @@ export interface WhyAleanSectionProps {
   cards: WhyAleanCardProps[]
 }
 
-export function WhyAleanSection({ label, dotImage, title, description, cards }: WhyAleanSectionProps) {
+export function WhyAleanSection({ label, title, description, cards }: WhyAleanSectionProps) {
   return (
     <section aria-labelledby="about-why-title" className="bg-[#0a0a0d] px-4 py-16 text-white sm:px-10 sm:py-20 lg:px-20 lg:py-[100px]">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-10">
-        <div className="flex items-center gap-2.5">
-          <Image src={dotImage} alt="" width={8} height={8} />
-          <p className="font-sans text-[13px] font-medium tracking-[1.95px] text-[#80808c]">{label}</p>
-        </div>
+        <SectionLabel>{label}</SectionLabel>
         <div className="flex flex-col gap-5">
-          <h2 id="about-why-title" className="font-sans text-3xl font-semibold leading-none sm:text-4xl lg:text-5xl">{title}</h2>
-          <p className="max-w-[700px] whitespace-pre-line font-sans text-base leading-6 text-[#80808c]">{description}</p>
+          <h2 id="about-why-title" className="font-[family-name:var(--font-hero-title)] text-3xl font-bold leading-none sm:text-4xl lg:text-5xl">{title}</h2>
+          <p className=" whitespace-pre-line font-[family-name:var(--font-hero-description)] text-base leading-[1.5] text-[#80808c] sm:text-lg">{description}</p>
         </div>
         <div className="lg:hidden">
           <WhyAleanMobileCarousel cards={cards} />
         </div>
 
         <div className="hidden gap-4 lg:grid lg:grid-cols-4">
-          {cards.map((card) => <WhyAleanCard key={card.number} {...card} />)}
+          {cards.map((card) => (
+            <WhyAleanCard
+              key={card.number}
+              {...card}
+              className="[&_h3]:font-medium [&_h3]:leading-[1.5] [&_article>div>div>p]:text-base [&_article>div>div>p]:leading-6"
+            />
+          ))}
         </div>
       </div>
     </section>

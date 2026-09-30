@@ -20,7 +20,7 @@ export default async function AboutPage({ about, partners }: { about: PublicAbou
         title={about.who.headline}
         columns={[about.who.intro_left, about.who.intro_right]}
         stats={about.stats}
-        decorativeImageTop="/about/image-about-bg.png"
+        decorativeImageTop="/about/about-decorative-top.png"
         decorativeImageBottom="/about/image-about-bg-bottom.png"
       />
       <IataSection

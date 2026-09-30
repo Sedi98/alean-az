@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { SectionLabel } from "@/components/section-label"
 
 export interface InsuranceFeature {
   title: string
@@ -14,11 +15,11 @@ export interface InsuranceSectionProps {
 
 export function InsuranceSection({ category, icon, title, description, features }: InsuranceSectionProps) {
   return (
-    <section id="insurance" data-node-id="222:2087" className="scroll-mt-6 bg-[#0a0a0d] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
+    <section id="insurance" data-node-id="222:2087" className="scroll-mt-6 bg-transparent px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
       <div className="mx-auto max-w-[1280px]">
         <div className="flex w-full flex-col gap-8">
           <div className="flex w-full max-w-[956px] flex-col gap-6">
-            <p className="font-sans text-base font-medium leading-[1.5] text-[#6666ec]">{category}</p>
+            <SectionLabel>{category}</SectionLabel>
             <div className="flex flex-col gap-5">
               <div className="flex items-center gap-[21px]">
                 <Image src={icon ?? "/services/insurance-icon.svg"} alt="" width={48} height={48} />
@@ -34,7 +35,7 @@ export function InsuranceSection({ category, icon, title, description, features 
             {features.map((feature, index) => (
               <div
                 key={feature.title}
-                className={`flex min-h-[82px] items-center rounded-xl border bg-[#14141a] p-5 font-sans text-[15px] font-semibold leading-normal text-white ${index === 0 ? "border-[#b9b9f6]" : "border-[#d0d0f9]"}`}
+                className={`flex min-h-[82px] items-center rounded-xl border bg-[#332661] p-5 font-sans text-[15px] font-semibold leading-normal text-white ${index === 0 ? "border-[#b9b9f6]" : "border-[#d0d0f9]"}`}
               >
                 {feature.title}
               </div>

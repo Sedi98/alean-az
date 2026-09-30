@@ -21,33 +21,31 @@ export function HeroSection({
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative isolate min-h-[616px] overflow-hidden bg-[linear-gradient(181.45deg,rgba(97,97,97,0)_4.48%,rgba(64,73,152,0.721)_87.75%,#333fae_101.61%)] flex items-center justify-center"
+      className="relative isolate flex min-h-[616px] items-center justify-center overflow-hidden bg-[#0a0a0d]"
     >
-      {image ? (
-        <Image
-          src={image}
-          alt={imageAlt}
-          fill
-          priority
-          className="-z-10 object-cover"
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
-      ) : null}
+      <Image
+        src="/brand/home-hero-vectors.svg"
+        alt=""
+        fill
+        priority
+        className="pointer-events-none object-cover"
+        sizes="100vw"
+      />
 
-      <div className="mx-auto flex min-h-[416px] max-w-[1282px] items-center px-6 py-16 sm:px-10 lg:px-20">
-        <div className="w-full text-center text-white">
+      <div className="relative z-10 mx-auto flex min-h-[416px] w-full max-w-[1282px] items-center py-16">
+        <div className="w-full max-w-[80%] text-left text-white">
           <h1
             id="hero-title"
-            className="whitespace-pre-line font-[family-name:var(--font-hero-title)] text-[42px] font-bold leading-none sm:text-[60px]"
+            className="max-w-[80%] whitespace-pre-line font-[family-name:var(--font-hero-title)] text-[42px] font-bold leading-none sm:text-[60px]"
           >
             {title}
           </h1>
-          <p className="mx-auto mt-[14px] max-w-[752px] whitespace-pre-line font-[family-name:var(--font-hero-description)] text-base leading-6 text-white sm:text-lg sm:leading-[27px]">
+          <p className="mt-[14px] max-w-[600px] whitespace-pre-line font-[family-name:var(--font-hero-description)] text-base leading-6 text-white sm:text-lg sm:leading-[27px]">
             {description}
           </p>
           <Link
             href={url}
-            className="mt-[78px] inline-flex items-center justify-center gap-4 rounded-full bg-[#f2e002] py-[6px] pl-[6px] pr-8 text-lg font-medium leading-[27px] text-[#0f0f14] transition-colors hover:bg-[#f2e002]/85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="mt-5 inline-flex items-center justify-center gap-4 rounded-full bg-[#f2e002] py-[6px] pl-[6px] pr-8 text-lg font-medium leading-[27px] text-[#0f0f14] transition-colors hover:bg-[#f2e002]/85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             <span className="relative size-11 shrink-0 overflow-hidden rounded-full">
               <Image src="/brand/icon-circle.svg" alt="" fill sizes="44px" />
@@ -59,6 +57,18 @@ export function HeroSection({
           </Link>
         </div>
       </div>
+      {image ? (
+        <div className="absolute bottom-0 right-0 z-[1] aspect-video w-[58%] overflow-hidden rounded-tl-3xl sm:w-1/2 lg:w-[48%]">
+          <Image
+            src={image}
+            alt={imageAlt}
+            fill
+            priority
+            className="object-cover"
+            sizes="(max-width: 1023px) 100vw, 50vw"
+          />
+        </div>
+      ) : null}
     </section>
   )
 }
