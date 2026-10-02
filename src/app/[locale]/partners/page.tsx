@@ -22,17 +22,18 @@ export async function generateMetadata({ params, searchParams }: {
   })
 }
 
-export default async function Page({ searchParams }: {
+export default async function Page({ params, searchParams }: {
   params: Promise<{ locale: string }>
   searchParams: Promise<{ page?: string }>
 }) {
+  const { locale } = await params
   const query = await searchParams
   const pageNumber = query.page ? Number(query.page) : 1
   const currentPage = Number.isFinite(pageNumber) && pageNumber > 0 ? Math.floor(pageNumber) : 1
   const limit = 9
   const [page, partners] = await Promise.all([
-    getPartnersPage(),
-    getPartners({ limit, offset: (currentPage - 1) * limit }),
+    getPartnersPage({ lang: locale as Locale }),
+    getPartners({ lang: locale as Locale, limit, offset: (currentPage - 1) * limit }),
   ])
 
   return <PartnersPage page={page} partners={partners.results} currentPage={currentPage} totalPages={Math.max(1, Math.ceil(partners.count / limit))} />

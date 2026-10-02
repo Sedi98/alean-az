@@ -45,7 +45,6 @@ export function generateStaticParams(): Array<{ locale: Locale }> {
 }
 
 export const dynamic = "force-static"
-export const dynamicParams = false
 export const revalidate = 120
 
 type LocaleLayoutProps = Readonly<{
@@ -60,12 +59,12 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     notFound()
   }
 
-  // Avoid reading the locale from request headers so pages remain statically renderable.
+  // Configure next-intl for translations and static locale-aware rendering.
   setRequestLocale(locale)
-  const site = await getSiteSettings()
+  const site = await getSiteSettings({ lang: locale as Locale })
 
   return (
-    <html lang={locale} className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, montserrat.variable, spaceGrotesk.variable, poppins.variable, inter.variable, "font-sans")}>
+    <html lang={locale} data-scroll-behavior="smooth" className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, montserrat.variable, spaceGrotesk.variable, poppins.variable, inter.variable, "font-sans")}>
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider>
           <JsonLd data={{

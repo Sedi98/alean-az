@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
-  await params
-  const contact = await getContact()
+  const { locale } = await params
+  const contact = await getContact({ lang: locale as Locale })
 
-  return <ContactPage contact={contact} />
+  return <ContactPage locale={locale as Locale} contact={contact} />
 }

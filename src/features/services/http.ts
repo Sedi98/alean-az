@@ -102,7 +102,11 @@ export async function PostApi<TPayload, TResponse>(
   config: ApiRequestConfig = {},
 ): Promise<TResponse> {
   try {
-    const response = await apiClient.post<TResponse>(url, payload, toAxiosConfig(config))
+    const response = await apiClient.post<TResponse>(
+      url,
+      payload,
+      toAxiosConfig(config),
+    )
     return response.data
   } catch (error) {
     return handleApiError(error, config)

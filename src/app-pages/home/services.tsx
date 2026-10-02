@@ -1,6 +1,5 @@
-import Image from "next/image"
-
 import { ServiceCard, type ServiceCardProps } from "@/components/service-card"
+import { SectionLabel } from "@/components/section-label"
 
 export interface ServicesSectionProps {
   label: string
@@ -8,14 +7,11 @@ export interface ServicesSectionProps {
   services: ServiceCardProps[]
 }
 
-export function ServicesSection({ label, dotImage, services }: ServicesSectionProps) {
+export function ServicesSection({ label, services }: ServicesSectionProps) {
   return (
     <section className="bg-white px-6 py-16 sm:px-10 sm:py-20 lg:px-20 lg:py-[100px]">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-12">
-        <div className="flex items-center gap-2.5 overflow-hidden">
-          <Image src={dotImage} alt="" width={8} height={8} />
-          <h2 className="font-sans text-lg font-medium leading-[1.5] text-[#666673]">{label}</h2>
-        </div>
+        <SectionLabel>{label}</SectionLabel>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (

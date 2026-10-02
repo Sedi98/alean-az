@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/.pnpm-store/
 /.pnp
 .pnp.*
 .yarn/*
@@ -22,7 +23,19 @@
 
 # misc
 .DS_Store
+Thumbs.db
+*.log
 *.pem
+
+# local tooling and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# build and tool caches
+.cache/
+.turbo/
 
 # debug
 npm-debug.log*

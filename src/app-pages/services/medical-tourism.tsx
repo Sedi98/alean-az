@@ -1,6 +1,5 @@
 import Image from "next/image"
-
-import { ServiceImageGallery, type ServiceImage } from "./image-gallery"
+import { SectionLabel } from "@/components/section-label"
 
 export interface MedicalFeature {
   number: string
@@ -14,16 +13,15 @@ export interface MedicalTourismSectionProps {
   title: string
   description: string
   features: MedicalFeature[]
-  images: ServiceImage[]
 }
 
-export function MedicalTourismSection({ category, icon, title, description, features, images }: MedicalTourismSectionProps) {
+export function MedicalTourismSection({ category, icon, title, description, features }: MedicalTourismSectionProps) {
   return (
     <section id="medical" data-node-id="236:2291" className="scroll-mt-6 bg-[#f7f7fa] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
-      <div className="mx-auto grid max-w-[1280px] items-center gap-14 lg:grid-cols-[minmax(0,800px)_409px] lg:gap-[71px]">
+      <div className="mx-auto max-w-[1280px]">
         <div className="flex flex-col gap-8">
           <div className="flex w-full max-w-[469px] flex-col gap-6">
-            <p className="font-sans text-base font-medium leading-[1.5] text-[#6666ec]">{category}</p>
+            <SectionLabel>{category}</SectionLabel>
             <div className="flex flex-col gap-5">
               <div className="flex items-center gap-[21px]">
                 <Image src={icon ?? "/services/medical-icon.svg"} alt="" width={52} height={52} />
@@ -49,7 +47,6 @@ export function MedicalTourismSection({ category, icon, title, description, feat
           </div>
         </div>
 
-        <ServiceImageGallery images={images} />
       </div>
     </section>
   )

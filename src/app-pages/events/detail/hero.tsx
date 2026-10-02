@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { getTranslations } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
+import { normalizeSlug } from "@/lib/routes"
 
 import type { PublicEventDetail } from "@/features/services/events/types"
 
@@ -37,7 +38,7 @@ export async function EventDetailHero({ event, locale = "az" }: EventDetailHeroP
             <p className="w-full max-w-[420px] text-left font-sans text-xs leading-[1.6] text-[#666673] lg:text-right">{t("trustLine")}</p>
             <div className="flex w-full flex-wrap gap-5 lg:justify-end">
               <CtaLink href="/services">{t("servicesWithPossessive")}</CtaLink>
-              {event.can_register ? <CtaLink href={`/events/${event.slug}/registration`} light>{t("registration")}</CtaLink> : null}
+              {event.can_register ? <CtaLink href={`/events/${normalizeSlug(event.slug)}/registration`} light>{t("registration")}</CtaLink> : null}
             </div>
           </div>
         </div>

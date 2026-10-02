@@ -14,10 +14,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
-  await params
+  const { locale } = await params
   const [home, partners] = await Promise.all([
-    getHome(),
-    getPartners({ limit: 4 }),
+    getHome({ lang: locale as Locale }),
+    getPartners({ lang: locale as Locale, limit: 4 }),
   ])
 
   return <HomePage home={home} partners={partners.results} />;

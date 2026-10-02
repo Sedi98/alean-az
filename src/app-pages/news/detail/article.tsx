@@ -5,11 +5,11 @@ import type { PublicNewsDetail } from "@/features/services/news/types"
 
 export interface NewsArticleProps {
   news: PublicNewsDetail
+  shareUrl: string
 }
 
-export async function NewsArticle({ news }: NewsArticleProps) {
+export async function NewsArticle({ news, shareUrl }: NewsArticleProps) {
   const t = await getTranslations("Common")
-  const paragraphs = (news.content ?? "").split(/\n{2,}/).filter(Boolean)
 
   return (
     <section data-node-id="274:275" className="bg-white px-6 pb-16 pt-12 sm:px-10 lg:px-40 lg:pb-20">
@@ -20,15 +20,42 @@ export async function NewsArticle({ news }: NewsArticleProps) {
           <div className="flex items-center justify-between font-sans text-sm"><span className="font-medium text-[#595966]">{news.author ?? "ALEAN Tour Operator"}</span><time dateTime={news.date} className="text-[#80808c]">{news.date}</time></div>
           {news.summary && <p className="font-sans text-base leading-[1.75] text-[#4d4d59]">{news.summary}</p>}
           <div className="h-px w-full bg-black/[0.08]" />
-          {paragraphs.map((paragraph) => <p key={paragraph} className="whitespace-pre-line font-sans text-[15px] leading-[1.85] text-[#4d4d59]">{paragraph}</p>)}
+          <div
+            className="space-y-6 font-sans text-[15px] leading-[1.85] text-[#4d4d59] [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-[#14141a] [&_p]:m-0"
+            dangerouslySetInnerHTML={{ __html: news.content ?? "" }}
+          />
         </article>
 
         <aside className="flex w-full shrink-0 flex-col gap-8 lg:w-[200px]">
           <h2 className="font-sans text-base font-bold text-[#14141a]">{t("share")}</h2>
           <div className="flex items-center gap-3">
-            <button type="button" aria-label={`${t("share")} Facebook`} className="flex size-10 items-center justify-center rounded-full border border-black/10 font-inter text-lg font-bold text-[#4d4d59]">f</button>
-            <button type="button" aria-label={`${t("share")} LinkedIn`} className="flex size-10 items-center justify-center rounded-full border border-black/10 font-inter text-[15px] font-bold text-[#4d4d59]">in</button>
-            <button type="button" aria-label={t("share")} className="relative size-10 overflow-hidden rounded-full"><Image src="/news/detail/share-icon.svg" alt="" fill sizes="40px" /></button>
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${t("share")} Facebook`}
+              className="flex size-10 items-center justify-center rounded-full border border-black/10 font-inter text-lg font-bold text-[#4d4d59]"
+            >
+              f
+            </a>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${t("share")} LinkedIn`}
+              className="flex size-10 items-center justify-center rounded-full border border-black/10 font-inter text-[15px] font-bold text-[#4d4d59]"
+            >
+              in
+            </a>
+            <a
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${t("share")} Instagram`}
+              className="relative size-10 overflow-hidden rounded-full"
+            >
+              <Image src="/news/detail/share-icon.svg" alt="" fill sizes="40px" />
+            </a>
           </div>
           <div className="h-px w-full bg-black/[0.08]" />
           <h2 className="font-sans text-base font-bold text-[#14141a]">{t("keywords")}</h2>

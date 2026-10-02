@@ -1,3 +1,5 @@
+import { SectionLabel } from "@/components/section-label"
+
 export interface AdditionalService {
   title: string
 }
@@ -10,10 +12,10 @@ export interface AdditionalServicesSectionProps {
 
 export function AdditionalServicesSection({ category, title, services }: AdditionalServicesSectionProps) {
   return (
-    <section id="extras" data-node-id="239:2372" className="scroll-mt-6 bg-[#0a0a0d] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
+    <section id="extras" data-node-id="239:2372" className="scroll-mt-6 bg-transparent px-0 py-0">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-8">
         <div className="flex w-full max-w-[469px] flex-col gap-6">
-          <p className="font-sans text-base font-medium leading-[1.5] text-[#6666ec]">{category}</p>
+          <SectionLabel>{category}</SectionLabel>
           <h2 className="font-sans text-[28px] font-semibold leading-[1.25] text-white sm:text-[36px]">{title}</h2>
         </div>
         <div className="grid gap-4 md:grid-cols-3">

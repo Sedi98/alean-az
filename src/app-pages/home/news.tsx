@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { Link } from "@/i18n/navigation"
+import { SectionLabel } from "@/components/section-label"
 
 import { NewsCard, type NewsCardProps } from "@/components/news-card"
 import { NewsMobileCarousel } from "@/components/news-mobile-carousel"
@@ -14,14 +15,11 @@ export interface NewsSectionProps {
   cards: NewsCardProps[]
 }
 
-export function NewsSection({ label, dotImage, title, description, actionText, actionUrl, cards }: NewsSectionProps) {
+export function NewsSection({ label, title, description, actionText, actionUrl, cards }: NewsSectionProps) {
   return (
     <section aria-labelledby="home-news-title" className="bg-white px-4 py-16 sm:px-10 sm:py-20 lg:px-20 lg:py-[100px]">
       <div className="mx-auto flex max-w-[1280px] flex-col gap-10">
-        <div className="flex items-center gap-2.5">
-          <Image src={dotImage} alt="" width={8} height={8} />
-          <p className="font-sans text-base font-medium leading-[1.5] text-[#666673] sm:text-lg">{label}</p>
-        </div>
+        <SectionLabel>{label}</SectionLabel>
         <h2 id="home-news-title" className="font-inter text-4xl font-bold leading-tight text-[#2b2b63] sm:text-5xl lg:text-[56px]">{title}</h2>
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <p className="max-w-[700px] font-sans text-base leading-6 text-[#80808c]">{description}</p>

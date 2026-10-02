@@ -34,10 +34,12 @@ export async function getEvent(slug: string, params: LanguageParams = {}): Promi
 export async function registerForEvent(
   slug: string,
   payload: RegistrationCreateRequest,
+  params: LanguageParams = {},
 ): Promise<RegistrationCreateResponse> {
   return PostApi<RegistrationCreateRequest, RegistrationCreateResponse>(
     "/api/v1/events/" + slug + "/register/",
     payload,
+    { params },
   )
 }
 

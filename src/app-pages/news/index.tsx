@@ -7,6 +7,7 @@ import type {
   PublicNewsPage,
 } from "@/features/services/news/types"
 import { Pagination } from "@/components/ui/pagination"
+import { normalizeSlug } from "@/lib/routes"
 
 export interface NewsPageProps {
   page: PublicNewsPage
@@ -25,7 +26,7 @@ export default async function NewsPage({ page, categories, news, activeCategory,
     description: item.summary ?? "",
     image: item.cover_image ?? "/news/news-1.jpeg",
     imageAlt: item.title,
-    href: "/news/" + item.slug,
+    href: "/news/" + normalizeSlug(item.slug),
   }))
 
   return (
