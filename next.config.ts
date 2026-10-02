@@ -1,24 +1,19 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
-const imageProtocol = process.env.NEXT_PUBLIC_IMAGE_PROTOCOL;
-const imageHostname = process.env.NEXT_PUBLIC_IMAGE_HOSTNAME;
-const imagePort = process.env.NEXT_PUBLIC_IMAGE_PORT;
-const isVercelBuild = process.env.VERCEL === "1";
-const isDockerBuild = process.env.DOCKER_BUILD === "1";
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const isVercelBuild = Boolean(process.env.VERCEL);
 
-const envImagePattern = imageProtocol && imageHostname
+const envImagePattern = apiUrl
   ? {
-      protocol: imageProtocol === "https" ? "https" as const : "http" as const,
-      hostname: imageHostname,
-      ...(imagePort ? { port: imagePort } : {}),
+      protocol: new URL(apiUrl).protocol.slice(0, -1) as "http" | "https",
+      hostname: new URL(apiUrl).hostname,
       pathname: "/media/**",
     }
   : null;
 
 const nextConfig: NextConfig = {
-  // Vercel packages Next.js with its own adapter. Standalone is only for Docker.
-  ...(!isVercelBuild && isDockerBuild ? { output: "standalone" } : {}),
+  ...(!isVercelBuild ? { output: "standalone" } : {}),
   reactCompiler: true,
   images: {
     remotePatterns: [
