@@ -2,6 +2,7 @@ FROM node:24-slim AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
+ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN corepack enable
 WORKDIR /app
@@ -26,6 +27,7 @@ FROM node:24-slim AS runner
 ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
+ENV NEXT_TELEMETRY_DISABLED=1
 
 WORKDIR /app
 
