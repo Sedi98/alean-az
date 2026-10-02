@@ -8,7 +8,7 @@ export interface EventsGridProps {
   events: EventGridCardProps[]
 }
 
-export async function EventsGrid({ events, locale = "az" }: EventsGridProps & { locale?: string }) {
+export async function EventsGrid({ events, locale = "en" }: EventsGridProps & { locale?: string }) {
   const t = await getTranslations("Common")
   return (
     <section data-node-id="251:228" className="bg-white px-6 py-16 sm:px-10 lg:px-20 lg:py-16">

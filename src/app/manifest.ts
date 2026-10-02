@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Alean.az",
     short_name: "Alean",
     description: "Alean.az travel and tourism services",
-    start_url: "/az",
+    start_url: "/en",
     display: "standalone",
     background_color: "#ffffff",
     theme_color: "#14141f",

@@ -3,7 +3,7 @@ import { RegistrationForm } from "./form"
 import { RegistrationInfoCards } from "./info-cards"
 import { getTranslations } from "next-intl/server"
 
-export default async function RegistrationPage({ locale = "az" }: { locale?: string }) {
+export default async function RegistrationPage({ locale = "en" }: { locale?: string }) {
   const t = await getTranslations("Common")
   return (
     <main className="min-h-screen bg-white">

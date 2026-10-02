@@ -4,7 +4,7 @@ import { RegistrationInfoCards } from "@/app-pages/registration/info-cards"
 import { LoginForm } from "./form"
 import { getTranslations } from "next-intl/server"
 
-export default async function LoginPage({ locale = "az" }: { locale?: string }) {
+export default async function LoginPage({ locale = "en" }: { locale?: string }) {
   const t = await getTranslations("Common")
   return (
     <main className="min-h-screen bg-white">

@@ -22,7 +22,7 @@ function CtaLink({ href, children, light = false }: { href: string; children: st
   )
 }
 
-export async function EventDetailHero({ event, locale = "az" }: EventDetailHeroProps) {
+export async function EventDetailHero({ event, locale = "en" }: EventDetailHeroProps) {
   const t = await getTranslations("Common")
   return (
     <section data-node-id="258:307" className="relative min-h-[420px] overflow-hidden bg-[linear-gradient(180deg,#14141f_0%,#1f1a38_50%,#332661_100%)] px-6 py-8 sm:px-10 lg:px-20 lg:pt-[100px]">

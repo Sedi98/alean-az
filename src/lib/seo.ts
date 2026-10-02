@@ -56,7 +56,7 @@ export function createPageMetadata({
     description: stripHtml(description),
     alternates: {
       canonical,
-      languages: { ...languages, "x-default": absoluteUrl(`/az${pathname}`) },
+      languages: { ...languages, "x-default": absoluteUrl(`/en${pathname}`) },
     },
     openGraph: {
       type,

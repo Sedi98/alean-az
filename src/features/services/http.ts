@@ -4,7 +4,7 @@ import axios, { type AxiosRequestConfig } from "axios"
 import { notFound } from "next/navigation"
 
 export type ApiLanguage = "az" | "en" | "ru"
-export const DEFAULT_API_LANGUAGE: ApiLanguage = "az"
+export const DEFAULT_API_LANGUAGE: ApiLanguage = "en"
 
 export interface LanguageParams {
   lang?: ApiLanguage

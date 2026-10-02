@@ -1,0 +1,11 @@
+.git
+.next
+node_modules
+.pnpm-store
+.vercel
+.aws
+.codebase-memory
+.env*
+!.env
+!.env.example
+*.log

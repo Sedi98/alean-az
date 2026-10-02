@@ -81,8 +81,8 @@ export function Navbar({ site }: { site: PublicSite }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const locale = useLocale()
   const t = useTranslations("Navbar")
-  const localeOrder: Locale[] = ["az", "en", "ru"]
-  const currentLocale = localeOrder.includes(locale as Locale) ? (locale as Locale) : "az"
+  const localeOrder: Locale[] = ["en", "az", "ru"]
+  const currentLocale = localeOrder.includes(locale as Locale) ? (locale as Locale) : "en"
   const siteName = site.site_name ?? "Alean Turoperator"
 
   function switchLocale(nextLocale: Locale) {
@@ -160,7 +160,7 @@ export function Navbar({ site }: { site: PublicSite }) {
 
         <div className="hidden shrink-0 items-center xl:flex">
           <a
-            href="https://b2b.alean.az/signin"
+            href="http://www.alean-az.com/register_agency"
             className="inline-flex h-12 items-center justify-center rounded-full border border-white px-4 py-1 font-[family-name:var(--font-hero-description)] text-base font-semibold leading-6 text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
             {t("registration")}
@@ -216,7 +216,7 @@ export function Navbar({ site }: { site: PublicSite }) {
             <LocalePopover currentLocale={currentLocale} localeOrder={localeOrder} label={t("language")} onChange={switchLocale} align="start" />
           </div>
           <a
-            href="https://b2b.alean.az/signin"
+            href="http://www.alean-az.com/register_agency"
             onClick={() => setIsMenuOpen(false)}
             className="inline-flex w-fit rounded-full bg-gradient-to-r from-[#738cff] to-[#8059f2] px-5 py-2.5 font-sans text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           >
