@@ -17,8 +17,9 @@ export interface MedicalTourismSectionProps {
 
 export function MedicalTourismSection({ category, icon, title, description, features }: MedicalTourismSectionProps) {
   return (
-    <section id="medical" data-node-id="236:2291" className="scroll-mt-6 bg-[#f7f7fa] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
-      <div className="mx-auto max-w-[1280px]">
+    <section id="medical" data-node-id="236:2291" className="relative isolate scroll-mt-6 overflow-hidden bg-[#f7f7fa] px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
+      <Image src="/services/layer-image.png" alt="" aria-hidden="true" width={277} height={500} className="pointer-events-none absolute right-0 top-0 z-0 hidden h-[500px] w-[277px] object-contain sm:block" />
+      <div className="relative z-10 mx-auto max-w-[1280px]">
         <div className="flex flex-col gap-8">
           <div className="flex w-full max-w-[469px] flex-col gap-6">
             <SectionLabel>{category}</SectionLabel>

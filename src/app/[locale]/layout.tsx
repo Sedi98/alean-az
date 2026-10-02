@@ -15,8 +15,8 @@ import { routing, type Locale } from "@/i18n/routing"
 import "../globals.css"
 
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-sans" })
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], weight: ["600", "700"], variable: "--font-hero-title" })
-const poppins = Poppins({ subsets: ["latin"], weight: ["400"], variable: "--font-hero-description" })
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], weight: ["500", "600", "700"], variable: "--font-hero-title" })
+const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-hero-description" })
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
 const geistSans = Geist({
@@ -33,11 +33,24 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: "Seo" })
 
-  return createPageMetadata({
+  const metadata = createPageMetadata({
     locale: locale as Locale,
     title: t("siteTitle"),
     description: t("siteDescription"),
   })
+
+  return {
+    ...metadata,
+    icons: {
+      icon: [
+        { url: "/favicon.ico", type: "image/x-icon" },
+        { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+        { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      ],
+      apple: "/apple-touch-icon.png",
+      manifest: "/manifest.webmanifest",
+    },
+  }
 }
 
 export function generateStaticParams(): Array<{ locale: Locale }> {

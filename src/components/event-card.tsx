@@ -11,7 +11,7 @@ export interface EventCardProps {
 
 export function EventCard({ title, description, href, className }: EventCardProps) {
   const content = (
-      <div className="relative flex min-h-[170px] w-full flex-col items-center justify-between gap-4 p-8" data-node-id="152:2124">
+      <div className="relative flex min-h-[170px] w-full flex-1 flex-col items-center justify-between gap-4 p-8" data-node-id="152:2124">
       <div className="pointer-events-none absolute inset-y-0 right-0 z-0 w-[97px] rounded-r-2xl bg-[linear-gradient(270deg,rgba(143,108,237,0.68),rgba(106,107,240,0.68)_21.211%,rgba(20,20,25,0))] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="pointer-events-none absolute bottom-[-31px] right-[-20px] z-10 flex h-[139.062px] w-[141.07px] items-center justify-center rotate-[69.36deg] opacity-0 transition-opacity duration-300 group-hover:opacity-100" data-node-id="152:2117">
         <Image
@@ -31,7 +31,7 @@ export function EventCard({ title, description, href, className }: EventCardProp
   )
 
   const cardClassName = cn(
-    "group relative block min-h-[170px] w-full overflow-hidden rounded-2xl border border-[rgba(115,140,255,0.12)] bg-[#14141a] transition-[border-color,box-shadow] duration-300 hover:border-[rgba(115,140,255,0.65)] hover:shadow-[0_14px_35px_rgba(115,108,237,0.16)]",
+    "group relative flex min-h-[170px] w-full flex-col overflow-hidden rounded-2xl border border-[rgba(115,140,255,0.12)] bg-[#14141a] transition-[border-color,box-shadow] duration-300 hover:border-[rgba(115,140,255,0.65)] hover:shadow-[0_14px_35px_rgba(115,108,237,0.16)]",
     href && "cursor-pointer",
     className,
   )

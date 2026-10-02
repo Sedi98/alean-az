@@ -13,8 +13,9 @@ export interface ToursSectionProps {
 
 export function ToursSection({ category, icon, title, description, categories }: ToursSectionProps) {
   return (
-    <section id="tours" data-node-id="222:1594" className="scroll-mt-6 bg-white px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
-      <div className="mx-auto flex max-w-[1280px] flex-col gap-12">
+    <section id="tours" data-node-id="222:1594" className="relative isolate scroll-mt-6 overflow-hidden bg-white px-6 py-16 sm:px-10 lg:px-20 lg:py-[100px]">
+      <Image src="/services/layer-image.png" alt="" aria-hidden="true" width={277} height={500} className="pointer-events-none absolute right-0 top-0 z-0 hidden h-[500px] w-[277px] object-contain sm:block" />
+      <div className="relative z-10 mx-auto flex max-w-[1280px] flex-col gap-12">
         <div className="flex w-full max-w-[800px] flex-col items-start">
           <div className="flex w-full flex-col gap-[34px]">
             <div className="flex w-full flex-col items-start">
