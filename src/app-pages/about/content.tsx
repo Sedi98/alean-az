@@ -19,6 +19,8 @@ export interface AboutContentProps {
 }
 
 export function AboutContent({ label, title, columns, stats, decorativeImageTop, decorativeImageBottom }: AboutContentProps) {
+  console.log(stats);
+  
   return (
     <section aria-labelledby="about-content-title" className="relative isolate overflow-hidden bg-gradient-to-b from-[#332661] via-[#1f1a38] to-[#130f27] px-6 py-16 text-white sm:px-10 sm:py-20 lg:px-20 lg:py-[100px]">
       <div className="relative z-10 mx-auto flex max-w-[1280px] flex-col gap-12">

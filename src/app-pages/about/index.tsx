@@ -11,6 +11,8 @@ import type { PublicPartner } from "@/features/services/partners/types"
 
 export default async function AboutPage({ about, partners }: { about: PublicAbout; partners: PublicPartner[] }) {
   const t = await getTranslations("Common")
+  console.log(about);
+  
   return (
     <main className="min-h-screen bg-white">
       <AboutHero image="/about-hero.png" breadcrumb={`${t("home")} / ${t("about")}`} title={t("about")} />
@@ -19,9 +21,15 @@ export default async function AboutPage({ about, partners }: { about: PublicAbou
         dotImage="/about/about-dot.svg"
         title={about.who.headline}
         columns={[about.who.intro_left, about.who.intro_right]}
-        stats={about.stats}
+       stats={[
+          ...about.stats,
+          ...(about.iata.logo
+            ? [{ image: about.iata.logo, imageAlt: "IATA", label: about.iata.caption }]
+            : []),
+        ]}
         decorativeImageTop="/about/about-decorative-top.png"
         decorativeImageBottom="/about/image-about-bg-bottom.png"
+       
       />
       <IataSection
         logo={about.iata.logo ?? "/about/iata-section.png"}

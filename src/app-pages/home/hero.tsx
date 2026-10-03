@@ -21,7 +21,7 @@ export function HeroSection({
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative isolate flex min-h-[616px] items-center justify-center overflow-hidden bg-[#0a0a0d]"
+      className="relative isolate flex min-h-[616px] items-center justify-center overflow-hidden bg-[#0a0a0d] px-4 md:px-0"
     >
       <Image
         src="/brand/home-hero-vectors.svg"
@@ -58,13 +58,13 @@ export function HeroSection({
         </div>
       </div>
       {image ? (
-        <div className="absolute bottom-0 right-0 z-[1] aspect-video w-[58%] overflow-hidden rounded-tl-3xl sm:w-1/2 lg:w-[48%]">
+        <div className="absolute bottom-0 right-0 z-[1] aspect-video w-full overflow-hidden rounded-tl-3xl sm:w-1/2 lg:w-[60%]">
           <Image
             src={image}
             alt={imageAlt}
             fill
             priority
-            className="object-cover"
+            className="object-contain object-bottom"
             sizes="(max-width: 1023px) 100vw, 50vw"
           />
         </div>
