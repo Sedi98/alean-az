@@ -11,8 +11,6 @@ import type { PublicPartner } from "@/features/services/partners/types"
 
 export default async function AboutPage({ about, partners }: { about: PublicAbout; partners: PublicPartner[] }) {
   const t = await getTranslations("Common")
-  console.log(about);
-  
   return (
     <main className="min-h-screen bg-white">
       <AboutHero image="/about-hero.png" breadcrumb={`${t("home")} / ${t("about")}`} title={t("about")} />
