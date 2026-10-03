@@ -80,7 +80,7 @@ export async function Footer({ site }: { site: PublicSite }) {
           <div className="order-1 flex flex-col items-start gap-8 sm:order-2 sm:items-center sm:gap-5">
             <p className="font-[family-name:var(--font-hero-description)] text-[23px] font-medium leading-normal text-[#80808c] sm:font-inter sm:text-[18px]">{site.footer_social_title ?? t("followUs")}</p>
             <div className="flex items-center gap-8 sm:gap-4">
-              {site.social.map((social) => <SocialLink key={social.network} network={social.network} href={social.url} />)}
+              {site.social.map((social) => <SocialLink key={social.network} network={social.network} href={social.url} label={t("socialLink", { network: t(`social.${social.network}`) })} />)}
             </div>
           </div>
           <p className="order-2 font-[family-name:var(--font-hero-description)] text-xl leading-[1.5] text-[#b0b0b0] sm:hidden">
@@ -103,7 +103,7 @@ function FooterColumn({ title, links }: { title: string; links: string[][] }) {
   )
 }
 
-function SocialLink({ network, href }: { network: Network; href: string }) {
+function SocialLink({ network, href, label }: { network: Network; href: string; label: string }) {
   const labels: Record<Network, string> = {
     facebook: "f",
     instagram: "instagram",
@@ -116,7 +116,7 @@ function SocialLink({ network, href }: { network: Network; href: string }) {
   }
 
   return (
-    <a href={href} target="_blank" rel="noreferrer" aria-label={network} className={`flex size-[69px] items-center justify-center rounded-full border-[1.7px] border-white/20 font-inter font-bold text-white/70 transition-colors hover:border-white/60 hover:text-white sm:size-[53px] sm:border sm:text-[22px] ${network === "linkedin" ? "text-[27px]" : "text-[31px]"}`}>
+    <a href={href} target="_blank" rel="noreferrer" aria-label={label} className={`flex size-[69px] items-center justify-center rounded-full border-[1.7px] border-white/20 font-inter font-bold text-white/70 transition-colors hover:border-white/60 hover:text-white sm:size-[53px] sm:border sm:text-[22px] ${network === "linkedin" ? "text-[27px]" : "text-[31px]"}`}>
       {network === "instagram" ? <Image src="/brand/instagram.svg" alt="" width={69} height={69} className="size-full sm:size-[53px]" /> : labels[network]}
     </a>
   )

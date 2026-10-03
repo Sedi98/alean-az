@@ -16,11 +16,22 @@
     "homeAria": "Главная страница Alean.az"
   },
   "Footer": {
-    "pages": "Səhifələr",
-    "services": "Xidmətlər",
-    "contact": "Əlaqə",
-    "followUs": "Bizi izləyin",
-    "copyright": "© 2026 ALEAN Tour Operator. Bütün hüquqlar qorunur.",
+    "pages": "Страницы",
+    "services": "Услуги",
+    "contact": "Контакты",
+    "followUs": "Подписывайтесь на нас",
+    "socialLink": "Подписывайтесь на нас: {network}",
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn",
+      "youtube": "YouTube",
+      "telegram": "Telegram",
+      "tiktok": "TikTok",
+      "x": "X",
+      "whatsapp": "WhatsApp"
+    },
+    "copyright": "© 2026 ALEAN Tour Operator. Все права защищены.",
     "pageAbout": "О нас",
     "pageServices": "Услуги",
     "pagePartners": "Партнёры",

@@ -20,6 +20,17 @@
     "services": "Services",
     "contact": "Contact",
     "followUs": "Follow us",
+    "socialLink": "Follow us on {network}",
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn",
+      "youtube": "YouTube",
+      "telegram": "Telegram",
+      "tiktok": "TikTok",
+      "x": "X",
+      "whatsapp": "WhatsApp"
+    },
     "copyright": "© 2026 ALEAN Tour Operator. All rights reserved.",
     "pageAbout": "About us",
     "pageServices": "Services",

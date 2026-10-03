@@ -20,6 +20,17 @@
     "services": "Xidmətlər",
     "contact": "Əlaqə",
     "followUs": "Bizi izləyin",
+    "socialLink": "Bizi izləyin: {network}",
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "linkedin": "LinkedIn",
+      "youtube": "YouTube",
+      "telegram": "Telegram",
+      "tiktok": "TikTok",
+      "x": "X",
+      "whatsapp": "WhatsApp"
+    },
     "copyright": "© 2026 ALEAN Tour Operator. Bütün hüquqlar qorunur.",
     "pageAbout": "Haqqımızda",
     "pageServices": "Xidmətlər",
